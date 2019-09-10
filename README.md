@@ -6,5 +6,7 @@ Nesse projeto foi desenvolvido um sistema de controle de vendas e estoque de uma
 Ferramentas:
 
 IDE: NetBeans
+
 Linguagem: Java
+
 Banco de Dados: Java DB (Derby)
