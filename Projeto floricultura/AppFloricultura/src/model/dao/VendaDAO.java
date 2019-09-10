@@ -23,6 +23,8 @@ public class VendaDAO
     
     public boolean debitar_estoque(Venda_produto venda_produto)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
         
         PreparedStatement stmt = null;
@@ -51,6 +53,8 @@ public class VendaDAO
     
     public boolean repor_estoque(Venda_produto venda_produto)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
         
         PreparedStatement stmt = null;
@@ -109,9 +113,11 @@ public class VendaDAO
     
     public int consultar_pk_venda(Venda venda)
     {
+        con = ConnectionFactory.getConnection();
+        
         int pk_venda = 0;
         
-        String sql = "SELECT * FROM Venda WHERE data = ? AND valor = ? AND forma_pagamento = ? AND cod_cli = ?";
+        String sql = "SELECT cod_venda FROM Venda WHERE data = ? AND valor = ? AND forma_pagamento = ? AND cod_cli = ?";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -127,8 +133,10 @@ public class VendaDAO
             
             rs = stmt.executeQuery();
             
-            pk_venda = Integer.parseInt(rs.getString("cod_venda"));
-            
+            while(rs.next())
+            {
+                pk_venda = Integer.parseInt(rs.getString("cod_venda"));                
+            }
         }
         catch (SQLException ex)
         {
@@ -144,6 +152,8 @@ public class VendaDAO
     
     public boolean gerar(Venda_produto venda_produto)
     {
+        con = ConnectionFactory.getConnection();
+                
         String sql = "INSERT INTO Venda_produto(cod_venda, cod_prod, qtd_prod_venda) VALUES(?, ?, ?)";
                 
         PreparedStatement stmt = null;
@@ -355,6 +365,8 @@ public class VendaDAO
     
     public boolean alterar(Venda_produto venda_produto)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "UPDATE Venda_produto SET qtd_prod_venda = ? WHERE cod_venda = ? AND cod_prod = ?";
         
         PreparedStatement stmt = null;
@@ -384,6 +396,8 @@ public class VendaDAO
     
     public boolean excluir(Venda_produto venda_produto)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "DELETE FROM Venda_produto WHERE cod_venda = ? AND cod_prod = ?";
         
         PreparedStatement stmt = null;
@@ -506,9 +520,7 @@ public class VendaDAO
     
     public boolean alterar(Venda venda, List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
     {
-        boolean result;
-        
-        result = alterar(venda);
+        boolean result = alterar(venda);
         
         if(result == true)
             result = alterar(lista_PV_antiga, lista_PV_atualizada);
@@ -540,6 +552,8 @@ public class VendaDAO
     
     public boolean excluir(Venda venda)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "DELETE FROM Venda WHERE cod_venda = ?";
         
         PreparedStatement stmt = null;
@@ -567,9 +581,7 @@ public class VendaDAO
     
     public boolean excluir(Venda venda, List<Venda_produto> lista_produtos_venda)
     {
-        boolean result;
-        
-        result = excluir(lista_produtos_venda);
+        boolean result = excluir(lista_produtos_venda);
         
         if(result == true)
             excluir(venda);

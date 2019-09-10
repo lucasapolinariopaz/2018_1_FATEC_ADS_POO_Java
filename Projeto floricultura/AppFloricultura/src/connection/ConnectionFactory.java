@@ -23,7 +23,7 @@ public class ConnectionFactory
         catch (ClassNotFoundException | SQLException ex)
         {
             //ex.printStackTrace();
-            //System.exit(1);            
+            //System.exit(1);           
             throw new RuntimeException("Erro na conexão", ex);
         }
     }

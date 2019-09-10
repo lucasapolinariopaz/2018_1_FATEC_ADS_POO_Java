@@ -41,22 +41,22 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         btn_inserir = new javax.swing.JButton();
         btn_limpar = new javax.swing.JButton();
         lbl_PesquisaNome = new javax.swing.JLabel();
-        txt_PesquisaNome = new javax.swing.JTextField();
+        txt_PesquisaClienteNome = new javax.swing.JTextField();
         lbl_codigo = new javax.swing.JLabel();
-        lbltxt_codigo = new javax.swing.JLabel();
+        lbltxt_ClienteCodigo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_clientes = new javax.swing.JTable();
-        lbltxt_nome = new javax.swing.JLabel();
-        lbltxt_rg = new javax.swing.JLabel();
-        lbltxt_cpf = new javax.swing.JLabel();
-        lbltxt_endereco = new javax.swing.JLabel();
-        lbltxt_n_endereco = new javax.swing.JLabel();
-        lbltxt_cidade = new javax.swing.JLabel();
-        lbltxt_estado = new javax.swing.JLabel();
-        lbltxt_telefone = new javax.swing.JLabel();
-        lbltxt_celular = new javax.swing.JLabel();
-        lbltxt_email = new javax.swing.JLabel();
+        lbltxt_ClienteNome = new javax.swing.JLabel();
+        lbltxt_ClienteRg = new javax.swing.JLabel();
+        lbltxt_ClienteCpf = new javax.swing.JLabel();
+        lbltxt_ClienteEndereco = new javax.swing.JLabel();
+        lbltxt_ClienteN_endereco = new javax.swing.JLabel();
+        lbltxt_ClienteCidade = new javax.swing.JLabel();
+        lbltxt_ClienteEstado = new javax.swing.JLabel();
+        lbltxt_ClienteTelefone = new javax.swing.JLabel();
+        lbltxt_ClienteCelular = new javax.swing.JLabel();
+        lbltxt_ClienteEmail = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,7 +95,7 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
 
         lbl_codigo.setText("Código");
 
-        lbltxt_codigo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteCodigo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tb_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,25 +123,25 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         tb_clientes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tb_clientes);
 
-        lbltxt_nome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteNome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_rg.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteRg.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_cpf.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteCpf.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_endereco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteEndereco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_n_endereco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteN_endereco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_cidade.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteCidade.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_estado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteEstado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_telefone.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteTelefone.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_celular.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteCelular.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_email.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ClienteEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,7 +156,7 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbl_PesquisaNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_PesquisaClienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,18 +179,18 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lbltxt_codigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                                            .addComponent(lbltxt_nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lbltxt_rg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(lbltxt_ClienteCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                                            .addComponent(lbltxt_ClienteNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lbltxt_ClienteRg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(lbltxt_cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_endereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_n_endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_cidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_estado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_celular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbltxt_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lbltxt_ClienteCpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteN_endereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteCidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteTelefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteCelular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbltxt_ClienteEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
@@ -208,55 +208,55 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_PesquisaNome)
-                    .addComponent(txt_PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_PesquisaClienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbltxt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltxt_ClienteCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_codigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbltxt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltxt_ClienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Nome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbltxt_rg, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltxt_ClienteRg, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Rg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbltxt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltxt_ClienteCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Cpf))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Endereco)
-                            .addComponent(lbltxt_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Numero)
-                            .addComponent(lbltxt_n_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteN_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Cidade)
-                            .addComponent(lbltxt_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Uf)
-                            .addComponent(lbltxt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Telefone)
-                            .addComponent(lbltxt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Celular)
-                            .addComponent(lbltxt_celular, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Email)
-                            .addComponent(lbltxt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ClienteEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_inserir)
@@ -377,18 +377,18 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Telefone;
     private javax.swing.JLabel lbl_Uf;
     private javax.swing.JLabel lbl_codigo;
-    private javax.swing.JLabel lbltxt_celular;
-    private javax.swing.JLabel lbltxt_cidade;
-    private javax.swing.JLabel lbltxt_codigo;
-    private javax.swing.JLabel lbltxt_cpf;
-    private javax.swing.JLabel lbltxt_email;
-    private javax.swing.JLabel lbltxt_endereco;
-    private javax.swing.JLabel lbltxt_estado;
-    private javax.swing.JLabel lbltxt_n_endereco;
-    private javax.swing.JLabel lbltxt_nome;
-    private javax.swing.JLabel lbltxt_rg;
-    private javax.swing.JLabel lbltxt_telefone;
+    private javax.swing.JLabel lbltxt_ClienteCelular;
+    private javax.swing.JLabel lbltxt_ClienteCidade;
+    private javax.swing.JLabel lbltxt_ClienteCodigo;
+    private javax.swing.JLabel lbltxt_ClienteCpf;
+    private javax.swing.JLabel lbltxt_ClienteEmail;
+    private javax.swing.JLabel lbltxt_ClienteEndereco;
+    private javax.swing.JLabel lbltxt_ClienteEstado;
+    private javax.swing.JLabel lbltxt_ClienteN_endereco;
+    private javax.swing.JLabel lbltxt_ClienteNome;
+    private javax.swing.JLabel lbltxt_ClienteRg;
+    private javax.swing.JLabel lbltxt_ClienteTelefone;
     private javax.swing.JTable tb_clientes;
-    private javax.swing.JTextField txt_PesquisaNome;
+    private javax.swing.JTextField txt_PesquisaClienteNome;
     // End of variables declaration//GEN-END:variables
 }

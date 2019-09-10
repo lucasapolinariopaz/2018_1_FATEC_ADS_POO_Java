@@ -6,7 +6,14 @@
 
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.beans.Cliente;
+import model.beans.Venda;
+import model.beans.Venda_produto;
+import model.dao.VendaDAO;
 
 /**
  *
@@ -15,7 +22,10 @@ import model.beans.Cliente;
 public class GerarVenda extends javax.swing.JFrame {
     
     InserirCliente_GerarVenda tela_InserirCliente_GerarVenda = new InserirCliente_GerarVenda();
+    AdicionarProduto_GerarVenda tela_AdicionarProduto_GerarVenda = new AdicionarProduto_GerarVenda();
+
     Cliente cliente = new Cliente();
+    List<Venda_produto> lista_produtos_venda = new ArrayList<>();
                 
     /** Creates new form RealizarVenda */
     public GerarVenda() {
@@ -29,6 +39,52 @@ public class GerarVenda extends javax.swing.JFrame {
         lbltxt_ClienteCpf.setText(cliente.getCpf());
     }
     
+    public void preencherTabelaProdutos(List<Venda_produto> lista_produtos_venda)
+    {
+        DefaultTableModel tabela = (DefaultTableModel) tb_ProdutosVenda.getModel();
+        tabela.setNumRows(0);
+        
+        double venda_total = 0;
+        
+        for(int i = 0; i < lista_produtos_venda.size(); i++)
+        {
+            tabela.addRow(new Object[]
+            {
+                lista_produtos_venda.get(i).getProduto().getCod_prod(),
+                lista_produtos_venda.get(i).getProduto().getNome(),
+                lista_produtos_venda.get(i).getProduto().getPreco(),
+                lista_produtos_venda.get(i).getQtd_prod_venda(),
+                lista_produtos_venda.get(i).getProduto().getPreco() * lista_produtos_venda.get(i).getQtd_prod_venda()
+            });
+            
+            venda_total += lista_produtos_venda.get(i).getProduto().getPreco() * (double) lista_produtos_venda.get(i).getQtd_prod_venda();
+        }
+        
+        lbltxt_VendaTotal.setText(String.valueOf(venda_total));
+    }
+    
+    public void importarProduto(Venda_produto venda_produto)
+    {
+        this.lista_produtos_venda.add(venda_produto);
+        this.preencherTabelaProdutos(lista_produtos_venda);
+    }
+    
+    public boolean isInListaProduto(Venda_produto venda_produto)
+    {
+        boolean result = false;
+        
+        for(int i = 0; i < lista_produtos_venda.size(); i++)
+        {
+            if(lista_produtos_venda.get(i).getProduto().getCod_prod() == venda_produto.getProduto().getCod_prod())
+            {
+                result = true;
+                break;
+            } 
+        }
+        
+        return result;
+    }
+    
     public void limparCamposCliente()
     {
         lbltxt_ClienteCodigo.setText("");
@@ -36,17 +92,22 @@ public class GerarVenda extends javax.swing.JFrame {
         lbltxt_ClienteCpf.setText("");
     }
     
-    public void limparCamposProdutos()
+    public void limparUmProduto()
     {
-        tb_ProdutosVenda.removeAll();
+        int linha = tb_ProdutosVenda.getSelectedRow();
+        
+        lista_produtos_venda.remove(linha);
+        
+        preencherTabelaProdutos(lista_produtos_venda);
     }
     
     public void limparTodosCampos()
     {
-        limparCamposCliente();
-        limparCamposProdutos();
         txt_VendaData.setText("");
         txt_VendaPagamento.setText("");
+        limparCamposCliente();
+        lista_produtos_venda.clear();
+        preencherTabelaProdutos(lista_produtos_venda);
         lbltxt_VendaTotal.setText("");
     }
     
@@ -334,7 +395,6 @@ public class GerarVenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btn_limpar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_vendaActionPerformed
-        
         limparTodosCampos();
     }//GEN-LAST:event_btn_limpar_vendaActionPerformed
 
@@ -345,26 +405,48 @@ public class GerarVenda extends javax.swing.JFrame {
         
         tela_InserirCliente_GerarVenda.setVisible(true);
         tela_InserirCliente_GerarVenda.linkar(this);
-        tela_InserirCliente_GerarVenda.linkar(cliente);
     }//GEN-LAST:event_btn_inserir_clienteActionPerformed
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
         
-        AdicionarProduto_GerarVenda tela_AdicionarProduto_GerarVenda = new AdicionarProduto_GerarVenda();
+        if(tela_AdicionarProduto_GerarVenda == null)
+            tela_AdicionarProduto_GerarVenda = new AdicionarProduto_GerarVenda();
+        
         tela_AdicionarProduto_GerarVenda.setVisible(true);
+        tela_AdicionarProduto_GerarVenda.linkar(this);
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
 
     private void btn_gerar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gerar_vendaActionPerformed
-        // TODO add your handling code here:
+        
+        Venda venda = new Venda();
+        
+        venda.setData(txt_VendaData.getText());
+        venda.setForma_pagamento(txt_VendaPagamento.getText());
+        venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+        
+        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+        venda.setCliente(cliente);
+        
+        VendaDAO dao = new VendaDAO();
+        
+        boolean result = dao.gerar(venda, lista_produtos_venda);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Venda gerada", "Venda gerada", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Venda não gerada", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_btn_gerar_vendaActionPerformed
 
     private void btn_limpar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_clienteActionPerformed
-        
         limparCamposCliente();
     }//GEN-LAST:event_btn_limpar_clienteActionPerformed
 
     private void btn_excluir_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluir_produtoActionPerformed
-        limparCamposProdutos();
+        limparUmProduto();
     }//GEN-LAST:event_btn_excluir_produtoActionPerformed
 
     /**

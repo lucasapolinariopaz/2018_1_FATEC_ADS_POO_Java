@@ -23,7 +23,57 @@ public class ConsultarProduto extends javax.swing.JFrame {
     public ConsultarProduto() {
         initComponents();
     }
+    
+    public void limparTodosCampos()
+    {
+        lbltxt_codigo.setText("");
+        txt_nome.setText("");
+        txt_preco.setText("");
+        txt_categoria.setText("");
+        txt_quant.setText("");
+    }
 
+    public void preencher_PD(String sql)
+    {
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        List<Produto> consulta_produto = dao.consutar_PD(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_produto.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getCategoria(),
+                instancia.getPreco()
+            });
+        });
+    }
+    
+    public void pesquisaDinamica()
+    {
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencher_PD(sql);
+    }
+    
+    public void preencherConsulta(String sql)
+    {
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        Produto consulta_produto = dao.consultar(sql);
+        
+        lbltxt_codigo.setText("" + consulta_produto.getCod_prod());
+        txt_nome.setText(consulta_produto.getNome());
+        txt_preco.setText("" + consulta_produto.getPreco());
+        txt_categoria.setText(consulta_produto.getCategoria());
+        txt_quant.setText("" + consulta_produto.getQuantidade());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,9 +129,6 @@ public class ConsultarProduto extends javax.swing.JFrame {
         txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_PesquisaNomeKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PesquisaNomeKeyTyped(evt);
             }
         });
 
@@ -243,60 +290,11 @@ public class ConsultarProduto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void preencher_PD(String sql)
-    {
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        List<Produto> consulta_produto = dao.consutar_PD(sql);
-        
-        DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
-        tabela.setNumRows(0);
-        
-        consulta_produto.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
-                instancia.getNome(),
-                instancia.getCategoria(),
-                instancia.getPreco()
-            });
-        });
-    }
     
-    public void preencherConsulta(String sql)
-    {
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        Produto consulta_produto = dao.consultar(sql);
-        
-        lbltxt_codigo.setText("" + consulta_produto.getCod_prod());
-        txt_nome.setText(consulta_produto.getNome());
-        txt_preco.setText("" + consulta_produto.getPreco());
-        txt_categoria.setText(consulta_produto.getCategoria());
-        txt_quant.setText("" + consulta_produto.getQuantidade());
-    }
-    
-    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
-    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
-
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         
-        lbltxt_codigo.setText("");
-        txt_nome.setText("");
-        txt_preco.setText("");
-        txt_categoria.setText("");
-        txt_quant.setText("");
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.limparTodosCampos();
+        this.pesquisaDinamica();        
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void tb_produtosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_produtosMouseClicked
@@ -313,10 +311,7 @@ public class ConsultarProduto extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.pesquisaDinamica();
     }//GEN-LAST:event_formWindowOpened
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
@@ -342,10 +337,8 @@ public class ConsultarProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Produto não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
         }
         
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
@@ -367,18 +360,13 @@ public class ConsultarProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Produto não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
         }
         
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
         
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.pesquisaDinamica();
     }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 
     /**

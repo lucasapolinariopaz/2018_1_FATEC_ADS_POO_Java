@@ -17,7 +17,6 @@ import model.dao.ClienteDAO;
 public class InserirCliente_GerarVenda extends javax.swing.JFrame {
 
     private GerarVenda tela_GerarVenda;
-    private Cliente cliente;
     
     /**
      * Creates new form InserirCliente_GerarVendaJFrame
@@ -31,11 +30,69 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         this.tela_GerarVenda = tela_GerarVenda;
     }
     
-    public void linkar(Cliente cliente)
+    public void limparTodosCampos()
     {
-        this.cliente = cliente;
+        txt_PesquisaNome.setText("");
+        lbltxt_codigo.setText("");
+        lbltxt_nome.setText("");
+        lbltxt_rg.setText("");
+        lbltxt_cpf.setText("");
+        lbltxt_endereco.setText("");
+        lbltxt_n_endereco.setText("");
+        lbltxt_cidade.setText("");
+        lbltxt_estado.setText("");
+        lbltxt_telefone.setText("");
+        lbltxt_celular.setText("");
+        lbltxt_email.setText("");
     }
-                    
+    
+    public void preencher_PD(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_cliente.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getRg(),
+                instancia.getCpf()
+            });
+        });
+    }
+    
+    public void pesquisaDinamica()
+    {
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+
+        this.preencher_PD(sql);
+    }    
+    
+    public void preencherConsulta(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        Cliente consulta_cliente = dao.consultar(sql);  
+        
+        lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
+        lbltxt_nome.setText(consulta_cliente.getNome());
+        lbltxt_rg.setText(consulta_cliente.getRg());
+        lbltxt_cpf.setText(consulta_cliente.getCpf());
+        lbltxt_endereco.setText(consulta_cliente.getEndereco());
+        lbltxt_n_endereco.setText("" + consulta_cliente.getNum_endereco());
+        lbltxt_cidade.setText(consulta_cliente.getCidade());
+        lbltxt_estado.setText(consulta_cliente.getUf());
+        lbltxt_telefone.setText(consulta_cliente.getTelefone());
+        lbltxt_celular.setText(consulta_cliente.getCelular());
+        lbltxt_email.setText(consulta_cliente.getEmail());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +134,11 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         lbltxt_email = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INSERIR CLIENTE (GERAR VENDA)", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -119,9 +181,6 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_PesquisaNomeKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PesquisaNomeKeyTyped(evt);
             }
         });
 
@@ -318,90 +377,31 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void limparTodosCampos()
-    {
-        txt_PesquisaNome.setText("");
-        lbltxt_codigo.setText("");
-        lbltxt_nome.setText("");
-        lbltxt_rg.setText("");
-        lbltxt_cpf.setText("");
-        lbltxt_endereco.setText("");
-        lbltxt_n_endereco.setText("");
-        lbltxt_cidade.setText("");
-        lbltxt_estado.setText("");
-        lbltxt_telefone.setText("");
-        lbltxt_celular.setText("");
-        lbltxt_email.setText("");
-    }
-    
-    public void preencher_PD(String sql)
-    {
-        ClienteDAO dao = new ClienteDAO();
-        
-        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
-        
-        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
-        tabela.setNumRows(0);
-        
-        consulta_cliente.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
-                instancia.getNome(),
-                instancia.getRg(),
-                instancia.getCpf()
-            });
-        });
-    }
-    
-    public void preencherConsulta(String sql)
-    {
-        ClienteDAO dao = new ClienteDAO();
-        
-        Cliente consulta_cliente = dao.consultar(sql);  
-        
-        lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
-        lbltxt_nome.setText(consulta_cliente.getNome());
-        lbltxt_rg.setText(consulta_cliente.getRg());
-        lbltxt_cpf.setText(consulta_cliente.getCpf());
-        lbltxt_endereco.setText(consulta_cliente.getEndereco());
-        lbltxt_n_endereco.setText("" + consulta_cliente.getNum_endereco());
-        lbltxt_cidade.setText(consulta_cliente.getCidade());
-        lbltxt_estado.setText(consulta_cliente.getUf());
-        lbltxt_telefone.setText(consulta_cliente.getTelefone());
-        lbltxt_celular.setText(consulta_cliente.getCelular());
-        lbltxt_email.setText(consulta_cliente.getEmail());
-    }
     
     private void btn_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserirActionPerformed
 
+        Cliente cliente = new Cliente();
+        
         cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
         cliente.setNome(lbltxt_nome.getText());
         cliente.setCpf(lbltxt_cpf.getText());
         
         if(tela_GerarVenda != null)
         {
-            tela_GerarVenda.importarCliente(cliente);            
+            tela_GerarVenda.importarCliente(cliente);
+            this.limparTodosCampos();
         }
     }//GEN-LAST:event_btn_inserirActionPerformed
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
 
         this.limparTodosCampos();
-
-        String sql = "SELECT * FROM Cliente WHERE "
-        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-
-        this.preencher_PD(sql);
+        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
 
-        String sql = "SELECT * FROM Cliente WHERE "
-        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-
-        this.preencher_PD(sql);
+        this.pesquisaDinamica();
     }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
@@ -416,13 +416,10 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         this.preencherConsulta(sql);
     }//GEN-LAST:event_tb_clientesMouseClicked
 
-    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        String sql = "SELECT * FROM Cliente WHERE "
-        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-
-        this.preencher_PD(sql);
-    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

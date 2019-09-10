@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -64,31 +67,31 @@
                               <Group type="102" attributes="0">
                                   <Component id="lbl_PesquisaNome" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txt_PesquisaNome" min="-2" pref="325" max="-2" attributes="0"/>
+                                  <Component id="txt_PesquisaProdutoNome" min="-2" pref="325" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="440" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lbl_nome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_preco" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_categoria" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_quantidade" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_codigo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProdutoNome" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProdutoPreco" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProdutoCategoria" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProdutoQuantidade" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProdutoCodigo" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lbltxt_codigo" alignment="0" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="lbltxt_nome" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="lbltxt_categoria" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="lbltxt_quantidade" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                                      <Component id="lbltxt_preco" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Component id="lbltxt_ProdutoNome" min="-2" pref="289" max="-2" attributes="0"/>
+                                      <Component id="lbltxt_ProdutoCategoria" min="-2" pref="289" max="-2" attributes="0"/>
+                                      <Component id="lbltxt_ProdutoQuantidade" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="lbltxt_ProdutoPreco" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Component id="lbltxt_ProdutoCodigo" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="459" max="-2" attributes="0"/>
                                   <Component id="lbl_qtd_venda" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txt_quant_venda" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="txt_VendaProduto_qtd" min="-2" pref="57" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -119,7 +122,7 @@
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_PesquisaNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_PesquisaNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_PesquisaProdutoNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -127,35 +130,35 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_codigo" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_codigo" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ProdutoCodigo" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_ProdutoCodigo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_nome" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_nome" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_ProdutoNome" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ProdutoNome" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_preco" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_preco" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_ProdutoPreco" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ProdutoPreco" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_categoria" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_categoria" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_ProdutoCategoria" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ProdutoCategoria" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_quantidade" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_quantidade" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_ProdutoQuantidade" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ProdutoQuantidade" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbl_qtd_venda" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_quant_venda" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_VendaProduto_qtd" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -165,38 +168,38 @@
                       </Group>
                       <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lbl_nome">
+        <Component class="javax.swing.JLabel" name="lbl_ProdutoNome">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nome"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_preco">
+        <Component class="javax.swing.JLabel" name="lbl_ProdutoPreco">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_categoria">
+        <Component class="javax.swing.JLabel" name="lbl_ProdutoCategoria">
           <Properties>
             <Property name="text" type="java.lang.String" value="Categoria"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_quantidade">
+        <Component class="javax.swing.JLabel" name="lbl_ProdutoQuantidade">
           <Properties>
             <Property name="text" type="java.lang.String" value="Quantidade"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_codigo">
+        <Component class="javax.swing.JLabel" name="lbl_ProdutoCodigo">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_codigo">
+        <Component class="javax.swing.JLabel" name="lbltxt_ProdutoCodigo">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -212,17 +215,26 @@
             <Property name="text" type="java.lang.String" value="Pesquisar Nome"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_PesquisaNome">
+        <Component class="javax.swing.JTextField" name="txt_PesquisaProdutoNome">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisaProdutoNomeKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_adicionar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Adicionar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_adicionarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_limpar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_limparActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -263,6 +275,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_produtosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -273,9 +288,9 @@
             <Property name="text" type="java.lang.String" value="Informe a quantidade do produto para vender"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_quant_venda">
+        <Component class="javax.swing.JTextField" name="txt_VendaProduto_qtd">
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_nome">
+        <Component class="javax.swing.JLabel" name="lbltxt_ProdutoNome">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -284,7 +299,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_preco">
+        <Component class="javax.swing.JLabel" name="lbltxt_ProdutoPreco">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -293,7 +308,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_categoria">
+        <Component class="javax.swing.JLabel" name="lbltxt_ProdutoCategoria">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -302,7 +317,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_quantidade">
+        <Component class="javax.swing.JLabel" name="lbltxt_ProdutoQuantidade">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">

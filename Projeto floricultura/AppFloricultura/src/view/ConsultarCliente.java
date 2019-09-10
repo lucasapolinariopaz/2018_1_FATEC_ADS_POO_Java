@@ -24,6 +24,69 @@ public class ConsultarCliente extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void limparTodosCampos()
+    {
+        txt_PesquisaNome.setText("");
+        lbltxt_codigo.setText("");
+        txt_nome.setText("");
+        txt_rg.setText("");
+        txt_cpf.setText("");
+        txt_endereco.setText("");
+        txt_n_endereco.setText("");
+        txt_cidade.setText("");
+        txt_estado.setText("");
+        txt_telefone.setText("");
+        txt_cel.setText("");
+        txt_email.setText("");
+    }
+    
+    public void preencher_PD(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_cliente.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getRg(),
+                instancia.getCpf()
+            });
+        });
+    }
+    
+    public void pesquisaDinamica()
+    {
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencher_PD(sql);
+    }
+    
+    public void preencherConsulta(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        Cliente consulta_cliente = dao.consultar(sql);  
+        
+        lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
+        txt_nome.setText(consulta_cliente.getNome());
+        txt_rg.setText(consulta_cliente.getRg());
+        txt_cpf.setText(consulta_cliente.getCpf());
+        txt_endereco.setText(consulta_cliente.getEndereco());
+        txt_n_endereco.setText("" + consulta_cliente.getNum_endereco());
+        txt_cidade.setText(consulta_cliente.getCidade());
+        txt_estado.setText(consulta_cliente.getUf());
+        txt_telefone.setText(consulta_cliente.getTelefone());
+        txt_cel.setText(consulta_cliente.getCelular());
+        txt_email.setText(consulta_cliente.getEmail());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,9 +183,6 @@ public class ConsultarCliente extends javax.swing.JFrame {
         txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_PesquisaNomeKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PesquisaNomeKeyTyped(evt);
             }
         });
 
@@ -306,74 +366,13 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void preencher_PD(String sql)
-    {
-        ClienteDAO dao = new ClienteDAO();
-        
-        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
-        
-        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
-        tabela.setNumRows(0);
-        
-        consulta_cliente.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
-                instancia.getNome(),
-                instancia.getRg(),
-                instancia.getCpf()
-            });
-        });
-    }
-    
-    public void preencherConsulta(String sql)
-    {
-        ClienteDAO dao = new ClienteDAO();
-        
-        Cliente consulta_cliente = dao.consultar(sql);  
-        
-        lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
-        txt_nome.setText(consulta_cliente.getNome());
-        txt_rg.setText(consulta_cliente.getRg());
-        txt_cpf.setText(consulta_cliente.getCpf());
-        txt_endereco.setText(consulta_cliente.getEndereco());
-        txt_n_endereco.setText("" + consulta_cliente.getNum_endereco());
-        txt_cidade.setText(consulta_cliente.getCidade());
-        txt_estado.setText(consulta_cliente.getUf());
-        txt_telefone.setText(consulta_cliente.getTelefone());
-        txt_cel.setText(consulta_cliente.getCelular());
-        txt_email.setText(consulta_cliente.getEmail());
-    }
     
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         
-        txt_PesquisaNome.setText("");
-        lbltxt_codigo.setText("");
-        txt_nome.setText("");
-        txt_rg.setText("");
-        txt_cpf.setText("");
-        txt_endereco.setText("");
-        txt_n_endereco.setText("");
-        txt_cidade.setText("");
-        txt_estado.setText("");
-        txt_telefone.setText("");
-        txt_cel.setText("");
-        txt_email.setText("");
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
         
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
     }//GEN-LAST:event_btn_limparActionPerformed
-
-    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
-        
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
-    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
 
@@ -389,10 +388,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);        
+        this.pesquisaDinamica();       
     }//GEN-LAST:event_formWindowOpened
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
@@ -424,10 +420,8 @@ public class ConsultarCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cliente não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
         }
         
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
@@ -449,18 +443,13 @@ public class ConsultarCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cliente não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
         }
         
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
         
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencher_PD(sql);
+        this.pesquisaDinamica();
     }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 
     /**

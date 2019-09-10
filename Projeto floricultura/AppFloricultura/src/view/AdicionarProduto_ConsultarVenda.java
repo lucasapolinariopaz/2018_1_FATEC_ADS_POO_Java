@@ -33,21 +33,21 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
         lbl_categoria = new javax.swing.JLabel();
         lbl_quantidade = new javax.swing.JLabel();
         lbl_codigo = new javax.swing.JLabel();
-        lbltxt_codigo = new javax.swing.JLabel();
+        lbltxt_ProdutoCodigo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbl_PesquisaNome = new javax.swing.JLabel();
-        txt_PesquisaNome = new javax.swing.JTextField();
+        txt_PesquisaProdutoNome = new javax.swing.JTextField();
         btn_adicionar = new javax.swing.JButton();
         btn_limpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_produtos = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         lbl_qtd_venda = new javax.swing.JLabel();
-        txt_quant_venda = new javax.swing.JTextField();
-        lbltxt_nome = new javax.swing.JLabel();
-        lbltxt_preco = new javax.swing.JLabel();
-        lbltxt_categoria = new javax.swing.JLabel();
-        lbltxt_quantidade = new javax.swing.JLabel();
+        txt_VendaProduto_qtd = new javax.swing.JTextField();
+        lbltxt_ProdutoNome = new javax.swing.JLabel();
+        lbltxt_ProdutoPreco = new javax.swing.JLabel();
+        lbltxt_ProdutoCategoria = new javax.swing.JLabel();
+        lbltxt_ProdutoQuantidade = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,7 +63,7 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
 
         lbl_codigo.setText("Código");
 
-        lbltxt_codigo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ProdutoCodigo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbl_PesquisaNome.setText("Pesquisar Nome");
 
@@ -99,13 +99,13 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
 
         lbl_qtd_venda.setText("Informe a quantidade do produto para vender");
 
-        lbltxt_nome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ProdutoNome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_preco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ProdutoPreco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_categoria.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ProdutoCategoria.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbltxt_quantidade.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltxt_ProdutoQuantidade.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,7 +120,7 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbl_PesquisaNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_PesquisaProdutoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(440, 440, 440)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,16 +131,16 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
                                     .addComponent(lbl_codigo, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbltxt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbltxt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbltxt_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbltxt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbltxt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lbltxt_ProdutoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbltxt_ProdutoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbltxt_ProdutoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbltxt_ProdutoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbltxt_ProdutoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(459, 459, 459)
                                 .addComponent(lbl_qtd_venda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_quant_venda, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_VendaProduto_qtd, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,43 +164,43 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_PesquisaNome)
-                    .addComponent(txt_PesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_PesquisaProdutoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbltxt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltxt_ProdutoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_codigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_nome)
-                            .addComponent(lbltxt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ProdutoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_preco)
-                            .addComponent(lbltxt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ProdutoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_categoria)
-                            .addComponent(lbltxt_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ProdutoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_quantidade)
-                            .addComponent(lbltxt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbltxt_ProdutoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_qtd_venda)
-                            .addComponent(txt_quant_venda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_VendaProduto_qtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_adicionar)
                             .addComponent(btn_limpar)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_adicionar, btn_limpar});
@@ -306,13 +306,13 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_preco;
     private javax.swing.JLabel lbl_qtd_venda;
     private javax.swing.JLabel lbl_quantidade;
-    private javax.swing.JLabel lbltxt_categoria;
-    private javax.swing.JLabel lbltxt_codigo;
-    private javax.swing.JLabel lbltxt_nome;
-    private javax.swing.JLabel lbltxt_preco;
-    private javax.swing.JLabel lbltxt_quantidade;
+    private javax.swing.JLabel lbltxt_ProdutoCategoria;
+    private javax.swing.JLabel lbltxt_ProdutoCodigo;
+    private javax.swing.JLabel lbltxt_ProdutoNome;
+    private javax.swing.JLabel lbltxt_ProdutoPreco;
+    private javax.swing.JLabel lbltxt_ProdutoQuantidade;
     private javax.swing.JTable tb_produtos;
-    private javax.swing.JTextField txt_PesquisaNome;
-    private javax.swing.JTextField txt_quant_venda;
+    private javax.swing.JTextField txt_PesquisaProdutoNome;
+    private javax.swing.JTextField txt_VendaProduto_qtd;
     // End of variables declaration//GEN-END:variables
 }
