@@ -5,6 +5,10 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import model.beans.Cliente;
+import model.dao.ClienteDAO;
+
 /**
  *
  * @author Gustavo Lobo
@@ -14,7 +18,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     /**
      * Creates new form CadastroCliente
      */
-    public CadastrarCliente() {
+    public CadastrarCliente() throws ClassNotFoundException {
         initComponents();
     }
 
@@ -53,7 +57,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CADASTRO DE CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CADASTRO DE CLIENTE", 2, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         lbl_Nome.setText("Nome");
 
@@ -76,8 +80,18 @@ public class CadastrarCliente extends javax.swing.JFrame {
         lbl_Email.setText("E-mail");
 
         btn_cadastrar.setText("Cadastrar");
+        btn_cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cadastrarActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setText("Limpar");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,6 +204,50 @@ public class CadastrarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        
+        txt_nome.setText("");
+        txt_rg.setText("");
+        txt_cpf.setText("");
+        txt_endereco.setText("");
+        txt_n_endereco.setText("");
+        txt_cidade.setText("");
+        txt_estado.setText("");
+        txt_telefone.setText("");
+        txt_cel.setText("");
+        txt_email.setText("");
+        
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setNome(txt_nome.getText());
+        cliente.setRg(txt_rg.getText());
+        cliente.setCpf(txt_cpf.getText());
+        cliente.setEndereco(txt_endereco.getText());
+        cliente.setNum_endereco(Integer.parseInt(txt_n_endereco.getText()));
+        cliente.setCidade(txt_cidade.getText());
+        cliente.setUf(txt_estado.getText());
+        cliente.setTelefone(txt_telefone.getText());
+        cliente.setCelular(txt_cel.getText());
+        cliente.setEmail(txt_email.getText());
+        
+        ClienteDAO dao = new ClienteDAO();
+        
+        boolean result = dao.cadastrar(cliente);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Cliente inserido", "Cliente inserido", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Cliente não inserido", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_cadastrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,8 +278,16 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new CadastrarCliente().setVisible(true);
+                try 
+                {
+                    new CadastrarCliente().setVisible(true);
+                    
+                } catch (ClassNotFoundException ex) 
+                {
+                    System.err.println("Erro: " + ex);
+                }
             }
         });
     }

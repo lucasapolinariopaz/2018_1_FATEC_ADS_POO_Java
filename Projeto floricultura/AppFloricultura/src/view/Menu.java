@@ -100,8 +100,18 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Cadastro_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastro_clienteActionPerformed
-        CadastrarCliente tela01 = new CadastrarCliente();
-        tela01.setVisible(true);
+        
+        CadastrarCliente tela01;
+        
+        try
+        {
+            tela01 = new CadastrarCliente();
+            tela01.setVisible(true);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            System.err.println("Erro: " + ex);
+        }
     }//GEN-LAST:event_Cadastro_clienteActionPerformed
 
     private void Consultar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_clienteActionPerformed
