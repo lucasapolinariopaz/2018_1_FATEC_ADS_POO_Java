@@ -55,10 +55,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jSeparator1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -71,7 +71,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="365" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lbl_Cpf" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="lbltxt_codigo" alignment="1" pref="352" max="32767" attributes="0"/>
                                               <Component id="lbltxt_nome" alignment="0" max="32767" attributes="0"/>
@@ -109,9 +109,9 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="131" max="32767" attributes="0"/>
-                                  <Component id="btn_inserir" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_inserir" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Component id="btn_limpar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_limpar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -132,68 +132,68 @@
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_codigo" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_codigo" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_codigo" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_codigo" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_nome" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_Nome" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_nome" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Nome" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_rg" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_Rg" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_rg" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Rg" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_cpf" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_Cpf" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_cpf" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Cpf" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Endereco" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_endereco" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Endereco" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_endereco" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Numero" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_n_endereco" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Numero" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_n_endereco" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Cidade" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_cidade" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Cidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_cidade" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Uf" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_estado" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Uf" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_estado" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Telefone" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_telefone" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Telefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_telefone" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Celular" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_celular" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Celular" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_celular" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_email" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_Email" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_email" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btn_inserir" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_limpar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_inserir" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_limpar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -255,6 +255,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Inserir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_inserirActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_limpar">
           <Properties>
@@ -270,6 +273,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_PesquisaNome">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisaNomeKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisaNomeKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_codigo">
           <Properties>
@@ -303,29 +310,13 @@
                     <Column editable="false" title="CPF" type="java.lang.String"/>
                   </Table>
                 </Property>
-                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                  </TableColumnModel>
-                </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_clientesMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
