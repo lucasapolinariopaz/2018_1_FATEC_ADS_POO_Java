@@ -266,16 +266,13 @@ public class ConsultarProduto extends javax.swing.JFrame {
     {
         ProdutoDAO dao = new ProdutoDAO();
         
-        List<Produto> consulta_produto = dao.consultar(sql);
+        Produto consulta_produto = dao.consultar(sql);
         
-        consulta_produto.forEach((instancia) -> 
-        {
-            lbltxt_codigo.setText("" + instancia.getCod_prod());
-            txt_nome.setText(instancia.getNome());
-            txt_preco.setText("" + instancia.getPreco());
-            txt_categoria.setText(instancia.getCategoria());
-            txt_quant.setText("" + instancia.getQuantidade());
-        });
+        lbltxt_codigo.setText("" + consulta_produto.getCod_prod());
+        txt_nome.setText(consulta_produto.getNome());
+        txt_preco.setText("" + consulta_produto.getPreco());
+        txt_categoria.setText(consulta_produto.getCategoria());
+        txt_quant.setText("" + consulta_produto.getQuantidade());
     }
     
     private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped

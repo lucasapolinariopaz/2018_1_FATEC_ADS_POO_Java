@@ -6,6 +6,11 @@
 
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.beans.Venda_CD;
+import model.dao.VendaDAO;
+
 /**
  *
  * @author Gustavo Lobo
@@ -354,6 +359,26 @@ public class ConsultarVenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void preencherTabela(String sql)
+    {
+        VendaDAO dao = new VendaDAO();
+        
+        List<Venda_CD> consulta_venda = dao.consultar_tabela(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_consulta_vendas.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_venda.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getData_venda(),
+                instancia.getNome_cliente(),
+                instancia.getTotal_venda()
+            });
+        });
+    }
+    
     private void btn_limpar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_vendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_limpar_vendaActionPerformed

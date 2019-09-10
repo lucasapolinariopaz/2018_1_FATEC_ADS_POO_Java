@@ -329,22 +329,19 @@ public class ConsultarCliente extends javax.swing.JFrame {
     {
         ClienteDAO dao = new ClienteDAO();
         
-        List<Cliente> consulta_cliente = dao.consultar(sql);
+        Cliente consulta_cliente = dao.consultar(sql);  
         
-        consulta_cliente.forEach((instancia) -> 
-        {
-            lbltxt_codigo.setText("" + instancia.getCod_cli());
-            txt_nome.setText(instancia.getNome());
-            txt_rg.setText(instancia.getRg());
-            txt_cpf.setText(instancia.getCpf());
-            txt_endereco.setText(instancia.getEndereco());
-            txt_n_endereco.setText("" + instancia.getNum_endereco());
-            txt_cidade.setText(instancia.getCidade());
-            txt_estado.setText(instancia.getUf());
-            txt_telefone.setText(instancia.getTelefone());
-            txt_cel.setText(instancia.getCelular());
-            txt_email.setText(instancia.getEmail());
-        });
+        lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
+        txt_nome.setText(consulta_cliente.getNome());
+        txt_rg.setText(consulta_cliente.getRg());
+        txt_cpf.setText(consulta_cliente.getCpf());
+        txt_endereco.setText(consulta_cliente.getEndereco());
+        txt_n_endereco.setText("" + consulta_cliente.getNum_endereco());
+        txt_cidade.setText(consulta_cliente.getCidade());
+        txt_estado.setText(consulta_cliente.getUf());
+        txt_telefone.setText(consulta_cliente.getTelefone());
+        txt_cel.setText(consulta_cliente.getCelular());
+        txt_email.setText(consulta_cliente.getEmail());
     }
     
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed

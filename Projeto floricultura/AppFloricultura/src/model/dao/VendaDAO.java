@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import model.beans.Cliente;
+import model.beans.Produto_CD;
 import model.beans.Venda;
+import model.beans.Venda_CD;
 import model.beans.Venda_produto;
 
 public class VendaDAO
@@ -107,4 +111,81 @@ public class VendaDAO
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
+    
+    public List<Venda_CD> consultar_tabela(String sql)
+    {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Venda_CD> consulta_venda = new ArrayList<>();
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while(rs.next())
+            {
+                Venda_CD venda = new Venda_CD();
+                
+                venda.setData_venda(rs.getString("data_venda"));
+                venda.setNome_cliente(rs.getString("nome_cliente"));
+                venda.setTotal_venda(Double.parseDouble(rs.getString("valor_venda")));
+                
+                consulta_venda.add(venda);
+            }
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO consultar_tabela: " + ex);
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return consulta_venda;
+    }
+    
+    public Venda consultar_venda(String sql)
+    {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        Venda consulta_venda = new Venda();
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            consulta_venda.setCod_venda(Integer.parseInt(rs.getString("cod_venda")));
+            consulta_venda.setData(rs.getString("data"));
+            consulta_venda.setValor(Double.parseDouble(rs.getString("valor")));
+            consulta_venda.setForma_pagamento(rs.getString("forma_pagamento"));
+            
+            Cliente cliente_consulta = new Cliente();
+            
+            cliente_consulta.setCod_cli(Integer.parseInt(rs.getString("cod_cli")));
+            
+            consulta_venda.setCliente(cliente_consulta);
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO consultar_venda: " + ex);
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return consulta_venda;
+    }
+    
+    /*
+    public List<Venda_produto> consultar_prod_venda(String sql)
+    {
+        
+    }
+    */
 }

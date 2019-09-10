@@ -84,30 +84,23 @@ public class ProdutoDAO
         return consulta_produto;
     }
     
-    public List<Produto> consultar(String sql)
+    public Produto consultar(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Produto> consulta_produto = new ArrayList<>();
+        Produto consulta_produto = new Produto();
         
         try 
         {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
-            while(rs.next())
-            {
-                Produto produto = new Produto();
-                
-                produto.setCod_prod(Integer.parseInt(rs.getString("cod_prod")));
-                produto.setNome(rs.getString("nome"));
-                produto.setPreco(Double.parseDouble(rs.getString("preco")));
-                produto.setCategoria(rs.getString("categoria"));
-                produto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
-            
-                consulta_produto.add(produto);
-            }
+                           
+            consulta_produto.setCod_prod(Integer.parseInt(rs.getString("cod_prod")));
+            consulta_produto.setNome(rs.getString("nome"));
+            consulta_produto.setPreco(Double.parseDouble(rs.getString("preco")));
+            consulta_produto.setCategoria(rs.getString("categoria"));
+            consulta_produto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
         }
         catch (SQLException ex)
         {

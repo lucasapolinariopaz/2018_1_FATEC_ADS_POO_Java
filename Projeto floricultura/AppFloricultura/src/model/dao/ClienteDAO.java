@@ -91,36 +91,29 @@ public class ClienteDAO
         return consulta_cliente;
     }
     
-    public List<Cliente> consultar(String sql)
+    public Cliente consultar(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Cliente> consulta_cliente = new ArrayList<>();
+        Cliente consulta_cliente = new Cliente();
         
         try 
         {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            while(rs.next())
-            {
-                Cliente cliente = new Cliente();
-                
-                cliente.setCod_cli(rs.getInt("cod_cli"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setRg(rs.getString("rg"));
-                cliente.setCpf(rs.getString("cpf"));
-                cliente.setEndereco(rs.getString("endereco"));
-                cliente.setNum_endereco(rs.getInt("num_endereco"));
-                cliente.setCidade(rs.getString("cidade"));
-                cliente.setUf(rs.getString("uf"));
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setCelular(rs.getString("celular"));
-                cliente.setEmail(rs.getString("email"));
-            
-                consulta_cliente.add(cliente);
-            }
+            consulta_cliente.setCod_cli(rs.getInt("cod_cli"));
+            consulta_cliente.setNome(rs.getString("nome"));
+            consulta_cliente.setRg(rs.getString("rg"));
+            consulta_cliente.setCpf(rs.getString("cpf"));
+            consulta_cliente.setEndereco(rs.getString("endereco"));
+            consulta_cliente.setNum_endereco(rs.getInt("num_endereco"));
+            consulta_cliente.setCidade(rs.getString("cidade"));
+            consulta_cliente.setUf(rs.getString("uf"));
+            consulta_cliente.setTelefone(rs.getString("telefone"));
+            consulta_cliente.setCelular(rs.getString("celular"));
+            consulta_cliente.setEmail(rs.getString("email"));
         }
         catch (SQLException ex)
         {
