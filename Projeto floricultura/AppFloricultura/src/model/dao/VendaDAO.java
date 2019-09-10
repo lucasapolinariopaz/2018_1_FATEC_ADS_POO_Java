@@ -20,63 +20,6 @@ public class VendaDAO
         con = ConnectionFactory.getConnection();
     }
     
-    public boolean gerar(Venda venda)
-    {
-        String sql = "INSERT INTO Venda(data, valor, forma_pagamento, cod_cli) VALUES(?, ?, ?, ?)";
-                
-        PreparedStatement stmt = null;
-        
-        try 
-        {
-            stmt = con.prepareStatement(sql);
-            
-            stmt.setString(1, venda.getData());
-            stmt.setDouble(2, venda.getValor());
-            stmt.setString(3, venda.getForma_pagamento());
-            stmt.setInt(4, venda.getCliente().getCod_cli());
-                       
-            stmt.executeUpdate();
-            
-            return true;
-        }
-        catch (SQLException ex)
-        {
-            System.err.println("Erro VendaDAO cadastrar (Tabela Venda) cadastrar: " + ex);
-            return false;
-        }
-        finally
-        {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
-    
-    public int consultar_pk_venda(String sql)
-    {
-        int pk_venda = 0;
-        
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        
-        try 
-        {
-            stmt = con.prepareStatement(sql);
-            rs = stmt.executeQuery();
-            
-            pk_venda = Integer.parseInt(rs.getString("cod_venda"));
-            
-        }
-        catch (SQLException ex)
-        {
-            System.err.println("Erro VendaDAO consultar_pk_venda: " + ex);
-        }
-        finally
-        {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-        
-        return pk_venda;
-    }
-    
     public boolean gerar(List<Venda_produto> lista_produtos_venda)
     {
         String sql = "INSERT INTO Venda_produto(cod_venda, cod_prod, qtd_prod_venda) VALUES(?, ?, ?)";
@@ -101,6 +44,82 @@ public class VendaDAO
         catch (SQLException ex)
         {
             System.err.println("Erro VendaDAO cadastrar (Tabela Venda_produto) cadastrar: " + ex);
+            return false;
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public int consultar_pk_venda(Venda venda)
+    {
+        int pk_venda = 0;
+        
+        String sql = "SELECT * FROM Venda WHERE data = ? AND valor = ? AND forma_pagamento = ? AND cod_cli = ?";
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setString(1, venda.getData());
+            stmt.setDouble(2, venda.getValor());
+            stmt.setString(3, venda.getForma_pagamento());
+            stmt.setInt(4, venda.getCliente().getCod_cli());
+            
+            rs = stmt.executeQuery();
+            
+            pk_venda = Integer.parseInt(rs.getString("cod_venda"));
+            
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO consultar_pk_venda: " + ex);
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return pk_venda;
+    }
+    
+    public boolean gerar(Venda venda, List<Venda_produto> lista_produtos_venda)
+    {
+        String sql = "INSERT INTO Venda(data, valor, forma_pagamento, cod_cli) VALUES(?, ?, ?, ?)";
+                
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setString(1, venda.getData());
+            stmt.setDouble(2, venda.getValor());
+            stmt.setString(3, venda.getForma_pagamento());
+            stmt.setInt(4, venda.getCliente().getCod_cli());
+            
+            stmt.executeUpdate();
+            
+            int pk_venda = consultar_pk_venda(venda);
+            
+            venda.setCod_venda(pk_venda);
+            
+            lista_produtos_venda.forEach((instancia) -> 
+            {
+                instancia.setVenda(venda);
+            });
+            
+            boolean result = gerar(lista_produtos_venda);
+            
+            return result;
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO cadastrar (Tabela Venda) cadastrar: " + ex);
             return false;
         }
         finally
@@ -161,16 +180,20 @@ public class VendaDAO
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            consulta_venda.setCod_venda(Integer.parseInt(rs.getString("cod_venda")));
-            consulta_venda.setData(rs.getString("data"));
-            consulta_venda.setValor(Double.parseDouble(rs.getString("valor")));
-            consulta_venda.setForma_pagamento(rs.getString("forma_pagamento"));
             
-            Cliente cliente_consulta = new Cliente();
+            while(rs.next())
+            {
+                consulta_venda.setCod_venda(Integer.parseInt(rs.getString("cod_venda")));
+                consulta_venda.setData(rs.getString("data"));
+                consulta_venda.setValor(Double.parseDouble(rs.getString("valor")));
+                consulta_venda.setForma_pagamento(rs.getString("forma_pagamento"));
+                
+                Cliente cliente_consulta = new Cliente();
             
-            cliente_consulta.setCod_cli(Integer.parseInt(rs.getString("cod_cli")));
+                cliente_consulta.setCod_cli(Integer.parseInt(rs.getString("cod_cli")));
             
-            consulta_venda.setCliente(cliente_consulta);
+                consulta_venda.setCliente(cliente_consulta);
+            }        
         }
         catch (SQLException ex)
         {
