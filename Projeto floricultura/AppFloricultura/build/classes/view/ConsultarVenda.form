@@ -371,6 +371,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar Altera&#xe7;&#xf5;es"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterar_vendaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
@@ -423,6 +426,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir Venda"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_excluir_vendaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_PesquisarVendaData">
           <Properties>
