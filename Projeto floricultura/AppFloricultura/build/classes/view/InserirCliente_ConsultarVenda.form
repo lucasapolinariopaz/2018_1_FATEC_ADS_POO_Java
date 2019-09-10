@@ -65,7 +65,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lbl_PesquisaNome" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txt_PesquisaNome" min="-2" pref="284" max="-2" attributes="0"/>
+                          <Component id="txt_PesquisaClienteNome" min="-2" pref="284" max="-2" attributes="0"/>
                           <EmptySpace min="37" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -90,20 +90,20 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lbltxt_codigo" alignment="1" pref="352" max="32767" attributes="0"/>
-                                              <Component id="lbltxt_nome" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="lbltxt_rg" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lbltxt_ClienteCodigo" alignment="1" pref="352" max="32767" attributes="0"/>
+                                              <Component id="lbltxt_ClienteNome" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lbltxt_ClienteRg" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="lbltxt_cpf" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_endereco" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_n_endereco" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_cidade" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_estado" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_telefone" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_celular" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lbltxt_email" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteCpf" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteEndereco" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteN_endereco" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteCidade" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteEstado" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteTelefone" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteCelular" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbltxt_ClienteEmail" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -126,7 +126,7 @@
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_PesquisaNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_PesquisaNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_PesquisaClienteNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -134,58 +134,58 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_codigo" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteCodigo" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="lbl_codigo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_nome" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteNome" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="lbl_Nome" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_rg" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteRg" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="lbl_Rg" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_cpf" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteCpf" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="lbl_Cpf" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Endereco" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_endereco" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteEndereco" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Numero" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_n_endereco" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteN_endereco" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Cidade" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_cidade" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteCidade" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Uf" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_estado" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteEstado" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Telefone" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_telefone" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteTelefone" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Celular" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_celular" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteCelular" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_email" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteEmail" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="22" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -269,14 +269,14 @@
             <Property name="text" type="java.lang.String" value="Pesquisar Nome"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_PesquisaNome">
+        <Component class="javax.swing.JTextField" name="txt_PesquisaClienteNome">
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_codigo">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_codigo">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteCodigo">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -329,7 +329,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lbltxt_nome">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteNome">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -338,7 +338,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_rg">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteRg">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -347,7 +347,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_cpf">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteCpf">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -356,7 +356,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_endereco">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteEndereco">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -365,7 +365,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_n_endereco">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteN_endereco">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -374,7 +374,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_cidade">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteCidade">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -383,7 +383,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_estado">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteEstado">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -392,7 +392,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_telefone">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteTelefone">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -401,7 +401,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_celular">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteCelular">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -410,7 +410,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_email">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteEmail">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
