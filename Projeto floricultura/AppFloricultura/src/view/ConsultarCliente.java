@@ -5,6 +5,13 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.beans.Cliente;
+import model.beans.Cliente_CD;
+import model.dao.ClienteDAO;
+
 /**
  *
  * @author Gustavo Lobo
@@ -14,7 +21,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaCliente
      */
-    public ConsultarCliente() {
+    public ConsultarCliente() throws ClassNotFoundException {
         initComponents();
     }
 
@@ -60,6 +67,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
         tb_clientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CONSULTA DE CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -84,6 +96,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
         lbl_Email.setText("E-mail");
 
         btn_alterar.setText("Alterar");
+        btn_alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alterarActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setText("Limpar");
         btn_limpar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,8 +110,19 @@ public class ConsultarCliente extends javax.swing.JFrame {
         });
 
         btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
 
         lbl_PesquisaNome.setText("Pesquisar Nome");
+
+        txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_PesquisaNomeKeyTyped(evt);
+            }
+        });
 
         lbl_codigo.setText("Código");
 
@@ -124,6 +152,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
             }
         });
         tb_clientes.getTableHeader().setReorderingAllowed(false);
+        tb_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_clientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_clientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -272,9 +305,156 @@ public class ConsultarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void preencherTabela(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente_CD> consulta_cliente = dao.consultar_tabela(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_cliente.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getRg(),
+                instancia.getCpf()
+            });
+        });
+    }
+    
+    public void preencherConsulta(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente> consulta_cliente = dao.consultar(sql);
+        
+        consulta_cliente.forEach((instancia) -> 
+        {
+            lbltxt_codigo.setText("" + instancia.getCod_cli());
+            txt_nome.setText(instancia.getNome());
+            txt_rg.setText(instancia.getRg());
+            txt_cpf.setText(instancia.getCpf());
+            txt_endereco.setText(instancia.getEndereco());
+            txt_n_endereco.setText("" + instancia.getNum_endereco());
+            txt_cidade.setText(instancia.getCidade());
+            txt_estado.setText(instancia.getUf());
+            txt_telefone.setText(instancia.getTelefone());
+            txt_cel.setText(instancia.getCelular());
+            txt_email.setText(instancia.getEmail());
+        });
+    }
+    
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        // TODO add your handling code here:
+        
+        txt_PesquisaNome.setText("");
+        lbltxt_codigo.setText("");
+        txt_nome.setText("");
+        txt_rg.setText("");
+        txt_cpf.setText("");
+        txt_endereco.setText("");
+        txt_n_endereco.setText("");
+        txt_cidade.setText("");
+        txt_estado.setText("");
+        txt_telefone.setText("");
+        txt_cel.setText("");
+        txt_email.setText("");
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
     }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
+
+    private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
+
+        int linha = tb_clientes.getSelectedRow();
+                        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome = '" + tb_clientes.getValueAt(linha, 0) + "' AND "
+                + "rg = '" + tb_clientes.getValueAt(linha, 1) + "' AND "
+                + "cpf = '" + tb_clientes.getValueAt(linha, 2) + "'";
+        
+        this.preencherConsulta(sql);
+    }//GEN-LAST:event_tb_clientesMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
+        cliente.setNome(txt_nome.getText());
+        cliente.setRg(txt_rg.getText());
+        cliente.setCpf(txt_cpf.getText());
+        cliente.setEndereco(txt_endereco.getText());
+        cliente.setNum_endereco(Integer.parseInt(txt_n_endereco.getText()));
+        cliente.setCidade(txt_cidade.getText());
+        cliente.setUf(txt_estado.getText());
+        cliente.setTelefone(txt_telefone.getText());
+        cliente.setCelular(txt_cel.getText());
+        cliente.setEmail(txt_email.getText());
+        
+        ClienteDAO dao = new ClienteDAO();
+        
+        boolean result = dao.alterar(cliente);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Cliente alterado", "Cliente alterado", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Cliente não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_btn_alterarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
+        
+        ClienteDAO dao = new ClienteDAO();
+        
+        boolean result = dao.excluir(cliente);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Cliente excluído", "Cliente excluído", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Cliente não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_btn_excluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,8 +488,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new ConsultarCliente().setVisible(true);
+                try
+                {
+                    new ConsultarCliente().setVisible(true);
+                } 
+                catch (ClassNotFoundException ex)
+                {
+                    System.err.println("Erro tela 02.1: " + ex);
+                }
             }
         });
     }

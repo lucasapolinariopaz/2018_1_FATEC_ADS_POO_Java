@@ -110,13 +110,23 @@ public class Menu extends javax.swing.JFrame {
         }
         catch (ClassNotFoundException ex)
         {
-            System.err.println("Erro: " + ex);
+            System.err.println("Erro tela 01: " + ex);
         }
     }//GEN-LAST:event_Cadastro_clienteActionPerformed
 
     private void Consultar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_clienteActionPerformed
-        ConsultarCliente tela02 = new ConsultarCliente();
-        tela02.setVisible(true);
+        
+        ConsultarCliente tela02;
+        
+        try
+        {
+            tela02 = new ConsultarCliente();
+            tela02.setVisible(true);
+        } 
+        catch (ClassNotFoundException ex) 
+        {
+            System.err.println("Erro tela 02: " + ex);
+        }
     }//GEN-LAST:event_Consultar_clienteActionPerformed
 
     private void Cadastrar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastrar_produtoActionPerformed

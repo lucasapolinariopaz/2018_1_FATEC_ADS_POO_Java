@@ -215,8 +215,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txt_estado.setText("");
         txt_telefone.setText("");
         txt_cel.setText("");
-        txt_email.setText("");
-        
+        txt_email.setText(""); 
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
@@ -286,7 +285,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     
                 } catch (ClassNotFoundException ex) 
                 {
-                    System.err.println("Erro: " + ex);
+                    System.err.println("Erro tela 01.1: " + ex);
                 }
             }
         });
