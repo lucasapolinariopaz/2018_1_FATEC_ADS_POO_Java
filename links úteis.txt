@@ -1,0 +1,24 @@
+http://profanderson.blog.etecarmine.com.br/trabalhando-com-jtable-e-banco-de-dados-no-java/
+http://profanderson.blog.etecarmine.com.br/criando-uma-busca-dinamica-com-sql-e-jtable-no-java/
+
+http://respostas.guj.com.br/1088-como-criar-relacionamento-entre-tabelas-no-java-db
+http://sageniuz.blogspot.com/2007/11/foreign-keys-in-derby-with-netbeans-6.html
+https://docs.oracle.com/javadb/10.8.2.2/ref/rrefsqlj13590.html
+
+https://www.devmedia.com.br/java-collections-set-list-e-iterator/29637
+https://www.devmedia.com.br/explorando-a-classe-arraylist-no-java/24298
+
+Interface Gráfica Java com Banco de Dados MySQL
+https://www.youtube.com/playlist?list=PLWd_VnthxxLcuMX7LluyGXGYNfWNAFvz2
+
+JavaSE + Banco de Dados + JUnit
+https://www.youtube.com/playlist?list=PLWd_VnthxxLevWyNp4Qsvhog2iFbwmPwy
+
+JTable - TableModel
+https://www.youtube.com/playlist?list=PLWd_VnthxxLfA37A4Lb7VJZjqPYpes96X
+
+Youtube - Aula 4 Recuperando objetos de outro JFrame
+https://www.youtube.com/watch?v=jErLePYJCtk
+
+Youtube - Tutorial Java - De um JFrame para outro JFrame (por Jonilson Rezendes)
+https://www.youtube.com/watch?v=pO1SNvqk6sg
