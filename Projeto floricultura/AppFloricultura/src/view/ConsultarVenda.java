@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Cliente;
+import model.beans.Produto;
 import model.beans.Venda;
 import model.beans.Venda_produto;
 import model.dao.VendaDAO;
@@ -128,12 +129,47 @@ public class ConsultarVenda extends javax.swing.JFrame {
     
     public void preencherConsulta_02(String sql)
     {
+        lista_PV_antiga.clear();
+        lista_PV_atualizada.clear();
+        
+        int i;
+        
         VendaDAO dao = new VendaDAO();
         
         lista_PV_antiga = dao.consultar_lista_prod_venda(sql);
-        lista_PV_atualizada = lista_PV_antiga;
         
-        this.preencherTabelaProdutos(lista_PV_antiga);
+        
+        for(i = 0; i < lista_PV_antiga.size(); i++)
+            lista_PV_atualizada.add(lista_PV_antiga.get(i));
+        
+        int qtd_estoque, qtd_prod_venda_antiga;
+        
+        for(i = 0; i < lista_PV_atualizada.size(); i++)
+        {
+            //Controle Virtual do estoque
+            qtd_estoque = lista_PV_atualizada.get(i).getProduto().getQuantidade();
+            qtd_prod_venda_antiga = lista_PV_atualizada.get(i).getQtd_prod_venda();
+            qtd_estoque += qtd_prod_venda_antiga;
+            
+            //Infelizmente foi preciso Re-Setar a instância da classe Venda_produto na lista nessa lógica
+            Venda_produto venda_produto = new Venda_produto();
+            venda_produto.setQtd_prod_venda(lista_PV_atualizada.get(i).getQtd_prod_venda());
+                
+            Produto produto = new Produto();
+            produto.setCod_prod(lista_PV_atualizada.get(i).getProduto().getCod_prod());
+            produto.setNome(lista_PV_atualizada.get(i).getProduto().getNome());
+            produto.setPreco(lista_PV_atualizada.get(i).getProduto().getPreco());
+            produto.setQuantidade(qtd_estoque);
+            venda_produto.setProduto(produto);
+              
+            Venda venda = new Venda();
+            venda.setCod_venda(lista_PV_atualizada.get(i).getVenda().getCod_venda());
+            venda_produto.setVenda(venda);
+            
+            lista_PV_atualizada.set(i, venda_produto);
+        }
+        
+        this.preencherTabelaProdutos(lista_PV_atualizada);
     }
     
     public void limparCamposCliente()
@@ -173,7 +209,39 @@ public class ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ClienteCpf.setText(cliente.getCpf());
     }
     
-    public boolean isInListaProduto(Venda_produto venda_produto)
+    public boolean isInListaProdutoAntiga(int cod_prod)
+    {
+        boolean result = false;
+        
+        for(int i = 0; i < lista_PV_antiga.size(); i++)
+        {
+            if(lista_PV_antiga.get(i).getProduto().getCod_prod() == cod_prod)
+            {
+                result = true;
+                break;
+            } 
+        }
+        
+        return result;
+    }
+    
+    public int qtd_ProdutoVendaAntiga(int cod_prod)
+    {    
+        int qtd_prod_venda_antiga = 0;
+        
+        for(int i = 0; i < lista_PV_antiga.size(); i++)
+        {
+            if(lista_PV_antiga.get(i).getProduto().getCod_prod() == cod_prod)
+            {
+                qtd_prod_venda_antiga = lista_PV_antiga.get(i).getQtd_prod_venda();
+                break;
+            } 
+        }
+        
+        return qtd_prod_venda_antiga;
+    }
+    
+    public boolean isInListaProdutoAtualizada(Venda_produto venda_produto)
     {
         boolean result = false;
         

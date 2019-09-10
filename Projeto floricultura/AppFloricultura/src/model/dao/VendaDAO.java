@@ -17,12 +17,12 @@ public class VendaDAO
     private Connection con = null;
 
     public VendaDAO(){
+        
+        con = ConnectionFactory.getConnection();
     }
     
     public boolean debitar_estoque(Venda_produto venda_produto)
     {
-        con = ConnectionFactory.getConnection();
-        
         String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
         
         PreparedStatement stmt = null;
@@ -45,7 +45,7 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt);
+            ConnectionFactory.closeConnection(stmt);
         }
     }
     
@@ -75,14 +75,12 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt);
+            ConnectionFactory.closeConnection(stmt);
         }
     }
     
     public boolean gerar(Venda venda)
     {
-        con = ConnectionFactory.getConnection();
-        
         String sql = "INSERT INTO Venda(data, valor, forma_pagamento, cod_cli) VALUES(?, ?, ?, ?)";
                 
         PreparedStatement stmt = null;
@@ -107,14 +105,12 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt);
+            ConnectionFactory.closeConnection(stmt);
         }
     } 
     
     public int consultar_pk_venda(Venda venda)
     {
-        con = ConnectionFactory.getConnection();
-        
         int pk_venda = 0;
         
         String sql = "SELECT cod_venda FROM Venda WHERE data = ? AND valor = ? AND forma_pagamento = ? AND cod_cli = ?";
@@ -144,7 +140,7 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(stmt, rs);
         }
         
         return pk_venda;
@@ -152,8 +148,6 @@ public class VendaDAO
     
     public boolean gerar(Venda_produto venda_produto)
     {
-        con = ConnectionFactory.getConnection();
-                
         String sql = "INSERT INTO Venda_produto(cod_venda, cod_prod, qtd_prod_venda) VALUES(?, ?, ?)";
                 
         PreparedStatement stmt = null;
@@ -177,14 +171,12 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt);
+            ConnectionFactory.closeConnection(stmt);
         }
     }
     
     public boolean gerar(Venda venda, List<Venda_produto> lista_produtos_venda)
     {       
-        con = ConnectionFactory.getConnection();
-        
         boolean result;
         int pk_venda;
         
@@ -212,13 +204,13 @@ public class VendaDAO
             }
         }
         
+        ConnectionFactory.closeConnection(con);
+        
         return result;
     }   
     
     public List<Venda> consultar_PD(String sql)
     {
-        con = ConnectionFactory.getConnection();
-        
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -259,8 +251,6 @@ public class VendaDAO
     
     public Venda consultar_venda(String sql)
     {
-        con = ConnectionFactory.getConnection();
-        
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -301,8 +291,6 @@ public class VendaDAO
     
     public List<Venda_produto> consultar_lista_prod_venda(String sql)
     {
-        con = ConnectionFactory.getConnection();
-        
         List<Venda_produto> consulta_produtos_venda = new ArrayList<>();
         
         PreparedStatement stmt = null;
@@ -346,8 +334,6 @@ public class VendaDAO
     
     public boolean alterar(Venda venda)
     {
-        con = ConnectionFactory.getConnection();
-        
         String sql = "UPDATE Venda SET data = ?, valor = ?, forma_pagamento = ?, cod_cli = ? WHERE cod_venda = ?";
         
         PreparedStatement stmt = null;
@@ -373,45 +359,12 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
-    
-    public boolean alterar(Venda_produto venda_produto)
-    {        
-        con = ConnectionFactory.getConnection();
-        
-        String sql = "UPDATE Venda_produto SET qtd_prod_venda = ? WHERE cod_venda = ? AND cod_prod = ?";
-        
-        PreparedStatement stmt = null;
-        
-        try 
-        {
-            stmt = con.prepareStatement(sql);
-            
-            stmt.setInt(1, venda_produto.getQtd_prod_venda());
-            stmt.setInt(2, venda_produto.getVenda().getCod_venda());
-            stmt.setInt(3, venda_produto.getProduto().getCod_prod());
-            
-            stmt.executeUpdate();
-            
-            return true;
-        }
-        catch (SQLException ex)
-        {
-            System.err.println("Erro VendaDAO alterar (Tabela Venda_produto): " + ex);
-            return false;
-        }
-        finally
-        {
-            ConnectionFactory.closeConnection(con, stmt);
+            ConnectionFactory.closeConnection(stmt);
         }
     }
     
     public boolean excluir(Venda_produto venda_produto)
     {
-        con = ConnectionFactory.getConnection();
-        
         String sql = "DELETE FROM Venda_produto WHERE cod_venda = ? AND cod_prod = ?";
         
         PreparedStatement stmt = null;
@@ -434,81 +387,8 @@ public class VendaDAO
         }
         finally
         {
-            ConnectionFactory.closeConnection(con, stmt);
+            ConnectionFactory.closeConnection(stmt);
         }
-    }
-    
-    public boolean alterar(List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
-    {
-        boolean result = false, compara = false;
-        int i, j, produto_lista_antiga, produto_lista_atualizada, qtd_estoque;
-        
-        //Varredura Lista de produtos antiga
-        for(i = 0; i < lista_PV_antiga.size(); i++)
-        {            
-            for(j = 0; j < lista_PV_atualizada.size(); j++)
-            {
-                produto_lista_antiga = lista_PV_antiga.get(i).getProduto().getCod_prod();
-                produto_lista_atualizada = lista_PV_atualizada.get(j).getProduto().getCod_prod();
-                
-                if(produto_lista_antiga == produto_lista_atualizada)
-                {
-                    compara = true;
-                    break;
-                }
-            }
-            
-            if(compara == true)
-            {                
-                if(repor_estoque(lista_PV_antiga.get(i)))
-                    if(debitar_estoque(lista_PV_atualizada.get(j)))
-                        if(alterar(lista_PV_atualizada.get(j)))
-                            result = true;
-            }
-            else
-            {
-                if(repor_estoque(lista_PV_antiga.get(i)))
-                    if(excluir(lista_PV_antiga.get(i)))
-                        result = true;
-            }  
-        }
-        
-        //if(result == true)
-        //{
-            //Varredura Lista de produtos atualizada
-            for(i = 0; i < lista_PV_atualizada.size(); i++)
-            {            
-                for(j = 0; j < lista_PV_antiga.size(); j++)
-                {
-                    produto_lista_atualizada = lista_PV_atualizada.get(i).getProduto().getCod_prod();
-                    produto_lista_antiga = lista_PV_antiga.get(j).getProduto().getCod_prod();
-                
-                    if(produto_lista_antiga == produto_lista_atualizada)
-                        compara = true;
-                
-                    if(compara == true)
-                        break;
-                }
-            
-                if(compara == false)
-                {
-                    if(debitar_estoque(lista_PV_atualizada.get(i)))
-                        if(gerar(lista_PV_atualizada.get(i)))
-                            result = true;
-                }             
-        }
-        
-        return result; 
-    }
-    
-    public boolean alterar(Venda venda, List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
-    {
-        boolean result = alterar(venda);
-        
-        if(result == true)
-            result = alterar(lista_PV_antiga, lista_PV_atualizada);
-                
-        return result;
     }
     
     public boolean excluir(List<Venda_produto> lista_produtos_venda)
@@ -533,10 +413,45 @@ public class VendaDAO
         return result;
     }
     
+    public boolean alterar(List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
+    {
+        boolean result = excluir(lista_PV_antiga);
+              
+        if(result == true)
+        {
+            for(int i = 0; i < lista_PV_atualizada.size(); i++)
+            {
+                result = gerar(lista_PV_atualizada.get(i));
+                
+                if(result == false)
+                    break;
+                else
+                {
+                    result = debitar_estoque(lista_PV_atualizada.get(i));
+                    
+                    if(result == false)
+                        break;
+                }   
+            }
+        }
+        
+        return result;
+    }
+    
+    public boolean alterar(Venda venda, List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
+    {
+        boolean result = alterar(venda);
+        
+        if(result == true)
+            result = alterar(lista_PV_antiga, lista_PV_atualizada);
+        
+        ConnectionFactory.closeConnection(con);
+                
+        return result;
+    }
+    
     public boolean excluir(Venda venda)
     {
-        con = ConnectionFactory.getConnection();
-        
         String sql = "DELETE FROM Venda WHERE cod_venda = ?";
         
         PreparedStatement stmt = null;

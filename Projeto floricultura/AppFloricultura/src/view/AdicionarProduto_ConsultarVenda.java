@@ -73,7 +73,17 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ProdutoNome.setText(consulta_produto.getNome());
         lbltxt_ProdutoPreco.setText("" + consulta_produto.getPreco());
         lbltxt_ProdutoCategoria.setText(consulta_produto.getCategoria());
-        lbltxt_ProdutoQuantidade.setText("" + consulta_produto.getQuantidade());
+        
+        //Controle "Virtual" do estoque
+        if(tela_ConsultarVenda.isInListaProdutoAntiga(consulta_produto.getCod_prod()) == true)
+        {
+            int qtd_prod_venda_antiga = tela_ConsultarVenda.qtd_ProdutoVendaAntiga(consulta_produto.getCod_prod());
+            int qtd_estoque = consulta_produto.getQuantidade();
+            qtd_estoque += qtd_prod_venda_antiga;
+            lbltxt_ProdutoQuantidade.setText("" + qtd_estoque);
+        }
+        else
+            lbltxt_ProdutoQuantidade.setText("" + consulta_produto.getQuantidade());
     }
     
     public void limparTodosCampos()
@@ -381,7 +391,7 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
         
                 if(tela_ConsultarVenda != null)
                 {
-                    if(tela_ConsultarVenda.isInListaProduto(venda_produto) == true)
+                    if(tela_ConsultarVenda.isInListaProdutoAtualizada(venda_produto) == true)
                         JOptionPane.showMessageDialog(this, "Produto já está adicionado na venda", 
                             "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
                     else

@@ -76,4 +76,46 @@ public class ConnectionFactory
         
         closeConnection(con, stmt);
     }
+    
+    public static void closeConnection(PreparedStatement stmt, ResultSet rs)
+    {
+        if(rs != null)
+        {
+            try
+            {
+                rs.close();
+            }
+            catch (SQLException ex)
+            {
+                System.err.println("Erro: " + ex);
+            }
+        }
+        
+        if(stmt != null)
+        {
+            try
+            {
+                stmt.close();
+            }
+            catch (SQLException ex)
+            {
+                System.err.println("Erro: " + ex);
+            }
+        }
+    }
+    
+    public static void closeConnection(PreparedStatement stmt)
+    {
+        if(stmt != null)
+        {
+            try
+            {
+                stmt.close();
+            }
+            catch (SQLException ex)
+            {
+                System.err.println("Erro: " + ex);
+            }
+        }
+    }
 }
