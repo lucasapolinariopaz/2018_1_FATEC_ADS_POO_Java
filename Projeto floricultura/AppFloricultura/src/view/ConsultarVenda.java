@@ -384,13 +384,13 @@ public class ConsultarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpar_vendaActionPerformed
 
     private void btn_inserir_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserir_clienteActionPerformed
-        InserirCliente_Venda tela07 = new InserirCliente_Venda();
-        tela07.setVisible(true);
+        InserirCliente_ConsultarVenda tela09 = new InserirCliente_ConsultarVenda();
+        tela09.setVisible(true);
     }//GEN-LAST:event_btn_inserir_clienteActionPerformed
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
-        AdicionarProduto_Venda tela08 = new AdicionarProduto_Venda();
-        tela08.setVisible(true);
+        AdicionarProduto_ConsultarVenda tela10 = new AdicionarProduto_ConsultarVenda();
+        tela10.setVisible(true);
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
 
     /**

@@ -21,6 +21,90 @@ public class VendaDAO
         con = ConnectionFactory.getConnection();
     }
     
+    public boolean debitar_estoque(Venda_produto venda_produto)
+    {
+        String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
+        
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setInt(1, venda_produto.getProduto().getQuantidade() - venda_produto.getQtd_prod_venda());
+            stmt.setInt(2, venda_produto.getProduto().getCod_prod());
+            
+            stmt.executeUpdate();
+            
+            return true;
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO debitar_estoque: " + ex);
+            return false;
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public boolean repor_estoque(Venda_produto venda_produto)
+    {
+        String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
+        
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setInt(1, venda_produto.getProduto().getQuantidade() + venda_produto.getQtd_prod_venda());
+            stmt.setInt(2, venda_produto.getProduto().getCod_prod());
+            
+            stmt.executeUpdate();
+            
+            return true;
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO repor_estoque: " + ex);
+            return false;
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public boolean restaurar_estoque(Venda_produto venda_produto)
+    {
+        String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
+        
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setInt(1, venda_produto.getProduto().getQuantidade());
+            stmt.setInt(2, venda_produto.getProduto().getCod_prod());
+            
+            stmt.executeUpdate();
+            
+            return true;
+        }
+        catch (SQLException ex)
+        {
+            System.err.println("Erro VendaDAO restaurar_estoque: " + ex);
+            return false;
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
     public boolean gerar(Venda venda)
     {
         String sql = "INSERT INTO Venda(data, valor, forma_pagamento, cod_cli) VALUES(?, ?, ?, ?)";

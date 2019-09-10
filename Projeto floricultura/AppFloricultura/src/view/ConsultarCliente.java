@@ -304,7 +304,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void preencherTabela(String sql)
+    public void preencher_PD(String sql)
     {
         ClienteDAO dao = new ClienteDAO();
         
@@ -361,7 +361,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         String sql = "SELECT * FROM Cliente WHERE "
                 + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
         
-        this.preencherTabela(sql);
+        this.preencher_PD(sql);
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
@@ -369,7 +369,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         String sql = "SELECT * FROM Cliente WHERE "
                 + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
         
-        this.preencherTabela(sql);
+        this.preencher_PD(sql);
     }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
@@ -389,7 +389,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         String sql = "SELECT * FROM Cliente WHERE "
                 + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
         
-        this.preencherTabela(sql);        
+        this.preencher_PD(sql);        
     }//GEN-LAST:event_formWindowOpened
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
@@ -424,7 +424,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         String sql = "SELECT * FROM Cliente WHERE "
                 + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
         
-        this.preencherTabela(sql);
+        this.preencher_PD(sql);
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
@@ -449,7 +449,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         String sql = "SELECT * FROM Cliente WHERE "
                 + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
         
-        this.preencherTabela(sql);
+        this.preencher_PD(sql);
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     /**

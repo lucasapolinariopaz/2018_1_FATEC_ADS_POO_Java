@@ -277,12 +277,12 @@ public class GerarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpar_vendaActionPerformed
 
     private void btn_inserir_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserir_clienteActionPerformed
-        InserirCliente_Venda tela07 = new InserirCliente_Venda();
+        InserirCliente_GerarVenda tela07 = new InserirCliente_GerarVenda();
         tela07.setVisible(true);
     }//GEN-LAST:event_btn_inserir_clienteActionPerformed
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
-        AdicionarProduto_Venda tela08 = new AdicionarProduto_Venda();
+        AdicionarProduto_GerarVenda tela08 = new AdicionarProduto_GerarVenda();
         tela08.setVisible(true);
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
 
