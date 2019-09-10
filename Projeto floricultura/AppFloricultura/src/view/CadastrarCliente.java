@@ -285,7 +285,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     
                 } catch (ClassNotFoundException ex) 
                 {
-                    System.err.println("Erro tela 01.1: " + ex);
+                    System.err.println("Erro tela CadastrarCliente: " + ex);
                 }
             }
         });

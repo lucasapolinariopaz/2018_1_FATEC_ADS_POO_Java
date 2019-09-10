@@ -5,6 +5,10 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import model.beans.Produto;
+import model.dao.ProdutoDAO;
+
 /**
  *
  * @author Gustavo Lobo
@@ -14,7 +18,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     /**
      * Creates new form CadastroProduto
      */
-    public CadastrarProduto() {
+    public CadastrarProduto() throws ClassNotFoundException {
         initComponents();
     }
 
@@ -52,8 +56,18 @@ public class CadastrarProduto extends javax.swing.JFrame {
         lbl_quantidade.setText("Quantidade");
 
         btn_cadastrar.setText("Cadastrar");
+        btn_cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cadastrarActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setText("Limpar");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,6 +148,37 @@ public class CadastrarProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        
+        txt_nome.setText("");
+        txt_preco.setText("");
+        txt_categoria.setText("");
+        txt_quant.setText("");
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
+        
+        Produto produto = new Produto();
+        
+        produto.setNome(txt_nome.getText());
+        produto.setPreco(Double.parseDouble(txt_preco.getText()));
+        produto.setCategoria(txt_categoria.getText());
+        produto.setQuantidade(Integer.parseInt(txt_quant.getText()));
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        boolean result = dao.cadastrar(produto);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Produto inserido", "Produto inserido", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Produto não inserido", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_cadastrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -164,8 +209,16 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new CadastrarProduto().setVisible(true);
+                try 
+                {
+                    new CadastrarProduto().setVisible(true);
+                }
+                catch (ClassNotFoundException ex)
+                {
+                    System.err.println("Erro tela CadastrarProduto: " + ex);
+                }
             }
         });
     }

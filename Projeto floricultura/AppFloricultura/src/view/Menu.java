@@ -110,7 +110,7 @@ public class Menu extends javax.swing.JFrame {
         }
         catch (ClassNotFoundException ex)
         {
-            System.err.println("Erro tela 01: " + ex);
+            System.err.println("Erro menu tela 01: " + ex);
         }
     }//GEN-LAST:event_Cadastro_clienteActionPerformed
 
@@ -125,18 +125,37 @@ public class Menu extends javax.swing.JFrame {
         } 
         catch (ClassNotFoundException ex) 
         {
-            System.err.println("Erro tela 02: " + ex);
+            System.err.println("Erro menu tela 02: " + ex);
         }
     }//GEN-LAST:event_Consultar_clienteActionPerformed
 
     private void Cadastrar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastrar_produtoActionPerformed
-        CadastrarProduto tela03 = new CadastrarProduto();
-        tela03.setVisible(true);
+        
+        CadastrarProduto tela03;
+        
+        try
+        {
+            tela03 = new CadastrarProduto();
+            tela03.setVisible(true);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            System.err.println("Erro menu tela 03: " + ex);
+        }
     }//GEN-LAST:event_Cadastrar_produtoActionPerformed
 
     private void Consultar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_produtoActionPerformed
-        ConsultarProduto tela04 = new ConsultarProduto();
-        tela04.setVisible(true);
+        
+        ConsultarProduto tela04;
+        try 
+        {
+            tela04 = new ConsultarProduto();
+            tela04.setVisible(true);
+        }
+        catch (ClassNotFoundException ex) 
+        {
+            System.err.println("Erro menu tela 04: " + ex);
+        }
     }//GEN-LAST:event_Consultar_produtoActionPerformed
 
     private void Cadastrar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastrar_vendaActionPerformed
@@ -160,15 +179,14 @@ public class Menu extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | 
+                InstantiationException | 
+                IllegalAccessException | 
+                javax.swing.UnsupportedLookAndFeelException ex) {
+            System.err.println("Erro menu: " + ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */

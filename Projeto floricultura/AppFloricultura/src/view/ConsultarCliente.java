@@ -496,7 +496,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 } 
                 catch (ClassNotFoundException ex)
                 {
-                    System.err.println("Erro tela 02.1: " + ex);
+                    System.err.println("Erro tela ConsultarCliente: " + ex);
                 }
             }
         });

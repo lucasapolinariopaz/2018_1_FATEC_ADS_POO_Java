@@ -5,6 +5,13 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.beans.Produto;
+import model.beans.Produto_CD;
+import model.dao.ProdutoDAO;
+
 /**
  *
  * @author Gustavo Lobo
@@ -14,7 +21,7 @@ public class ConsultarProduto extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaProduto
      */
-    public ConsultarProduto() {
+    public ConsultarProduto() throws ClassNotFoundException {
         initComponents();
     }
 
@@ -48,6 +55,11 @@ public class ConsultarProduto extends javax.swing.JFrame {
         tb_produtos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CONSULTA DE PRODUTO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -65,11 +77,32 @@ public class ConsultarProduto extends javax.swing.JFrame {
 
         lbl_PesquisaNome.setText("Pesquisar Nome");
 
+        txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_PesquisaNomeKeyTyped(evt);
+            }
+        });
+
         btn_alterar.setText("Alterar");
+        btn_alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alterarActionPerformed(evt);
+            }
+        });
 
         btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setText("Limpar");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
+            }
+        });
 
         tb_produtos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,6 +128,11 @@ public class ConsultarProduto extends javax.swing.JFrame {
             }
         });
         tb_produtos.getTableHeader().setReorderingAllowed(false);
+        tb_produtos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_produtosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_produtos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -204,6 +242,138 @@ public class ConsultarProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void preencherTabela(String sql)
+    {
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        List<Produto_CD> consulta_produto = dao.consutar_tabela(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_produto.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getCategoria(),
+                instancia.getPreco()
+            });
+        });
+    }
+    
+    public void preencherConsulta(String sql)
+    {
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        List<Produto> consulta_produto = dao.consultar(sql);
+        
+        consulta_produto.forEach((instancia) -> 
+        {
+            lbltxt_codigo.setText("" + instancia.getCod_prod());
+            txt_nome.setText(instancia.getNome());
+            txt_preco.setText("" + instancia.getPreco());
+            txt_categoria.setText(instancia.getCategoria());
+            txt_quant.setText("" + instancia.getQuantidade());
+        });
+    }
+    
+    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
+        
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
+
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        
+        lbltxt_codigo.setText("");
+        txt_nome.setText("");
+        txt_preco.setText("");
+        txt_categoria.setText("");
+        txt_quant.setText("");
+        
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void tb_produtosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_produtosMouseClicked
+        
+        int linha = tb_produtos.getSelectedRow();
+                        
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome = '" + tb_produtos.getValueAt(linha, 0) + "' AND "
+                + "categoria = '" + tb_produtos.getValueAt(linha, 1) + "' AND "
+                + "preco = " + tb_produtos.getValueAt(linha, 2);
+        
+        this.preencherConsulta(sql);
+    }//GEN-LAST:event_tb_produtosMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
+        
+        Produto produto = new Produto();
+        
+        produto.setCod_prod(Integer.parseInt(lbltxt_codigo.getText()));
+        produto.setNome(txt_nome.getText());
+        produto.setPreco(Double.parseDouble(txt_preco.getText()));
+        produto.setCategoria(txt_categoria.getText());
+        produto.setQuantidade(Integer.parseInt(txt_quant.getText()));
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        boolean result = dao.alterar(produto);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Produto alterado", "produto alterado", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Produto não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+        
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_btn_alterarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        
+        Produto produto = new Produto();
+        
+        produto.setCod_prod(Integer.parseInt(lbltxt_codigo.getText()));
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        boolean result = dao.excluir(produto);
+        
+        if(result == true)
+        {
+            JOptionPane.showMessageDialog(this, "Produto excluído", "produto excluído", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Produto não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+        
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencherTabela(sql);
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,8 +406,16 @@ public class ConsultarProduto extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new ConsultarProduto().setVisible(true);
+                try 
+                {
+                    new ConsultarProduto().setVisible(true);
+                }
+                catch (ClassNotFoundException ex) 
+                {
+                    System.err.println("Erro tela ConsultarProduto: " + ex);
+                }
             }
         });
     }
