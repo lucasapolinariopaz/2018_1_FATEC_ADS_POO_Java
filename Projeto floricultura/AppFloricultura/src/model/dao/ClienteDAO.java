@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.beans.Cliente;
-import model.beans.Cliente_CD;
 
 public class ClienteDAO
 {
@@ -56,12 +55,12 @@ public class ClienteDAO
         }
     }
     
-    public List<Cliente_CD> consultar_tabela(String sql)
+    public List<Cliente> consultar_tabela(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Cliente_CD> consulta_cliente = new ArrayList<>();
+        List<Cliente> consulta_cliente = new ArrayList<>();
         
         try 
         {
@@ -70,7 +69,7 @@ public class ClienteDAO
             
             while(rs.next())
             {
-                Cliente_CD cliente = new Cliente_CD();
+                Cliente cliente = new Cliente();
                 
                 cliente.setNome(rs.getString("nome"));
                 cliente.setRg(rs.getString("rg"));
@@ -99,21 +98,24 @@ public class ClienteDAO
         Cliente consulta_cliente = new Cliente();
         
         try 
-        {
+        {            
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            consulta_cliente.setCod_cli(rs.getInt("cod_cli"));
-            consulta_cliente.setNome(rs.getString("nome"));
-            consulta_cliente.setRg(rs.getString("rg"));
-            consulta_cliente.setCpf(rs.getString("cpf"));
-            consulta_cliente.setEndereco(rs.getString("endereco"));
-            consulta_cliente.setNum_endereco(rs.getInt("num_endereco"));
-            consulta_cliente.setCidade(rs.getString("cidade"));
-            consulta_cliente.setUf(rs.getString("uf"));
-            consulta_cliente.setTelefone(rs.getString("telefone"));
-            consulta_cliente.setCelular(rs.getString("celular"));
-            consulta_cliente.setEmail(rs.getString("email"));
+            while(rs.next())
+            {
+                consulta_cliente.setCod_cli(Integer.parseInt(rs.getString("cod_cli")));
+                consulta_cliente.setNome(rs.getString("nome"));
+                consulta_cliente.setRg(rs.getString("rg"));
+                consulta_cliente.setCpf(rs.getString("cpf"));
+                consulta_cliente.setEndereco(rs.getString("endereco"));
+                consulta_cliente.setNum_endereco(Integer.parseInt(rs.getString("num_endereco")));
+                consulta_cliente.setCidade(rs.getString("cidade"));
+                consulta_cliente.setUf(rs.getString("uf"));
+                consulta_cliente.setTelefone(rs.getString("telefone"));
+                consulta_cliente.setCelular(rs.getString("celular"));
+                consulta_cliente.setEmail(rs.getString("email"));
+            }
         }
         catch (SQLException ex)
         {

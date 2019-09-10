@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.beans.Produto;
-import model.beans.Produto_CD;
 
 public class ProdutoDAO
 {
@@ -49,12 +48,12 @@ public class ProdutoDAO
         }
     }
     
-    public List<Produto_CD> consutar_tabela(String sql)
+    public List<Produto> consutar_tabela(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Produto_CD> consulta_produto = new ArrayList<>();
+        List<Produto> consulta_produto = new ArrayList<>();
         
         try 
         {
@@ -63,7 +62,7 @@ public class ProdutoDAO
             
             while(rs.next())
             {
-                Produto_CD produto = new Produto_CD();
+                Produto produto = new Produto();
                 
                 produto.setNome(rs.getString("nome"));
                 produto.setCategoria(rs.getString("categoria"));
@@ -95,12 +94,15 @@ public class ProdutoDAO
         {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
-                           
-            consulta_produto.setCod_prod(Integer.parseInt(rs.getString("cod_prod")));
-            consulta_produto.setNome(rs.getString("nome"));
-            consulta_produto.setPreco(Double.parseDouble(rs.getString("preco")));
-            consulta_produto.setCategoria(rs.getString("categoria"));
-            consulta_produto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
+            
+            while(rs.next())
+            {
+                consulta_produto.setCod_prod(Integer.parseInt(rs.getString("cod_prod")));
+                consulta_produto.setNome(rs.getString("nome"));
+                consulta_produto.setPreco(Double.parseDouble(rs.getString("preco")));
+                consulta_produto.setCategoria(rs.getString("categoria"));
+                consulta_produto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
+            }
         }
         catch (SQLException ex)
         {

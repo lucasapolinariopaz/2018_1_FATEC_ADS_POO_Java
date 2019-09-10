@@ -8,7 +8,7 @@ package view;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import model.beans.Venda_CD;
+import model.beans.Venda;
 import model.dao.VendaDAO;
 
 /**
@@ -363,7 +363,7 @@ public class ConsultarVenda extends javax.swing.JFrame {
     {
         VendaDAO dao = new VendaDAO();
         
-        List<Venda_CD> consulta_venda = dao.consultar_tabela(sql);
+        List<Venda> consulta_venda = dao.consultar_tabela(sql);
         
         DefaultTableModel tabela = (DefaultTableModel) tb_consulta_vendas.getModel();
         tabela.setNumRows(0);
@@ -372,9 +372,9 @@ public class ConsultarVenda extends javax.swing.JFrame {
         {
             tabela.addRow(new Object[]
             {
-                instancia.getData_venda(),
-                instancia.getNome_cliente(),
-                instancia.getTotal_venda()
+                instancia.getData(),
+                instancia.getCliente().getNome(),
+                instancia.getValor()
             });
         });
     }
@@ -425,6 +425,7 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ConsultarVenda().setVisible(true);
             }

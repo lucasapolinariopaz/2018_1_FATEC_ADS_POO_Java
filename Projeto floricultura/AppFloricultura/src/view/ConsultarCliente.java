@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Cliente;
-import model.beans.Cliente_CD;
 import model.dao.ClienteDAO;
 
 /**
@@ -309,7 +308,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
     {
         ClienteDAO dao = new ClienteDAO();
         
-        List<Cliente_CD> consulta_cliente = dao.consultar_tabela(sql);
+        List<Cliente> consulta_cliente = dao.consultar_tabela(sql);
         
         DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
         tabela.setNumRows(0);

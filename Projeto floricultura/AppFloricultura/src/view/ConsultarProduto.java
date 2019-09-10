@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Produto;
-import model.beans.Produto_CD;
 import model.dao.ProdutoDAO;
 
 /**
@@ -246,7 +245,7 @@ public class ConsultarProduto extends javax.swing.JFrame {
     {
         ProdutoDAO dao = new ProdutoDAO();
         
-        List<Produto_CD> consulta_produto = dao.consutar_tabela(sql);
+        List<Produto> consulta_produto = dao.consutar_tabela(sql);
         
         DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
         tabela.setNumRows(0);

@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.beans.Cliente;
-import model.beans.Produto_CD;
 import model.beans.Venda;
-import model.beans.Venda_CD;
 import model.beans.Venda_produto;
 
 public class VendaDAO
@@ -52,9 +50,8 @@ public class VendaDAO
         }
     }
     
-    public int consultar_pk_venda()
+    public int consultar_pk_venda(String sql)
     {
-        String sql = "SELECT MAX(cod_venda) FROM Venda";
         int pk_venda = 0;
         
         PreparedStatement stmt = null;
@@ -112,12 +109,12 @@ public class VendaDAO
         }
     }
     
-    public List<Venda_CD> consultar_tabela(String sql)
+    public List<Venda> consultar_tabela(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Venda_CD> consulta_venda = new ArrayList<>();
+        List<Venda> consulta_venda = new ArrayList<>();
         
         try 
         {
@@ -126,11 +123,16 @@ public class VendaDAO
             
             while(rs.next())
             {
-                Venda_CD venda = new Venda_CD();
+                Venda venda = new Venda();
                 
-                venda.setData_venda(rs.getString("data_venda"));
-                venda.setNome_cliente(rs.getString("nome_cliente"));
-                venda.setTotal_venda(Double.parseDouble(rs.getString("valor_venda")));
+                venda.setData(rs.getString("data_venda"));
+                venda.setValor(Double.parseDouble(rs.getString("valor_venda")));
+                
+                Cliente cliente = new Cliente();
+                
+                cliente.setNome(rs.getString("nome_cliente"));
+                
+                venda.setCliente(cliente);
                 
                 consulta_venda.add(venda);
             }
