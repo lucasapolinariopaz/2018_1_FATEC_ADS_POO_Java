@@ -306,7 +306,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_PesquisaNome">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisaNomeKeyTyped"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisaNomeKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_codigo">

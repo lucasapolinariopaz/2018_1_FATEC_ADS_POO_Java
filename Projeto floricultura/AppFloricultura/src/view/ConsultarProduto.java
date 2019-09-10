@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Produto;
-import model.beans.Produto_CD;
 import model.dao.ProdutoDAO;
 
 /**
@@ -21,10 +20,96 @@ public class ConsultarProduto extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaProduto
      */
-    public ConsultarProduto() throws ClassNotFoundException {
+    public ConsultarProduto() {
         initComponents();
     }
+    
+    public void limparTodosCampos() {
+        lbltxt_codigo.setText("");
+        txt_nome.setText("");
+        txt_preco.setText("");
+        txt_categoria.setText("");
+        txt_quant.setText("");
+        txt_PesquisaNome.setText("");
+    }
 
+    public void preencher_PD(String sql) {
+        ProdutoDAO dao = new ProdutoDAO();
+
+        List<Produto> consulta_produto = dao.consutar_PD(sql);
+
+        DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
+        tabela.setNumRows(0);
+
+        consulta_produto.forEach((instancia)
+                -> {
+            tabela.addRow(new Object[]{
+                instancia.getNome(),
+                instancia.getCategoria(),
+                instancia.getPreco()
+            });
+        });
+    }
+
+    public void pesquisaDinamica() {
+        String sql = "SELECT * FROM Produto WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+
+        this.preencher_PD(sql);
+    }
+
+    public void preencherConsulta(String sql) {
+        ProdutoDAO dao = new ProdutoDAO();
+
+        Produto consulta_produto = dao.consultar(sql);
+
+        lbltxt_codigo.setText("" + consulta_produto.getCod_prod());
+        txt_nome.setText(consulta_produto.getNome());
+        txt_preco.setText("" + consulta_produto.getPreco());
+        txt_categoria.setText(consulta_produto.getCategoria());
+        txt_quant.setText("" + consulta_produto.getQuantidade());
+    }
+    
+    public boolean validacaoCampoVazio() {
+        boolean valida = false;
+
+        if (txt_nome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_preco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o preço do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_categoria.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a categoria do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_quant.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade (estoque) do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
+    public boolean validacaoCampoTamanho() {
+        boolean valida = false;
+
+        if (txt_nome.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo nome, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_preco.getText().length() > 10) {
+            JOptionPane.showMessageDialog(this, "Campo preço, tamanho máximo: 12 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_categoria.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Campo categoria, tamanho máximo: 50 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_quant.getText().length() > 4) {
+            JOptionPane.showMessageDialog(this, "Campo endereço, tamanho máximo: 4 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,8 +163,8 @@ public class ConsultarProduto extends javax.swing.JFrame {
         lbl_PesquisaNome.setText("Pesquisar Nome");
 
         txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_PesquisaNomeKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_PesquisaNomeKeyReleased(evt);
             }
         });
 
@@ -241,63 +326,11 @@ public class ConsultarProduto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void preencherTabela(String sql)
-    {
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        List<Produto_CD> consulta_produto = dao.consutar_tabela(sql);
-        
-        DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
-        tabela.setNumRows(0);
-        
-        consulta_produto.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
-                instancia.getNome(),
-                instancia.getCategoria(),
-                instancia.getPreco()
-            });
-        });
-    }
     
-    public void preencherConsulta(String sql)
-    {
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        List<Produto> consulta_produto = dao.consultar(sql);
-        
-        consulta_produto.forEach((instancia) -> 
-        {
-            lbltxt_codigo.setText("" + instancia.getCod_prod());
-            txt_nome.setText(instancia.getNome());
-            txt_preco.setText("" + instancia.getPreco());
-            txt_categoria.setText(instancia.getCategoria());
-            txt_quant.setText("" + instancia.getQuantidade());
-        });
-    }
-    
-    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencherTabela(sql);
-    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
-
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         
-        lbltxt_codigo.setText("");
-        txt_nome.setText("");
-        txt_preco.setText("");
-        txt_categoria.setText("");
-        txt_quant.setText("");
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencherTabela(sql);
+        this.limparTodosCampos();
+        this.pesquisaDinamica();        
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void tb_produtosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_produtosMouseClicked
@@ -313,66 +346,67 @@ public class ConsultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_tb_produtosMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencherTabela(sql);
+        this.pesquisaDinamica();
     }//GEN-LAST:event_formWindowOpened
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
         
-        Produto produto = new Produto();
-        
-        produto.setCod_prod(Integer.parseInt(lbltxt_codigo.getText()));
-        produto.setNome(txt_nome.getText());
-        produto.setPreco(Double.parseDouble(txt_preco.getText()));
-        produto.setCategoria(txt_categoria.getText());
-        produto.setQuantidade(Integer.parseInt(txt_quant.getText()));
-        
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        boolean result = dao.alterar(produto);
-        
-        if(result == true)
-        {
-            JOptionPane.showMessageDialog(this, "Produto alterado", "produto alterado", JOptionPane.PLAIN_MESSAGE);
+        if (lbltxt_codigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha um produto para poder alterar o cadastro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (validacaoCampoVazio()) {
+            if (validacaoCampoTamanho()) {
+                Produto produto = new Produto();
+
+                produto.setCod_prod(Integer.parseInt(lbltxt_codigo.getText()));
+                produto.setNome(txt_nome.getText());
+                produto.setPreco(Double.parseDouble(txt_preco.getText()));
+                produto.setCategoria(txt_categoria.getText());
+                produto.setQuantidade(Integer.parseInt(txt_quant.getText()));
+
+                ProdutoDAO dao = new ProdutoDAO();
+
+                boolean result = dao.alterar(produto);
+
+                if (result == true) {
+                    this.limparTodosCampos();
+                    this.pesquisaDinamica();
+                    JOptionPane.showMessageDialog(this, "Produto alterado", "produto alterado", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Produto não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Produto não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
-        }
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencherTabela(sql);
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
         
-        Produto produto = new Produto();
-        
-        produto.setCod_prod(Integer.parseInt(lbltxt_codigo.getText()));
-        
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        boolean result = dao.excluir(produto);
-        
-        if(result == true)
-        {
-            JOptionPane.showMessageDialog(this, "Produto excluído", "produto excluído", JOptionPane.PLAIN_MESSAGE);
+        if (lbltxt_codigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha um produto para poder excluir o cadastro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            Produto produto = new Produto();
+
+            produto.setCod_prod(Integer.parseInt(lbltxt_codigo.getText()));
+
+            ProdutoDAO dao = new ProdutoDAO();
+
+            boolean result = dao.excluir(produto);
+
+            if (result == true) {
+                this.limparTodosCampos();
+                this.pesquisaDinamica();
+                JOptionPane.showMessageDialog(this, "Produto excluído", "produto excluído", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Produto não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
+            }
         }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Produto não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
-        }
-        
-        String sql = "SELECT * FROM Produto WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
-        this.preencherTabela(sql);
     }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -408,14 +442,7 @@ public class ConsultarProduto extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try 
-                {
-                    new ConsultarProduto().setVisible(true);
-                }
-                catch (ClassNotFoundException ex) 
-                {
-                    System.err.println("Erro tela ConsultarProduto: " + ex);
-                }
+                new ConsultarProduto().setVisible(true);
             }
         });
     }

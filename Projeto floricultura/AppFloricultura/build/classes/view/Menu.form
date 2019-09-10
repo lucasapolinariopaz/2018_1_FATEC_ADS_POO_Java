@@ -55,12 +55,12 @@
             <Property name="text" type="java.lang.String" value="Venda"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="Cadastrar_venda">
+            <MenuItem class="javax.swing.JMenuItem" name="Gerar_venda">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerar Venda"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Cadastrar_vendaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Gerar_vendaActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Consultar_venda">
