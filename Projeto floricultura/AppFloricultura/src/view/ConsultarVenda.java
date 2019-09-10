@@ -190,9 +190,9 @@ public class ConsultarVenda extends javax.swing.JFrame {
     }
     
     public void importarProduto(Venda_produto venda_produto)
-    {
+    {   
         this.lista_PV_atualizada.add(venda_produto);
-        this.preencherTabelaProdutos(lista_PV_atualizada);
+        this.preencherTabelaProdutos(this.lista_PV_atualizada);
     }
     
     /** This method is called from within the constructor to
@@ -593,11 +593,17 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
         
-        if(tela_AdicionarProduto_ConsultarVenda == null)
-            tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
+        if(lbltxt_VendaCodigo.getText().isEmpty())        
+            JOptionPane.showMessageDialog(this, "Informe uma venda para alterar", 
+                            "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            if(tela_AdicionarProduto_ConsultarVenda == null)
+                tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
         
-        tela_AdicionarProduto_ConsultarVenda.setVisible(true);
-        tela_AdicionarProduto_ConsultarVenda.linkar(this);     
+            tela_AdicionarProduto_ConsultarVenda.setVisible(true);
+            tela_AdicionarProduto_ConsultarVenda.linkar(this, lbltxt_VendaCodigo.getText());  
+        }
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -625,7 +631,7 @@ public class ConsultarVenda extends javax.swing.JFrame {
         
         this.preencherConsulta_01(sql);
         
-        sql = "SELECT vp.cod_venda, vp.cod_prod, p.nome, p.preco, vp.qtd_prod_venda "
+        sql = "SELECT vp.cod_venda, vp.cod_prod, p.nome, p.preco, p.quantidade, vp.qtd_prod_venda "
                 + "FROM Venda_produto vp INNER JOIN Produto p ON vp.cod_prod = p.cod_prod "
                 + "WHERE vp.cod_venda = " + lbltxt_VendaCodigo.getText();
         
@@ -650,6 +656,7 @@ public class ConsultarVenda extends javax.swing.JFrame {
         
         Venda venda = new Venda();
         
+        venda.setCod_venda(Integer.parseInt(lbltxt_VendaCodigo.getText()));
         venda.setData(txt_VendaData.getText());
         venda.setForma_pagamento(txt_VendaPagamento.getText());
         venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
@@ -679,6 +686,7 @@ public class ConsultarVenda extends javax.swing.JFrame {
         
         Venda venda = new Venda();
         
+        venda.setCod_venda(Integer.parseInt(lbltxt_VendaCodigo.getText()));
         venda.setData(txt_VendaData.getText());
         venda.setForma_pagamento(txt_VendaPagamento.getText());
         venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));

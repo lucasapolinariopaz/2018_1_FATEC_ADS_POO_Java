@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Produto;
+import model.beans.Venda;
 import model.beans.Venda_produto;
 import model.dao.ProdutoDAO;
 
@@ -19,6 +20,7 @@ import model.dao.ProdutoDAO;
 public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
 
     private ConsultarVenda tela_ConsultarVenda;
+    private String pk_venda;
     
     /**
      * Creates new form ConsultaProduto
@@ -27,9 +29,10 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void linkar(ConsultarVenda tela_ConsultarVenda)
+    public void linkar(ConsultarVenda tela_ConsultarVenda, String pk_venda)
     {
         this.tela_ConsultarVenda = tela_ConsultarVenda;
+        this.pk_venda = pk_venda;
     }
     
     public void preencher_PD(String sql)
@@ -368,10 +371,13 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
                 produto.setPreco(Double.parseDouble(lbltxt_ProdutoPreco.getText()));
                 produto.setQuantidade(Integer.parseInt(lbltxt_ProdutoQuantidade.getText()));
         
+                Venda venda = new Venda();
+                venda.setCod_venda(Integer.parseInt(pk_venda));
+                
                 Venda_produto venda_produto = new Venda_produto();
-        
-                venda_produto.setProduto(produto);
                 venda_produto.setQtd_prod_venda(Integer.parseInt(txt_VendaProduto_qtd.getText()));
+                venda_produto.setVenda(venda);
+                venda_produto.setProduto(produto);
         
                 if(tela_ConsultarVenda != null)
                 {

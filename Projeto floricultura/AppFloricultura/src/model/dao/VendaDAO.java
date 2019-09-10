@@ -16,9 +16,7 @@ public class VendaDAO
 {
     private Connection con = null;
 
-    public VendaDAO()
-    {
-        con = ConnectionFactory.getConnection();
+    public VendaDAO(){
     }
     
     public boolean debitar_estoque(Venda_produto venda_produto)
@@ -83,6 +81,8 @@ public class VendaDAO
     
     public boolean gerar(Venda venda)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "INSERT INTO Venda(data, valor, forma_pagamento, cod_cli) VALUES(?, ?, ?, ?)";
                 
         PreparedStatement stmt = null;
@@ -183,6 +183,8 @@ public class VendaDAO
     
     public boolean gerar(Venda venda, List<Venda_produto> lista_produtos_venda)
     {       
+        con = ConnectionFactory.getConnection();
+        
         boolean result;
         int pk_venda;
         
@@ -215,6 +217,8 @@ public class VendaDAO
     
     public List<Venda> consultar_PD(String sql)
     {
+        con = ConnectionFactory.getConnection();
+        
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -255,6 +259,8 @@ public class VendaDAO
     
     public Venda consultar_venda(String sql)
     {
+        con = ConnectionFactory.getConnection();
+        
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -295,6 +301,8 @@ public class VendaDAO
     
     public List<Venda_produto> consultar_lista_prod_venda(String sql)
     {
+        con = ConnectionFactory.getConnection();
+        
         List<Venda_produto> consulta_produtos_venda = new ArrayList<>();
         
         PreparedStatement stmt = null;
@@ -314,6 +322,7 @@ public class VendaDAO
                 produto.setCod_prod(Integer.parseInt(rs.getString("cod_prod")));
                 produto.setNome(rs.getString("nome"));
                 produto.setPreco(Double.parseDouble(rs.getString("preco")));
+                produto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
                 venda_produto.setProduto(produto);
                 
                 Venda venda = new Venda();
@@ -337,6 +346,8 @@ public class VendaDAO
     
     public boolean alterar(Venda venda)
     {
+        con = ConnectionFactory.getConnection();
+        
         String sql = "UPDATE Venda SET data = ?, valor = ?, forma_pagamento = ?, cod_cli = ? WHERE cod_venda = ?";
         
         PreparedStatement stmt = null;
@@ -367,7 +378,7 @@ public class VendaDAO
     }
     
     public boolean alterar(Venda_produto venda_produto)
-    {
+    {        
         con = ConnectionFactory.getConnection();
         
         String sql = "UPDATE Venda_produto SET qtd_prod_venda = ? WHERE cod_venda = ? AND cod_prod = ?";
@@ -430,70 +441,50 @@ public class VendaDAO
     public boolean alterar(List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
     {
         boolean result = false, compara = false;
-        int i, j;
+        int i, j, produto_lista_antiga, produto_lista_atualizada, qtd_estoque;
         
         //Varredura Lista de produtos antiga
         for(i = 0; i < lista_PV_antiga.size(); i++)
         {            
             for(j = 0; j < lista_PV_atualizada.size(); j++)
             {
-                compara = ((lista_PV_antiga.get(i).getVenda().getCod_venda() == 
-                        lista_PV_atualizada.get(j).getVenda().getCod_venda()) && 
-                        (lista_PV_antiga.get(i).getProduto().getCod_prod() == 
-                        lista_PV_atualizada.get(j).getProduto().getCod_prod()));
-                        
-                if(compara == true)
+                produto_lista_antiga = lista_PV_antiga.get(i).getProduto().getCod_prod();
+                produto_lista_atualizada = lista_PV_atualizada.get(j).getProduto().getCod_prod();
+                
+                if(produto_lista_antiga == produto_lista_atualizada)
+                {
+                    compara = true;
                     break;
+                }
             }
             
             if(compara == true)
-            {
-                result = alterar(lista_PV_atualizada.get(j));
-                
-                if(result == false)
-                    break;
-                else
-                {
-                    result = repor_estoque(lista_PV_antiga.get(i));
-                    
-                    if(result == false)
-                        break;
-                    else
-                    {
-                        result = debitar_estoque(lista_PV_atualizada.get(j));
-                        
-                        if(result == false)
-                            break;
-                    }                    
-                }
+            {                
+                if(repor_estoque(lista_PV_antiga.get(i)))
+                    if(debitar_estoque(lista_PV_atualizada.get(j)))
+                        if(alterar(lista_PV_atualizada.get(j)))
+                            result = true;
             }
             else
             {
-                result = excluir(lista_PV_antiga.get(i));
-                
-                if(result == false)
-                    break;
-                else
-                {
-                    result = repor_estoque(lista_PV_antiga.get(i));
-                    
-                    if(result == false)
-                        break;
-                }
+                if(repor_estoque(lista_PV_antiga.get(i)))
+                    if(excluir(lista_PV_antiga.get(i)))
+                        result = true;
             }  
         }
         
-        if(result == true)
-        {
+        //if(result == true)
+        //{
             //Varredura Lista de produtos atualizada
             for(i = 0; i < lista_PV_atualizada.size(); i++)
             {            
                 for(j = 0; j < lista_PV_antiga.size(); j++)
                 {
-                    compara = ((lista_PV_atualizada.get(i).getVenda().getCod_venda() == 
-                            lista_PV_antiga.get(j).getVenda().getCod_venda()) && 
-                            (lista_PV_atualizada.get(i).getProduto().getCod_prod() == 
-                            lista_PV_antiga.get(j).getProduto().getCod_prod()));
+                    produto_lista_atualizada = lista_PV_atualizada.get(i).getProduto().getCod_prod();
+                    produto_lista_antiga = lista_PV_antiga.get(j).getProduto().getCod_prod();
+                
+                    if(produto_lista_antiga == produto_lista_atualizada)
+                        compara = true;
                 
                     if(compara == true)
                         break;
@@ -501,19 +492,10 @@ public class VendaDAO
             
                 if(compara == false)
                 {
-                    result = gerar(lista_PV_atualizada.get(i));
-                    
-                    if(result == false)
-                        break;
-                    else
-                    {
-                        result = debitar_estoque(lista_PV_atualizada.get(i));
-                        
-                        if(result == false)
-                            break;
-                    }
-                }
-            }                  
+                    if(debitar_estoque(lista_PV_atualizada.get(i)))
+                        if(gerar(lista_PV_atualizada.get(i)))
+                            result = true;
+                }             
         }
         
         return result; 
