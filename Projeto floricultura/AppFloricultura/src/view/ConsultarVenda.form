@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -93,8 +96,8 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="lbl_VendaPagamento" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbl_VendaCodigo" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbl_VendaData" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_VendaCodigo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -171,20 +174,17 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="lbltxt_VendaCodigo" min="-2" pref="20" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txt_VendaData" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbl_VendaData" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="lbl_VendaCodigo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lbl_VendaCodigo" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txt_VendaPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbl_VendaPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -273,6 +273,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpar cliente"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_limpar_clienteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_ClienteNome">
           <Properties>
@@ -360,6 +363,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir Produto"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_excluir_produtoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_alterar_venda">
           <Properties>
@@ -424,6 +430,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_PesquisarVendaData">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisarVendaDataKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_PesquisarClienteNome">
           <Properties>
@@ -431,6 +440,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_PesquisarClienteNome">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_PesquisarClienteNomeKeyReleased"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -452,14 +464,12 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_ConsultaVendasMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lbl_VendaCodigo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lbltxt_VendaCodigo">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -481,6 +491,11 @@
         <Component class="javax.swing.JLabel" name="lbl_ClienteCodigo">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#xf3;digo do Cliente"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_VendaCodigo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
           </Properties>
         </Component>
       </SubComponents>

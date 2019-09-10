@@ -270,12 +270,13 @@ public class VendaDAO
             {
                 consulta_venda.setCod_venda(Integer.parseInt(rs.getString("cod_venda")));
                 consulta_venda.setData(rs.getString("data"));
-                consulta_venda.setValor(Double.parseDouble(rs.getString("valor")));
                 consulta_venda.setForma_pagamento(rs.getString("forma_pagamento"));
                 
                 Cliente cliente_consulta = new Cliente();
             
                 cliente_consulta.setCod_cli(Integer.parseInt(rs.getString("cod_cli")));
+                cliente_consulta.setNome(rs.getString("nome"));
+                cliente_consulta.setCpf(rs.getString("cpf"));
             
                 consulta_venda.setCliente(cliente_consulta);
             }        
@@ -311,6 +312,8 @@ public class VendaDAO
                 
                 Produto produto = new Produto();
                 produto.setCod_prod(Integer.parseInt(rs.getString("cod_prod")));
+                produto.setNome(rs.getString("nome"));
+                produto.setPreco(Double.parseDouble(rs.getString("preco")));
                 venda_produto.setProduto(produto);
                 
                 Venda venda = new Venda();

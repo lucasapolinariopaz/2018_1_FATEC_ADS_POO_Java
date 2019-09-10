@@ -371,7 +371,6 @@ public class ConsultarCliente extends javax.swing.JFrame {
         
         this.limparTodosCampos();
         this.pesquisaDinamica();
-        
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
@@ -387,7 +386,6 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tb_clientesMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
         this.pesquisaDinamica();       
     }//GEN-LAST:event_formWindowOpened
 
@@ -448,7 +446,6 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
-        
         this.pesquisaDinamica();
     }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 

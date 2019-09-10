@@ -31,6 +31,7 @@ public class ConsultarProduto extends javax.swing.JFrame {
         txt_preco.setText("");
         txt_categoria.setText("");
         txt_quant.setText("");
+        txt_PesquisaNome.setText("");
     }
 
     public void preencher_PD(String sql)
@@ -310,7 +311,6 @@ public class ConsultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_tb_produtosMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
         this.pesquisaDinamica();
     }//GEN-LAST:event_formWindowOpened
 
@@ -365,7 +365,6 @@ public class ConsultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
-        
         this.pesquisaDinamica();
     }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 

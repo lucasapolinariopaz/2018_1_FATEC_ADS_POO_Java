@@ -24,7 +24,6 @@ public class GerarVenda extends javax.swing.JFrame {
     InserirCliente_GerarVenda tela_InserirCliente_GerarVenda = new InserirCliente_GerarVenda();
     AdicionarProduto_GerarVenda tela_AdicionarProduto_GerarVenda = new AdicionarProduto_GerarVenda();
 
-    Cliente cliente = new Cliente();
     List<Venda_produto> lista_produtos_venda = new ArrayList<>();
                 
     /** Creates new form RealizarVenda */
@@ -423,6 +422,8 @@ public class GerarVenda extends javax.swing.JFrame {
         venda.setData(txt_VendaData.getText());
         venda.setForma_pagamento(txt_VendaPagamento.getText());
         venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+        
+        Cliente cliente = new Cliente();
         
         cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
         venda.setCliente(cliente);

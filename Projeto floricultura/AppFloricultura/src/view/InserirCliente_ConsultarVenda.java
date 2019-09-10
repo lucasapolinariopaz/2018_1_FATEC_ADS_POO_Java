@@ -11,6 +11,8 @@ package view;
  */
 public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
 
+    private ConsultarVenda tela_ConsultarVenda;
+    
     /**
      * Creates new form ConsultaCliente
      */
@@ -18,6 +20,11 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void linkar(ConsultarVenda tela_ConsultarVenda)
+    {
+        this.tela_ConsultarVenda = tela_ConsultarVenda;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,11 +92,6 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         btn_inserir.setText("Inserir");
 
         btn_limpar.setText("Limpar");
-        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_limparActionPerformed(evt);
-            }
-        });
 
         lbl_PesquisaNome.setText("Pesquisar Nome");
 
@@ -286,10 +288,6 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_limparActionPerformed
 
     /**
      * @param args the command line arguments

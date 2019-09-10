@@ -6,9 +6,11 @@
 
 package view;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Venda;
+import model.beans.Venda_produto;
 import model.dao.VendaDAO;
 
 /**
@@ -17,11 +19,146 @@ import model.dao.VendaDAO;
  */
 public class ConsultarVenda extends javax.swing.JFrame {
 
+    InserirCliente_ConsultarVenda tela_InserirCliente_ConsultarVenda = new InserirCliente_ConsultarVenda();
+    
+    List<Venda_produto> lista_PV_antiga = new ArrayList<>();
+    List<Venda_produto> lista_PV_atualizada = new ArrayList<>();
+    
     /** Creates new form RealizarVenda */
     public ConsultarVenda(){
         initComponents();
     }
 
+    public void preencher_PD(String sql)
+    {
+        VendaDAO dao = new VendaDAO();
+        
+        List<Venda> consulta_venda = dao.consultar_PD(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_ConsultaVendas.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_venda.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getData(),
+                instancia.getCliente().getNome(),
+                instancia.getValor()
+            });
+        });
+    }
+    
+    public void pesquisaDinamica()
+    {
+        String sql;
+        
+        if(txt_PesquisarVendaData.getText().isEmpty() && txt_PesquisarClienteNome.getText().isEmpty())
+        {
+            sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
+                    + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli";
+        }
+        else if(txt_PesquisarVendaData.getText().isEmpty())
+        {
+            sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
+                    + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
+                    + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%'";
+        }
+        else if(txt_PesquisarClienteNome.getText().isEmpty())
+        {
+            sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
+                    + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
+                    + "WHERE v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%'";
+        }
+        else
+        {
+            sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
+                    + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
+                    + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%' AND "
+                    + "v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%'";
+        }
+                    
+        this.preencher_PD(sql);
+    }
+    
+    public void preencherConsulta_01(String sql)
+    {
+        VendaDAO dao = new VendaDAO();
+        
+        Venda consulta_venda = dao.consultar_venda(sql);
+        
+        lbltxt_VendaCodigo.setText("" + consulta_venda.getCod_venda());
+        txt_VendaData.setText(consulta_venda.getData());
+        txt_VendaPagamento.setText(consulta_venda.getForma_pagamento());
+        lbltxt_ClienteCodigo.setText("" + consulta_venda.getCliente().getCod_cli());
+        lbltxt_ClienteNome.setText(consulta_venda.getCliente().getNome());
+        lbltxt_ClienteCpf.setText(consulta_venda.getCliente().getCpf());
+    }
+    
+    public void preencherTabelaProdutos(List<Venda_produto> lista_produtos_venda)
+    {
+        DefaultTableModel tabela = (DefaultTableModel) tb_ProdutosVenda.getModel();
+        tabela.setNumRows(0);
+        
+        double venda_total = 0;
+        
+        for(int i = 0; i < lista_produtos_venda.size(); i++)
+        {
+            tabela.addRow(new Object[]
+            {
+                lista_produtos_venda.get(i).getProduto().getCod_prod(),
+                lista_produtos_venda.get(i).getProduto().getNome(),
+                lista_produtos_venda.get(i).getProduto().getPreco(),
+                lista_produtos_venda.get(i).getQtd_prod_venda(),
+                lista_produtos_venda.get(i).getProduto().getPreco() * lista_produtos_venda.get(i).getQtd_prod_venda()
+            });
+            
+            venda_total += lista_produtos_venda.get(i).getProduto().getPreco() * (double) lista_produtos_venda.get(i).getQtd_prod_venda();
+        }
+        
+        lbltxt_VendaTotal.setText(String.valueOf(venda_total));
+    }
+    
+    public void preencherConsulta_02(String sql)
+    {
+        VendaDAO dao = new VendaDAO();
+        
+        lista_PV_antiga = dao.consultar_lista_prod_venda(sql);
+        lista_PV_atualizada = lista_PV_antiga;
+        
+        this.preencherTabelaProdutos(lista_PV_antiga);
+    }
+    
+    public void limparCamposCliente()
+    {
+        lbltxt_ClienteCodigo.setText("");
+        lbltxt_ClienteNome.setText("");
+        lbltxt_ClienteCpf.setText("");
+    }
+    
+    public void limparUmProduto()
+    {
+        int linha = tb_ProdutosVenda.getSelectedRow();
+        
+        lista_PV_atualizada.remove(linha);
+        
+        preencherTabelaProdutos(lista_PV_atualizada);
+    }
+    
+    public void limparTodosCampos()
+    {
+        txt_PesquisarVendaData.setText("");
+        txt_PesquisarClienteNome.setText("");
+        lbltxt_VendaCodigo.setText("");
+        txt_VendaData.setText("");
+        txt_VendaPagamento.setText("");
+        limparCamposCliente();
+        lista_PV_antiga.clear();
+        lista_PV_atualizada.clear();
+        preencherTabelaProdutos(lista_PV_antiga);
+        lbltxt_VendaTotal.setText("");
+    }
+        
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -61,12 +198,17 @@ public class ConsultarVenda extends javax.swing.JFrame {
         txt_PesquisarClienteNome = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_ConsultaVendas = new javax.swing.JTable();
-        lbl_VendaCodigo = new javax.swing.JLabel();
         lbltxt_VendaCodigo = new javax.swing.JLabel();
         lbltxt_ClienteCodigo = new javax.swing.JLabel();
         lbl_ClienteCodigo = new javax.swing.JLabel();
+        lbl_VendaCodigo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CONSULTAR VENDA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -82,6 +224,11 @@ public class ConsultarVenda extends javax.swing.JFrame {
         });
 
         btn_limpar_cliente.setText("Limpar cliente");
+        btn_limpar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpar_clienteActionPerformed(evt);
+            }
+        });
 
         lbl_ClienteNome.setText("Nome do Cliente");
 
@@ -124,6 +271,11 @@ public class ConsultarVenda extends javax.swing.JFrame {
         });
 
         btn_excluir_produto.setText("Excluir Produto");
+        btn_excluir_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluir_produtoActionPerformed(evt);
+            }
+        });
 
         btn_alterar_venda.setText("Salvar Alterações");
 
@@ -147,7 +299,19 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
         lbl_PesquisarVendaData.setText("Pesquisar Data da Venda");
 
+        txt_PesquisarVendaData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_PesquisarVendaDataKeyReleased(evt);
+            }
+        });
+
         lbl_PesquisarClienteNome.setText("Pesquisar Nome do Cliente");
+
+        txt_PesquisarClienteNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_PesquisarClienteNomeKeyReleased(evt);
+            }
+        });
 
         tb_ConsultaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -173,15 +337,20 @@ public class ConsultarVenda extends javax.swing.JFrame {
             }
         });
         tb_ConsultaVendas.getTableHeader().setReorderingAllowed(false);
+        tb_ConsultaVendas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_ConsultaVendasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_ConsultaVendas);
-
-        lbl_VendaCodigo.setText("Código");
 
         lbltxt_VendaCodigo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbltxt_ClienteCodigo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbl_ClienteCodigo.setText("Código do Cliente");
+
+        lbl_VendaCodigo.setText("Código");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,8 +387,8 @@ public class ConsultarVenda extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lbl_VendaPagamento)
-                                    .addComponent(lbl_VendaCodigo)
-                                    .addComponent(lbl_VendaData))
+                                    .addComponent(lbl_VendaData)
+                                    .addComponent(lbl_VendaCodigo))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_VendaData, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,16 +453,14 @@ public class ConsultarVenda extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbltxt_VendaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txt_VendaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_VendaData))
-                                .addGap(6, 6, 6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbl_VendaCodigo)
-                                .addGap(34, 34, 34)))
+                                    .addComponent(lbl_VendaData)))
+                            .addComponent(lbl_VendaCodigo))
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_VendaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_VendaPagamento))
@@ -368,35 +535,14 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     
-    public void preencherTabela(String sql)
-    {
-        VendaDAO dao = new VendaDAO();
-        
-        List<Venda> consulta_venda = dao.consultar_PD(sql);
-        
-        DefaultTableModel tabela = (DefaultTableModel) tb_ConsultaVendas.getModel();
-        tabela.setNumRows(0);
-        
-        consulta_venda.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
-                instancia.getData(),
-                instancia.getCliente().getNome(),
-                instancia.getValor()
-            });
-        });
-    }
     
-    private void btn_limpar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_vendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_limpar_vendaActionPerformed
-
     private void btn_inserir_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserir_clienteActionPerformed
         
-        InserirCliente_ConsultarVenda tela_InserirCliente_ConsultarVenda = new InserirCliente_ConsultarVenda();
+        if(tela_InserirCliente_ConsultarVenda == null)
+            tela_InserirCliente_ConsultarVenda = new InserirCliente_ConsultarVenda();
+        
         tela_InserirCliente_ConsultarVenda.setVisible(true);
+        tela_InserirCliente_ConsultarVenda.linkar(this);
     }//GEN-LAST:event_btn_inserir_clienteActionPerformed
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
@@ -404,6 +550,50 @@ public class ConsultarVenda extends javax.swing.JFrame {
         AdicionarProduto_ConsultarVenda tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
         tela_AdicionarProduto_ConsultarVenda.setVisible(true);        
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void txt_PesquisarVendaDataKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisarVendaDataKeyReleased
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_txt_PesquisarVendaDataKeyReleased
+
+    private void txt_PesquisarClienteNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisarClienteNomeKeyReleased
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_txt_PesquisarClienteNomeKeyReleased
+
+    private void tb_ConsultaVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_ConsultaVendasMouseClicked
+        
+        int linha = tb_ConsultaVendas.getSelectedRow();
+        String sql;
+        
+        sql = "SELECT v.cod_venda, v.data, v.forma_pagamento, c.cod_cli, c.nome, c.cpf "
+                + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
+                + "WHERE v.data = '" + tb_ConsultaVendas.getValueAt(linha, 0) + "' AND "
+                + "c.nome = '" + tb_ConsultaVendas.getValueAt(linha, 1) + "' AND "
+                + "v.valor = " + tb_ConsultaVendas.getValueAt(linha, 2);
+        
+        this.preencherConsulta_01(sql);
+        
+        sql = "SELECT vp.cod_venda, vp.cod_prod, p.nome, p.preco, vp.qtd_prod_venda "
+                + "FROM Venda_produto vp INNER JOIN Produto p ON vp.cod_prod = p.cod_prod "
+                + "WHERE vp.cod_venda = " + lbltxt_VendaCodigo.getText();
+        
+        this.preencherConsulta_02(sql);
+    }//GEN-LAST:event_tb_ConsultaVendasMouseClicked
+
+    private void btn_limpar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_clienteActionPerformed
+        limparCamposCliente();
+    }//GEN-LAST:event_btn_limpar_clienteActionPerformed
+
+    private void btn_excluir_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluir_produtoActionPerformed
+        limparUmProduto();
+    }//GEN-LAST:event_btn_excluir_produtoActionPerformed
+
+    private void btn_limpar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_vendaActionPerformed
+        limparTodosCampos();
+    }//GEN-LAST:event_btn_limpar_vendaActionPerformed
 
     /**
      * @param args the command line arguments
