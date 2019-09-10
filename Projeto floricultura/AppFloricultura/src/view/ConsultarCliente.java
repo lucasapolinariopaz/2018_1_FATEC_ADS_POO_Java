@@ -24,8 +24,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void limparTodosCampos()
-    {
+    public void limparTodosCampos() {
         txt_PesquisaNome.setText("");
         lbltxt_codigo.setText("");
         txt_nome.setText("");
@@ -39,41 +38,36 @@ public class ConsultarCliente extends javax.swing.JFrame {
         txt_cel.setText("");
         txt_email.setText("");
     }
-    
-    public void preencher_PD(String sql)
-    {
+
+    public void preencher_PD(String sql) {
         ClienteDAO dao = new ClienteDAO();
-        
+
         List<Cliente> consulta_cliente = dao.consultar_PD(sql);
-        
+
         DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
         tabela.setNumRows(0);
-        
-        consulta_cliente.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
+
+        consulta_cliente.forEach((instancia)
+                -> {
+            tabela.addRow(new Object[]{
                 instancia.getNome(),
                 instancia.getRg(),
                 instancia.getCpf()
             });
         });
     }
-    
-    public void pesquisaDinamica()
-    {
-        String sql = "SELECT * FROM Cliente WHERE "
-                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
-        
+
+    public void pesquisaDinamica() {
+        String sql = "SELECT * FROM Cliente WHERE nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+
         this.preencher_PD(sql);
     }
-    
-    public void preencherConsulta(String sql)
-    {
+
+    public void preencherConsulta(String sql) {
         ClienteDAO dao = new ClienteDAO();
-        
-        Cliente consulta_cliente = dao.consultar(sql);  
-        
+
+        Cliente consulta_cliente = dao.consultar(sql);
+
         lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
         txt_nome.setText(consulta_cliente.getNome());
         txt_rg.setText(consulta_cliente.getRg());
@@ -85,6 +79,70 @@ public class ConsultarCliente extends javax.swing.JFrame {
         txt_telefone.setText(consulta_cliente.getTelefone());
         txt_cel.setText(consulta_cliente.getCelular());
         txt_email.setText(consulta_cliente.getEmail());
+    }
+
+    public boolean validacaoCampoVazio() {
+        boolean valida = false;
+
+        if (txt_nome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_rg.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o RG do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cpf.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o CPF do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_endereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o endereco do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_n_endereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o número do endereço do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a cidade do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_estado.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o estado do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
+    public boolean validacaoCampoTamanho() {
+        boolean valida = false;
+
+        if (txt_nome.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo nome, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_rg.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo RG, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cpf.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo CPF, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_endereco.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo endereço, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_n_endereco.getText().length() > 4) {
+            JOptionPane.showMessageDialog(this, "Campo número do endereço, tamanho máximo: 4 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cidade.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Campo cidade, tamanho máximo: 50 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_estado.getText().length() > 2) {
+            JOptionPane.showMessageDialog(this, "Campo estado, tamanho máximo: 2 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_telefone.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo telefone, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cel.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo celular, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_email.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo e-mail, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
     }
     
     /**
@@ -391,58 +449,63 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
         
-        Cliente cliente = new Cliente();
-        
-        cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
-        cliente.setNome(txt_nome.getText());
-        cliente.setRg(txt_rg.getText());
-        cliente.setCpf(txt_cpf.getText());
-        cliente.setEndereco(txt_endereco.getText());
-        cliente.setNum_endereco(Integer.parseInt(txt_n_endereco.getText()));
-        cliente.setCidade(txt_cidade.getText());
-        cliente.setUf(txt_estado.getText());
-        cliente.setTelefone(txt_telefone.getText());
-        cliente.setCelular(txt_cel.getText());
-        cliente.setEmail(txt_email.getText());
-        
-        ClienteDAO dao = new ClienteDAO();
-        
-        boolean result = dao.alterar(cliente);
-        
-        if(result == true)
-        {
-            JOptionPane.showMessageDialog(this, "Cliente alterado", "Cliente alterado", JOptionPane.PLAIN_MESSAGE);
+        if (lbltxt_codigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha um cliente para poder alterar o cadastro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (validacaoCampoVazio()) {
+            if (validacaoCampoTamanho()) {
+
+                Cliente cliente = new Cliente();
+
+                cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
+                cliente.setNome(txt_nome.getText());
+                cliente.setRg(txt_rg.getText());
+                cliente.setCpf(txt_cpf.getText());
+                cliente.setEndereco(txt_endereco.getText());
+                cliente.setNum_endereco(Integer.parseInt(txt_n_endereco.getText()));
+                cliente.setCidade(txt_cidade.getText());
+                cliente.setUf(txt_estado.getText());
+                cliente.setTelefone(txt_telefone.getText());
+                cliente.setCelular(txt_cel.getText());
+                cliente.setEmail(txt_email.getText());
+
+                ClienteDAO dao = new ClienteDAO();
+
+                boolean result = dao.alterar(cliente);
+
+                if (result == true) {
+                    this.limparTodosCampos();
+                    this.pesquisaDinamica();
+                    JOptionPane.showMessageDialog(this, "Cliente alterado", "Cliente alterado", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Cliente não alterado", "Erro", JOptionPane.PLAIN_MESSAGE);
-        }
-        
-        this.limparTodosCampos();
-        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
         
-        Cliente cliente = new Cliente();
-        
-        cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
-        
-        ClienteDAO dao = new ClienteDAO();
-        
-        boolean result = dao.excluir(cliente);
-        
-        if(result == true)
-        {
-            JOptionPane.showMessageDialog(this, "Cliente excluído", "Cliente excluído", JOptionPane.PLAIN_MESSAGE);
+        if (lbltxt_codigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha um cliente para poder excluir o cadastro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Cliente cliente = new Cliente();
+
+            cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
+
+            ClienteDAO dao = new ClienteDAO();
+
+            boolean result = dao.excluir(cliente);
+
+            if (result == true) {
+                this.limparTodosCampos();
+                this.pesquisaDinamica();
+                JOptionPane.showMessageDialog(this, "Cliente excluído", "Cliente excluído", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
+            }
         }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Cliente não excluído", "Erro", JOptionPane.PLAIN_MESSAGE);
-        }
-        
-        this.limparTodosCampos();
-        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased

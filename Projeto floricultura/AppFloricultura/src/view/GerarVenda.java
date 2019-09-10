@@ -20,94 +20,121 @@ import model.dao.VendaDAO;
  * @author Gustavo Lobo
  */
 public class GerarVenda extends javax.swing.JFrame {
-    
+
     InserirCliente_GerarVenda tela_InserirCliente_GerarVenda = new InserirCliente_GerarVenda();
     AdicionarProduto_GerarVenda tela_AdicionarProduto_GerarVenda = new AdicionarProduto_GerarVenda();
 
     List<Venda_produto> lista_produtos_venda = new ArrayList<>();
-                
-    /** Creates new form RealizarVenda */
+
+    /**
+     * Creates new form RealizarVenda
+     */
     public GerarVenda() {
         initComponents();
     }
-    
-    public void importarCliente(Cliente cliente)
-    {
+
+    public void importarCliente(Cliente cliente) {
         lbltxt_ClienteCodigo.setText(String.valueOf(cliente.getCod_cli()));
         lbltxt_ClienteNome.setText(cliente.getNome());
         lbltxt_ClienteCpf.setText(cliente.getCpf());
     }
-    
-    public void preencherTabelaProdutos(List<Venda_produto> lista_produtos_venda)
-    {
+
+    public void preencherTabelaProdutos(List<Venda_produto> lista_produtos_venda) {
         DefaultTableModel tabela = (DefaultTableModel) tb_ProdutosVenda.getModel();
         tabela.setNumRows(0);
-        
+
         double venda_total = 0;
-        
-        for(int i = 0; i < lista_produtos_venda.size(); i++)
-        {
-            tabela.addRow(new Object[]
-            {
+
+        for (int i = 0; i < lista_produtos_venda.size(); i++) {
+            tabela.addRow(new Object[]{
                 lista_produtos_venda.get(i).getProduto().getCod_prod(),
                 lista_produtos_venda.get(i).getProduto().getNome(),
                 lista_produtos_venda.get(i).getProduto().getPreco(),
                 lista_produtos_venda.get(i).getQtd_prod_venda(),
                 lista_produtos_venda.get(i).getProduto().getPreco() * lista_produtos_venda.get(i).getQtd_prod_venda()
             });
-            
+
             venda_total += lista_produtos_venda.get(i).getProduto().getPreco() * (double) lista_produtos_venda.get(i).getQtd_prod_venda();
         }
-        
+
         lbltxt_VendaTotal.setText(String.valueOf(venda_total));
     }
-    
-    public void importarProduto(Venda_produto venda_produto)
-    {
+
+    public void importarProduto(Venda_produto venda_produto) {
         this.lista_produtos_venda.add(venda_produto);
         this.preencherTabelaProdutos(lista_produtos_venda);
     }
-    
-    public boolean isInListaProduto(Venda_produto venda_produto)
-    {
+
+    public boolean isInListaProduto(Venda_produto venda_produto) {
         boolean result = false;
-        
-        for(int i = 0; i < lista_produtos_venda.size(); i++)
-        {
-            if(lista_produtos_venda.get(i).getProduto().getCod_prod() == venda_produto.getProduto().getCod_prod())
-            {
+
+        for (int i = 0; i < lista_produtos_venda.size(); i++) {
+            if (lista_produtos_venda.get(i).getProduto().getCod_prod() == venda_produto.getProduto().getCod_prod()) {
                 result = true;
                 break;
-            } 
+            }
         }
-        
+
         return result;
     }
-    
-    public void limparCamposCliente()
-    {
+
+    public void limparCamposCliente() {
         lbltxt_ClienteCodigo.setText("");
         lbltxt_ClienteNome.setText("");
         lbltxt_ClienteCpf.setText("");
     }
-    
-    public void limparUmProduto()
-    {
+
+    public void limparUmProduto() {
         int linha = tb_ProdutosVenda.getSelectedRow();
-        
+
         lista_produtos_venda.remove(linha);
-        
+
         preencherTabelaProdutos(lista_produtos_venda);
     }
-    
-    public void limparTodosCampos()
-    {
+
+    public void limparTodosCampos() {
         txt_VendaData.setText("");
         txt_VendaPagamento.setText("");
         limparCamposCliente();
         lista_produtos_venda.clear();
         preencherTabelaProdutos(lista_produtos_venda);
         lbltxt_VendaTotal.setText("");
+    }
+    
+    public boolean validacaoCampoVazio() {
+        
+        boolean valida = false;
+
+        if (txt_VendaData.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a data da venda", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_VendaPagamento.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a forma de pagamento da venda", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (lbltxt_ClienteCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o cliente que gerou a venda", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (lista_produtos_venda.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe os produtos que foram vendidos", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
+    public boolean validacaoCampoTamanho() {
+        
+        boolean valida = false;
+
+        if (txt_VendaData.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo data, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_VendaPagamento.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Campo forma de pagamento, tamanho máximo: 50 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
     }
     
     /** This method is called from within the constructor to
@@ -398,48 +425,51 @@ public class GerarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpar_vendaActionPerformed
 
     private void btn_inserir_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserir_clienteActionPerformed
-        
-        if(tela_InserirCliente_GerarVenda == null)
+
+        if (tela_InserirCliente_GerarVenda == null) {
             tela_InserirCliente_GerarVenda = new InserirCliente_GerarVenda();
-        
+        }
+
         tela_InserirCliente_GerarVenda.setVisible(true);
         tela_InserirCliente_GerarVenda.linkar(this);
     }//GEN-LAST:event_btn_inserir_clienteActionPerformed
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
         
-        if(tela_AdicionarProduto_GerarVenda == null)
+        if (tela_AdicionarProduto_GerarVenda == null) {
             tela_AdicionarProduto_GerarVenda = new AdicionarProduto_GerarVenda();
-        
+        }
+
         tela_AdicionarProduto_GerarVenda.setVisible(true);
         tela_AdicionarProduto_GerarVenda.linkar(this);
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
 
     private void btn_gerar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gerar_vendaActionPerformed
         
-        Venda venda = new Venda();
-        
-        venda.setData(txt_VendaData.getText());
-        venda.setForma_pagamento(txt_VendaPagamento.getText());
-        venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
-        
-        Cliente cliente = new Cliente();
-        
-        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
-        venda.setCliente(cliente);
-        
-        VendaDAO dao = new VendaDAO();
-        
-        boolean result = dao.gerar(venda, lista_produtos_venda);
-        
-        if(result == true)
-        {
-            limparTodosCampos();
-            JOptionPane.showMessageDialog(this, "Venda gerada", "Venda gerada", JOptionPane.PLAIN_MESSAGE);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Venda não gerada", "Erro", JOptionPane.PLAIN_MESSAGE);
+        if (validacaoCampoVazio()) {
+            if (validacaoCampoTamanho()) {
+                Venda venda = new Venda();
+
+                venda.setData(txt_VendaData.getText());
+                venda.setForma_pagamento(txt_VendaPagamento.getText());
+                venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+
+                Cliente cliente = new Cliente();
+
+                cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+                venda.setCliente(cliente);
+
+                VendaDAO dao = new VendaDAO();
+
+                boolean result = dao.gerar(venda, lista_produtos_venda);
+
+                if (result == true) {
+                    limparTodosCampos();
+                    JOptionPane.showMessageDialog(this, "Venda gerada", "Venda gerada", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Venda não gerada", "Erro", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btn_gerar_vendaActionPerformed
 

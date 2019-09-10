@@ -22,8 +22,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void limparTodosCampos()
-    {
+    public void limparTodosCampos() {
         txt_nome.setText("");
         txt_rg.setText("");
         txt_cpf.setText("");
@@ -35,6 +34,70 @@ public class CadastrarCliente extends javax.swing.JFrame {
         txt_cel.setText("");
         txt_email.setText("");
     }
+
+    public boolean validacaoCampoVazio() {
+        boolean valida = false;
+
+        if (txt_nome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_rg.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o RG do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cpf.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o CPF do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_endereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o endereco do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_n_endereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o número do endereço do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a cidade do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_estado.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o estado do cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
+    public boolean validacaoCampoTamanho() {
+        boolean valida = false;
+
+        if (txt_nome.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo nome, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_rg.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo RG, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cpf.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo CPF, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_endereco.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo endereço, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_n_endereco.getText().length() > 4) {
+            JOptionPane.showMessageDialog(this, "Campo número do endereço, tamanho máximo: 4 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cidade.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Campo cidade, tamanho máximo: 50 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_estado.getText().length() > 2) {
+            JOptionPane.showMessageDialog(this, "Campo estado, tamanho máximo: 2 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_telefone.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo telefone, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_cel.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo celular, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_email.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo e-mail, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }   
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,30 +288,32 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
         
-        Cliente cliente = new Cliente();
-        
-        cliente.setNome(txt_nome.getText());
-        cliente.setRg(txt_rg.getText());
-        cliente.setCpf(txt_cpf.getText());
-        cliente.setEndereco(txt_endereco.getText());
-        cliente.setNum_endereco(Integer.parseInt(txt_n_endereco.getText()));
-        cliente.setCidade(txt_cidade.getText());
-        cliente.setUf(txt_estado.getText());
-        cliente.setTelefone(txt_telefone.getText());
-        cliente.setCelular(txt_cel.getText());
-        cliente.setEmail(txt_email.getText());
-        
-        ClienteDAO dao = new ClienteDAO();
-        
-        boolean result = dao.cadastrar(cliente);
-        
-        if(result == true)
-        {
-            JOptionPane.showMessageDialog(this, "Cliente inserido", "Cliente inserido", JOptionPane.PLAIN_MESSAGE);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Cliente não inserido", "Erro", JOptionPane.PLAIN_MESSAGE);
+        if (validacaoCampoVazio()) {
+            if (validacaoCampoTamanho()) {
+                Cliente cliente = new Cliente();
+
+                cliente.setNome(txt_nome.getText());
+                cliente.setRg(txt_rg.getText());
+                cliente.setCpf(txt_cpf.getText());
+                cliente.setEndereco(txt_endereco.getText());
+                cliente.setNum_endereco(Integer.parseInt(txt_n_endereco.getText()));
+                cliente.setCidade(txt_cidade.getText());
+                cliente.setUf(txt_estado.getText());
+                cliente.setTelefone(txt_telefone.getText());
+                cliente.setCelular(txt_cel.getText());
+                cliente.setEmail(txt_email.getText());
+
+                ClienteDAO dao = new ClienteDAO();
+
+                boolean result = dao.cadastrar(cliente);
+
+                if (result == true) {
+                    limparTodosCampos();
+                    JOptionPane.showMessageDialog(this, "Cliente inserido", "Cliente inserido", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente não inserido", "Erro", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 

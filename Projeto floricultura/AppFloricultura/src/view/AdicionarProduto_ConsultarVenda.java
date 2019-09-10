@@ -21,7 +21,7 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
 
     private ConsultarVenda tela_ConsultarVenda;
     private String pk_venda;
-    
+
     /**
      * Creates new form ConsultaProduto
      */
@@ -29,65 +29,58 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void linkar(ConsultarVenda tela_ConsultarVenda, String pk_venda)
-    {
+    public void linkar(ConsultarVenda tela_ConsultarVenda, String pk_venda) {
         this.tela_ConsultarVenda = tela_ConsultarVenda;
         this.pk_venda = pk_venda;
     }
-    
-    public void preencher_PD(String sql)
-    {
+
+    public void preencher_PD(String sql) {
         ProdutoDAO dao = new ProdutoDAO();
-        
+
         List<Produto> consulta_produto = dao.consutar_PD(sql);
-        
+
         DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
         tabela.setNumRows(0);
-        
-        consulta_produto.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
+
+        consulta_produto.forEach((instancia)
+                -> {
+            tabela.addRow(new Object[]{
                 instancia.getNome(),
                 instancia.getCategoria(),
                 instancia.getPreco()
             });
         });
     }
-    
-    public void pesquisaDinamica()
-    {
+
+    public void pesquisaDinamica() {
         String sql = "SELECT * FROM Produto WHERE "
                 + "nome LIKE '%" + txt_PesquisaProdutoNome.getText() + "%'";
-        
+
         this.preencher_PD(sql);
     }
-    
-    public void preencherConsulta(String sql)
-    {
+
+    public void preencherConsulta(String sql) {
         ProdutoDAO dao = new ProdutoDAO();
-        
+
         Produto consulta_produto = dao.consultar(sql);
-        
+
         lbltxt_ProdutoCodigo.setText("" + consulta_produto.getCod_prod());
         lbltxt_ProdutoNome.setText(consulta_produto.getNome());
         lbltxt_ProdutoPreco.setText("" + consulta_produto.getPreco());
         lbltxt_ProdutoCategoria.setText(consulta_produto.getCategoria());
-        
+
         //Controle "Virtual" do estoque
-        if(tela_ConsultarVenda.isInListaProdutoAntiga(consulta_produto.getCod_prod()) == true)
-        {
+        if (tela_ConsultarVenda.isInListaProdutoAntiga(consulta_produto.getCod_prod()) == true) {
             int qtd_prod_venda_antiga = tela_ConsultarVenda.qtd_ProdutoVendaAntiga(consulta_produto.getCod_prod());
             int qtd_estoque = consulta_produto.getQuantidade();
             qtd_estoque += qtd_prod_venda_antiga;
             lbltxt_ProdutoQuantidade.setText("" + qtd_estoque);
-        }
-        else
+        } else {
             lbltxt_ProdutoQuantidade.setText("" + consulta_produto.getQuantidade());
+        }
     }
-    
-    public void limparTodosCampos()
-    {
+
+    public void limparTodosCampos() {
         lbltxt_ProdutoCodigo.setText("");
         lbltxt_ProdutoNome.setText("");
         lbltxt_ProdutoPreco.setText("");
@@ -95,7 +88,7 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ProdutoQuantidade.setText("");
         txt_VendaProduto_qtd.setText("");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -338,72 +331,64 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_PesquisaProdutoNomeKeyReleased
 
     private void tb_produtosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_produtosMouseClicked
-        
+
         int linha = tb_produtos.getSelectedRow();
-                        
+
         String sql = "SELECT * FROM Produto WHERE "
                 + "nome = '" + tb_produtos.getValueAt(linha, 0) + "' AND "
                 + "categoria = '" + tb_produtos.getValueAt(linha, 1) + "' AND "
                 + "preco = " + tb_produtos.getValueAt(linha, 2);
-        
+
         this.preencherConsulta(sql);
     }//GEN-LAST:event_tb_produtosMouseClicked
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        
+
         this.limparTodosCampos();
         this.pesquisaDinamica();
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
-        
-        if(lbltxt_ProdutoCodigo.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(this, "Informe o produto que deseja adicionar na venda", 
-                "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(txt_VendaProduto_qtd.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(this, "Informe a quantidade do produto que deseja adicionar na venda", 
-                "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
-        }      
-        else
-        {   
+
+        if (lbltxt_ProdutoCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o produto que deseja adicionar na venda",
+                    "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_VendaProduto_qtd.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade do produto que deseja adicionar na venda",
+                    "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
+        } else {
             int qtd_venda = Integer.parseInt(txt_VendaProduto_qtd.getText());
             int qtd_estoque = Integer.parseInt(lbltxt_ProdutoQuantidade.getText());
-        
-            if(qtd_venda <= qtd_estoque)
-            {
+
+            if (qtd_venda <= qtd_estoque) {
                 Produto produto = new Produto();
-        
+
                 produto.setCod_prod(Integer.parseInt(lbltxt_ProdutoCodigo.getText()));
                 produto.setNome(lbltxt_ProdutoNome.getText());
                 produto.setPreco(Double.parseDouble(lbltxt_ProdutoPreco.getText()));
                 produto.setQuantidade(Integer.parseInt(lbltxt_ProdutoQuantidade.getText()));
-        
+
                 Venda venda = new Venda();
                 venda.setCod_venda(Integer.parseInt(pk_venda));
-                
+
                 Venda_produto venda_produto = new Venda_produto();
                 venda_produto.setQtd_prod_venda(Integer.parseInt(txt_VendaProduto_qtd.getText()));
                 venda_produto.setVenda(venda);
                 venda_produto.setProduto(produto);
-        
-                if(tela_ConsultarVenda != null)
-                {
-                    if(tela_ConsultarVenda.isInListaProdutoAtualizada(venda_produto) == true)
-                        JOptionPane.showMessageDialog(this, "Produto já está adicionado na venda", 
-                            "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
-                    else
-                    {
+
+                if (tela_ConsultarVenda != null) {
+                    if (tela_ConsultarVenda.isInListaProdutoAtualizada(venda_produto) == true) {
+                        JOptionPane.showMessageDialog(this, "Produto já está adicionado na venda",
+                                "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
+                    } else {
                         tela_ConsultarVenda.importarProduto(venda_produto);
                         this.limparTodosCampos();
                     }
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Quantidade indisponível no estoque",
+                        "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
             }
-            else
-                JOptionPane.showMessageDialog(this, "Quantidade indisponível no estoque", 
-                    "Adicionar Produto", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_adicionarActionPerformed
 

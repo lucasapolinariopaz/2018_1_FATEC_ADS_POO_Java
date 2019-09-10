@@ -22,6 +22,53 @@ public class CadastrarProduto extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void limparTodosCampos() {
+        txt_nome.setText("");
+        txt_preco.setText("");
+        txt_categoria.setText("");
+        txt_quant.setText("");
+    }
+    
+    public boolean validacaoCampoVazio() {
+        boolean valida = false;
+
+        if (txt_nome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_preco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o preço do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_categoria.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a categoria do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_quant.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade (estoque) do produto", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
+    public boolean validacaoCampoTamanho() {
+        boolean valida = false;
+
+        if (txt_nome.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Campo nome, tamanho máximo: 100 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_preco.getText().length() > 10) {
+            JOptionPane.showMessageDialog(this, "Campo preço, tamanho máximo: 12 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_categoria.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Campo categoria, tamanho máximo: 50 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_quant.getText().length() > 4) {
+            JOptionPane.showMessageDialog(this, "Campo endereço, tamanho máximo: 4 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,33 +196,32 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        
-        txt_nome.setText("");
-        txt_preco.setText("");
-        txt_categoria.setText("");
-        txt_quant.setText("");
+        limparTodosCampos();        
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
         
-        Produto produto = new Produto();
-        
-        produto.setNome(txt_nome.getText());
-        produto.setPreco(Double.parseDouble(txt_preco.getText()));
-        produto.setCategoria(txt_categoria.getText());
-        produto.setQuantidade(Integer.parseInt(txt_quant.getText()));
-        
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        boolean result = dao.cadastrar(produto);
-        
-        if(result == true)
-        {
-            JOptionPane.showMessageDialog(this, "Produto inserido", "Produto inserido", JOptionPane.PLAIN_MESSAGE);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Produto não inserido", "Erro", JOptionPane.PLAIN_MESSAGE);
+        if (validacaoCampoVazio()) {
+            if (validacaoCampoTamanho()) {
+
+                Produto produto = new Produto();
+
+                produto.setNome(txt_nome.getText());
+                produto.setPreco(Double.parseDouble(txt_preco.getText()));
+                produto.setCategoria(txt_categoria.getText());
+                produto.setQuantidade(Integer.parseInt(txt_quant.getText()));
+
+                ProdutoDAO dao = new ProdutoDAO();
+
+                boolean result = dao.cadastrar(produto);
+
+                if (result == true) {
+                    limparTodosCampos();
+                    JOptionPane.showMessageDialog(this, "Produto inserido", "Produto inserido", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Produto não inserido", "Erro", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 

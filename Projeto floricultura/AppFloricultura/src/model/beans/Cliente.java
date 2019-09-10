@@ -1,7 +1,7 @@
 package model.beans;
 
-public class Cliente
-{
+public class Cliente {
+
     private int cod_cli;
     private String nome;
     private String rg;

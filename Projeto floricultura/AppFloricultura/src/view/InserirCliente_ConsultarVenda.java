@@ -6,6 +6,7 @@
 package view;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.beans.Cliente;
 import model.dao.ClienteDAO;
@@ -17,53 +18,48 @@ import model.dao.ClienteDAO;
 public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
 
     private ConsultarVenda tela_ConsultarVenda;
-    
+
     /**
      * Creates new form ConsultaCliente
      */
-    public InserirCliente_ConsultarVenda(){
+    public InserirCliente_ConsultarVenda() {
         initComponents();
     }
 
-    public void linkar(ConsultarVenda tela_ConsultarVenda)
-    {
+    public void linkar(ConsultarVenda tela_ConsultarVenda) {
         this.tela_ConsultarVenda = tela_ConsultarVenda;
     }
-    
-    public void preencher_PD(String sql)
-    {
+
+    public void preencher_PD(String sql) {
         ClienteDAO dao = new ClienteDAO();
-        
+
         List<Cliente> consulta_cliente = dao.consultar_PD(sql);
-        
+
         DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
         tabela.setNumRows(0);
-        
-        consulta_cliente.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
+
+        consulta_cliente.forEach((instancia)
+                -> {
+            tabela.addRow(new Object[]{
                 instancia.getNome(),
                 instancia.getRg(),
                 instancia.getCpf()
             });
         });
     }
-    
-    public void pesquisaDinamica()
-    {
+
+    public void pesquisaDinamica() {
         String sql = "SELECT * FROM Cliente WHERE "
-        + "nome LIKE '%" + txt_PesquisaClienteNome.getText() + "%'";
+                + "nome LIKE '%" + txt_PesquisaClienteNome.getText() + "%'";
 
         this.preencher_PD(sql);
     }
-    
-    public void preencherConsulta(String sql)
-    {
+
+    public void preencherConsulta(String sql) {
         ClienteDAO dao = new ClienteDAO();
-        
-        Cliente consulta_cliente = dao.consultar(sql);  
-        
+
+        Cliente consulta_cliente = dao.consultar(sql);
+
         lbltxt_ClienteCodigo.setText("" + consulta_cliente.getCod_cli());
         lbltxt_ClienteNome.setText(consulta_cliente.getNome());
         lbltxt_ClienteRg.setText(consulta_cliente.getRg());
@@ -76,9 +72,8 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ClienteCelular.setText(consulta_cliente.getCelular());
         lbltxt_ClienteEmail.setText(consulta_cliente.getEmail());
     }
-    
-    public void limparTodosCampos()
-    {
+
+    public void limparTodosCampos() {
         txt_PesquisaClienteNome.setText("");
         lbltxt_ClienteCodigo.setText("");
         lbltxt_ClienteNome.setText("");
@@ -92,7 +87,7 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ClienteCelular.setText("");
         lbltxt_ClienteEmail.setText("");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -392,36 +387,40 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_PesquisaClienteNomeKeyReleased
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
-        
+
         int linha = tb_clientes.getSelectedRow();
 
         String sql = "SELECT * FROM Cliente WHERE "
-        + "nome = '" + tb_clientes.getValueAt(linha, 0) + "' AND "
-        + "rg = '" + tb_clientes.getValueAt(linha, 1) + "' AND "
-        + "cpf = '" + tb_clientes.getValueAt(linha, 2) + "'";
+                + "nome = '" + tb_clientes.getValueAt(linha, 0) + "' AND "
+                + "rg = '" + tb_clientes.getValueAt(linha, 1) + "' AND "
+                + "cpf = '" + tb_clientes.getValueAt(linha, 2) + "'";
 
         this.preencherConsulta(sql);
     }//GEN-LAST:event_tb_clientesMouseClicked
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        
+
         this.limparTodosCampos();
         this.pesquisaDinamica();
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserirActionPerformed
-        
-        Cliente cliente = new Cliente();
-        
-        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
-        cliente.setNome(lbltxt_ClienteNome.getText());
-        cliente.setCpf(lbltxt_ClienteCpf.getText());
-        
-        if(tela_ConsultarVenda != null)
-        {
-            tela_ConsultarVenda.importarCliente(cliente);
-            this.limparTodosCampos();
-        }
+
+        if (lbltxt_ClienteCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha um cliente para poder inseri-lo na venda",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Cliente cliente = new Cliente();
+
+            cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+            cliente.setNome(lbltxt_ClienteNome.getText());
+            cliente.setCpf(lbltxt_ClienteCpf.getText());
+
+            if (tela_ConsultarVenda != null) {
+                tela_ConsultarVenda.importarCliente(cliente);
+                this.limparTodosCampos();
+            }
+        }     
     }//GEN-LAST:event_btn_inserirActionPerformed
 
     /**

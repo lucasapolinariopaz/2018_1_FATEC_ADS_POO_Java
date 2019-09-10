@@ -24,77 +24,68 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
     InserirCliente_ConsultarVenda tela_InserirCliente_ConsultarVenda = new InserirCliente_ConsultarVenda();
     AdicionarProduto_ConsultarVenda tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
-    
+
     List<Venda_produto> lista_PV_antiga = new ArrayList<>();
     List<Venda_produto> lista_PV_atualizada = new ArrayList<>();
-    
-    /** Creates new form RealizarVenda */
-    public ConsultarVenda(){
+
+    /**
+     * Creates new form RealizarVenda
+     */
+    public ConsultarVenda() {
         initComponents();
     }
 
-    public void preencher_PD(String sql)
-    {
+    public void preencher_PD(String sql) {
         VendaDAO dao = new VendaDAO();
-        
+
         List<Venda> consulta_venda = dao.consultar_PD(sql);
-        
+
         DefaultTableModel tabela = (DefaultTableModel) tb_ConsultaVendas.getModel();
         tabela.setNumRows(0);
-        
-        consulta_venda.forEach((instancia) -> 
-        {
-            tabela.addRow(new Object[]
-            {
+
+        consulta_venda.forEach((instancia)
+                -> {
+            tabela.addRow(new Object[]{
                 instancia.getData(),
                 instancia.getCliente().getNome(),
                 instancia.getValor()
             });
         });
     }
-    
-    public void pesquisaDinamica()
-    {
+
+    public void pesquisaDinamica() {
         String sql;
-        
-        if(txt_PesquisarVendaData.getText().isEmpty() && txt_PesquisarClienteNome.getText().isEmpty())
-        {
+
+        if (txt_PesquisarVendaData.getText().isEmpty() && txt_PesquisarClienteNome.getText().isEmpty()) {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
                     + "ORDER BY v.cod_venda DESC";
-        }
-        else if(txt_PesquisarVendaData.getText().isEmpty())
-        {
+        } else if (txt_PesquisarVendaData.getText().isEmpty()) {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
                     + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%' "
                     + "ORDER BY v.cod_venda DESC";
-        }
-        else if(txt_PesquisarClienteNome.getText().isEmpty())
-        {
+        } else if (txt_PesquisarClienteNome.getText().isEmpty()) {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
                     + "WHERE v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%' "
                     + "ORDER BY v.cod_venda DESC";
-        }
-        else
-        {
+        } else {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
                     + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%' AND "
                     + "v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%' "
                     + "ORDER BY v.cod_venda DESC";
         }
-                    
+
         this.preencher_PD(sql);
     }
-    
-    public void preencherConsulta_01(String sql)
-    {
+
+    public void preencherConsulta_01(String sql) {
         VendaDAO dao = new VendaDAO();
-        
+
         Venda consulta_venda = dao.consultar_venda(sql);
-        
+
         lbltxt_VendaCodigo.setText("" + consulta_venda.getCod_venda());
         txt_VendaData.setText(consulta_venda.getData());
         txt_VendaPagamento.setText(consulta_venda.getForma_pagamento());
@@ -102,94 +93,86 @@ public class ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ClienteNome.setText(consulta_venda.getCliente().getNome());
         lbltxt_ClienteCpf.setText(consulta_venda.getCliente().getCpf());
     }
-    
-    public void preencherTabelaProdutos(List<Venda_produto> lista_produtos_venda)
-    {
+
+    public void preencherTabelaProdutos(List<Venda_produto> lista_produtos_venda) {
         DefaultTableModel tabela = (DefaultTableModel) tb_ProdutosVenda.getModel();
         tabela.setNumRows(0);
-        
+
         double venda_total = 0;
-        
-        for(int i = 0; i < lista_produtos_venda.size(); i++)
-        {
-            tabela.addRow(new Object[]
-            {
+
+        for (int i = 0; i < lista_produtos_venda.size(); i++) {
+            tabela.addRow(new Object[]{
                 lista_produtos_venda.get(i).getProduto().getCod_prod(),
                 lista_produtos_venda.get(i).getProduto().getNome(),
                 lista_produtos_venda.get(i).getProduto().getPreco(),
                 lista_produtos_venda.get(i).getQtd_prod_venda(),
                 lista_produtos_venda.get(i).getProduto().getPreco() * lista_produtos_venda.get(i).getQtd_prod_venda()
             });
-            
+
             venda_total += lista_produtos_venda.get(i).getProduto().getPreco() * (double) lista_produtos_venda.get(i).getQtd_prod_venda();
         }
-        
+
         lbltxt_VendaTotal.setText(String.valueOf(venda_total));
     }
-    
-    public void preencherConsulta_02(String sql)
-    {
+
+    public void preencherConsulta_02(String sql) {
         lista_PV_antiga.clear();
         lista_PV_atualizada.clear();
-        
+
         int i;
-        
+
         VendaDAO dao = new VendaDAO();
-        
+
         lista_PV_antiga = dao.consultar_lista_prod_venda(sql);
-        
-        
-        for(i = 0; i < lista_PV_antiga.size(); i++)
+
+        for (i = 0; i < lista_PV_antiga.size(); i++) {
             lista_PV_atualizada.add(lista_PV_antiga.get(i));
-        
+        }
+
         int qtd_estoque, qtd_prod_venda_antiga;
-        
-        for(i = 0; i < lista_PV_atualizada.size(); i++)
-        {
+
+        for (i = 0; i < lista_PV_atualizada.size(); i++) {
             //Controle Virtual do estoque
             qtd_estoque = lista_PV_atualizada.get(i).getProduto().getQuantidade();
             qtd_prod_venda_antiga = lista_PV_atualizada.get(i).getQtd_prod_venda();
             qtd_estoque += qtd_prod_venda_antiga;
-            
+
             //Infelizmente foi preciso Re-Setar a instância da classe Venda_produto na lista nessa lógica
             Venda_produto venda_produto = new Venda_produto();
             venda_produto.setQtd_prod_venda(lista_PV_atualizada.get(i).getQtd_prod_venda());
-                
+
             Produto produto = new Produto();
             produto.setCod_prod(lista_PV_atualizada.get(i).getProduto().getCod_prod());
             produto.setNome(lista_PV_atualizada.get(i).getProduto().getNome());
             produto.setPreco(lista_PV_atualizada.get(i).getProduto().getPreco());
             produto.setQuantidade(qtd_estoque);
             venda_produto.setProduto(produto);
-              
+
             Venda venda = new Venda();
             venda.setCod_venda(lista_PV_atualizada.get(i).getVenda().getCod_venda());
             venda_produto.setVenda(venda);
-            
+
             lista_PV_atualizada.set(i, venda_produto);
         }
-        
+
         this.preencherTabelaProdutos(lista_PV_atualizada);
     }
-    
-    public void limparCamposCliente()
-    {
+
+    public void limparCamposCliente() {
         lbltxt_ClienteCodigo.setText("");
         lbltxt_ClienteNome.setText("");
         lbltxt_ClienteCpf.setText("");
     }
-    
-    public void limparUmProduto()
-    {
+
+    public void limparUmProduto() {
         int linha = tb_ProdutosVenda.getSelectedRow();
-        
+
         lista_PV_atualizada.remove(linha);
-        
+
         preencherTabelaProdutos(lista_PV_atualizada);
     }
-    
-    public void limparTodosCampos()
-    {
+
+    public void limparTodosCampos() {
         txt_PesquisarVendaData.setText("");
         txt_PesquisarClienteNome.setText("");
         lbltxt_VendaCodigo.setText("");
@@ -201,68 +184,93 @@ public class ConsultarVenda extends javax.swing.JFrame {
         preencherTabelaProdutos(lista_PV_antiga);
         lbltxt_VendaTotal.setText("");
     }
-    
-    public void importarCliente(Cliente cliente)
-    {
+
+    public void importarCliente(Cliente cliente) {
         lbltxt_ClienteCodigo.setText(String.valueOf(cliente.getCod_cli()));
         lbltxt_ClienteNome.setText(cliente.getNome());
         lbltxt_ClienteCpf.setText(cliente.getCpf());
     }
-    
-    public boolean isInListaProdutoAntiga(int cod_prod)
-    {
+
+    public boolean isInListaProdutoAntiga(int cod_prod) {
         boolean result = false;
-        
-        for(int i = 0; i < lista_PV_antiga.size(); i++)
-        {
-            if(lista_PV_antiga.get(i).getProduto().getCod_prod() == cod_prod)
-            {
+
+        for (int i = 0; i < lista_PV_antiga.size(); i++) {
+            if (lista_PV_antiga.get(i).getProduto().getCod_prod() == cod_prod) {
                 result = true;
                 break;
-            } 
+            }
         }
-        
+
         return result;
     }
-    
-    public int qtd_ProdutoVendaAntiga(int cod_prod)
-    {    
+
+    public int qtd_ProdutoVendaAntiga(int cod_prod) {
         int qtd_prod_venda_antiga = 0;
-        
-        for(int i = 0; i < lista_PV_antiga.size(); i++)
-        {
-            if(lista_PV_antiga.get(i).getProduto().getCod_prod() == cod_prod)
-            {
+
+        for (int i = 0; i < lista_PV_antiga.size(); i++) {
+            if (lista_PV_antiga.get(i).getProduto().getCod_prod() == cod_prod) {
                 qtd_prod_venda_antiga = lista_PV_antiga.get(i).getQtd_prod_venda();
                 break;
-            } 
+            }
         }
-        
+
         return qtd_prod_venda_antiga;
     }
-    
-    public boolean isInListaProdutoAtualizada(Venda_produto venda_produto)
-    {
+
+    public boolean isInListaProdutoAtualizada(Venda_produto venda_produto) {
         boolean result = false;
-        
-        for(int i = 0; i < lista_PV_atualizada.size(); i++)
-        {
-            if(lista_PV_atualizada.get(i).getProduto().getCod_prod() == venda_produto.getProduto().getCod_prod())
-            {
+
+        for (int i = 0; i < lista_PV_atualizada.size(); i++) {
+            if (lista_PV_atualizada.get(i).getProduto().getCod_prod() == venda_produto.getProduto().getCod_prod()) {
                 result = true;
                 break;
-            } 
+            }
         }
-        
+
         return result;
     }
-    
-    public void importarProduto(Venda_produto venda_produto)
-    {   
+
+    public void importarProduto(Venda_produto venda_produto) {
         this.lista_PV_atualizada.add(venda_produto);
         this.preencherTabelaProdutos(this.lista_PV_atualizada);
     }
-    
+
+    public boolean validacaoCampoVazio() {
+
+        boolean valida = false;
+
+        if (txt_VendaData.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a data da venda", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_VendaPagamento.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a forma de pagamento da venda", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (lbltxt_ClienteCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o cliente que gerou a venda", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (lista_PV_atualizada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe os produtos que foram vendidos", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
+    public boolean validacaoCampoTamanho() {
+
+        boolean valida = false;
+
+        if (txt_VendaData.getText().length() > 20) {
+            JOptionPane.showMessageDialog(this, "Campo data, tamanho máximo: 20 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_VendaPagamento.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Campo forma de pagamento, tamanho máximo: 50 caracteres",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            valida = true;
+        }
+
+        return valida;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -722,61 +730,68 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
     private void btn_alterar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterar_vendaActionPerformed
         
-        Venda venda = new Venda();
-        
-        venda.setCod_venda(Integer.parseInt(lbltxt_VendaCodigo.getText()));
-        venda.setData(txt_VendaData.getText());
-        venda.setForma_pagamento(txt_VendaPagamento.getText());
-        venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
-        
-        Cliente cliente = new Cliente();
-        
-        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
-        venda.setCliente(cliente);
-        
-        VendaDAO dao = new VendaDAO();
-        
-        boolean result = dao.alterar(venda, lista_PV_antiga, lista_PV_atualizada);
-        
-        if(result == true)
-        {
-            limparTodosCampos();
-            this.pesquisaDinamica();
-            JOptionPane.showMessageDialog(this, "Venda alterada", "Venda alterada", JOptionPane.PLAIN_MESSAGE);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Venda não alterada", "Erro", JOptionPane.PLAIN_MESSAGE);
+        if (lbltxt_VendaCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha uma venda para poder alterá-la",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else if (validacaoCampoVazio()) {
+            if (validacaoCampoTamanho()) {
+                
+                Venda venda = new Venda();
+
+                venda.setCod_venda(Integer.parseInt(lbltxt_VendaCodigo.getText()));
+                venda.setData(txt_VendaData.getText());
+                venda.setForma_pagamento(txt_VendaPagamento.getText());
+                venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+
+                Cliente cliente = new Cliente();
+
+                cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+                venda.setCliente(cliente);
+
+                VendaDAO dao = new VendaDAO();
+
+                boolean result = dao.alterar(venda, lista_PV_antiga, lista_PV_atualizada);
+
+                if (result == true) {
+                    limparTodosCampos();
+                    this.pesquisaDinamica();
+                    JOptionPane.showMessageDialog(this, "Venda alterada", "Venda alterada", JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Venda não alterada", "Erro", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btn_alterar_vendaActionPerformed
 
     private void btn_excluir_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluir_vendaActionPerformed
         
-        Venda venda = new Venda();
-        
-        venda.setCod_venda(Integer.parseInt(lbltxt_VendaCodigo.getText()));
-        venda.setData(txt_VendaData.getText());
-        venda.setForma_pagamento(txt_VendaPagamento.getText());
-        venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
-        
-        Cliente cliente = new Cliente();
-        
-        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
-        venda.setCliente(cliente);
-        
-        VendaDAO dao = new VendaDAO();
-        
-        boolean result = dao.excluir(venda, lista_PV_antiga);
-        
-        if(result == true)
-        {
-            limparTodosCampos();
-            this.pesquisaDinamica();
-            JOptionPane.showMessageDialog(this, "Venda excluída", "Venda excluída", JOptionPane.PLAIN_MESSAGE);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Venda não excluída", "Erro", JOptionPane.PLAIN_MESSAGE);
+         if (lbltxt_VendaCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escolha uma venda para poder excluí-la",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Venda venda = new Venda();
+
+            venda.setCod_venda(Integer.parseInt(lbltxt_VendaCodigo.getText()));
+            venda.setData(txt_VendaData.getText());
+            venda.setForma_pagamento(txt_VendaPagamento.getText());
+            venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+
+            Cliente cliente = new Cliente();
+
+            cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+            venda.setCliente(cliente);
+
+            VendaDAO dao = new VendaDAO();
+
+            boolean result = dao.excluir(venda, lista_PV_antiga);
+
+            if (result == true) {
+                limparTodosCampos();
+                this.pesquisaDinamica();
+                JOptionPane.showMessageDialog(this, "Venda excluída", "Venda excluída", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Venda não excluída", "Erro", JOptionPane.PLAIN_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btn_excluir_vendaActionPerformed
 
