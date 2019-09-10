@@ -45,7 +45,9 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="CADASTRO DE CLIENTE"/>
+            <TitledBorder justification="2" title="CADASTRO DE CLIENTE">
+              <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -54,20 +56,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_Endereco" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Rg" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Cpf" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Numero" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Cidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Uf" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Telefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Celular" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Email" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lbl_Cpf" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Endereco" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Rg" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Numero" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Cidade" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Uf" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Telefone" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Celular" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="btn_cadastrar" min="-2" max="-2" attributes="0"/>
@@ -99,9 +101,9 @@
                       <Component id="txt_nome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lbl_Rg" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_rg" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txt_rg" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Rg" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -134,14 +136,14 @@
                       <Component id="txt_telefone" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_Celular" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_cel" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txt_cel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Celular" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_email" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Email" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="59" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

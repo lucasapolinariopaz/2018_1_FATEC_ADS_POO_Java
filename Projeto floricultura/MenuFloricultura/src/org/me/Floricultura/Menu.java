@@ -100,7 +100,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_Cadastro_clienteActionPerformed
 
     private void Consultar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_clienteActionPerformed
-        ConsultaCliente c2 = new ConsultaCliente();
+        GerenciaCliente c2 = new GerenciaCliente();
         c2.setVisible(true);
     }//GEN-LAST:event_Consultar_clienteActionPerformed
 
@@ -110,7 +110,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_Cadastrar_produtoActionPerformed
 
     private void Consultar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_produtoActionPerformed
-        ConsultaProduto c4 = new ConsultaProduto();
+        GerenciaProduto c4 = new GerenciaProduto();
         c4.setVisible(true);
     }//GEN-LAST:event_Consultar_produtoActionPerformed
 

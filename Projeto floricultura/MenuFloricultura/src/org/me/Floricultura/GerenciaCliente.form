@@ -45,7 +45,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="CADASTRO DE CLIENTE">
+            <TitledBorder justification="2" title="GERENCIAMENTO DE CLIENTE">
               <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
             </TitledBorder>
           </Border>
@@ -55,38 +55,68 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lbl_Cpf" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Endereco" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Rg" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Numero" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Cidade" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Uf" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Telefone" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Celular" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btn_cadastrar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Component id="btn_limpar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="103" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lbl_Celular" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txt_cel" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lbl_PesquisaCpf" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_PesquisaCpf" pref="192" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btn_pesquisarcpf" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lbl_Cpf" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Endereco" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Rg" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_codigo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Numero" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Cidade" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Uf" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Telefone" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="lbl_Email" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbltxt_codigo" max="32767" attributes="0"/>
+                                      <Component id="txt_endereco" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_cpf" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_nome" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_rg" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_n_endereco" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_cidade" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_estado" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_telefone" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_email" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
-                      <Component id="txt_endereco" max="32767" attributes="0"/>
-                      <Component id="txt_cpf" max="32767" attributes="0"/>
-                      <Component id="txt_nome" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_rg" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_n_endereco" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_cidade" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_estado" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_telefone" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_cel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="btn_alterar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="btn_excluir" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btn_limpar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -95,60 +125,74 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_PesquisaCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_PesquisaCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_pesquisarcpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbl_codigo" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbltxt_codigo" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txt_nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txt_rg" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_Rg" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbl_Cpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_cpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Cpf" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbl_Endereco" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_endereco" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Endereco" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_Numero" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_n_endereco" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbl_Cidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_cidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Cidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbl_Uf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Uf" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbl_Telefone" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_telefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Telefone" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txt_cel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_Celular" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_Email" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btn_cadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btn_limpar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_alterar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_limpar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_excluir" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
@@ -226,15 +270,48 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_email">
         </Component>
-        <Component class="javax.swing.JButton" name="btn_cadastrar">
+        <Component class="javax.swing.JButton" name="btn_alterar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar"/>
+            <Property name="text" type="java.lang.String" value="Alterar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_limpar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_excluir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Excluir"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_PesquisaCpf">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pesquisar CPF"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_PesquisaCpf">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_codigo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbltxt_codigo">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_pesquisarcpf">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
       </SubComponents>
     </Container>
