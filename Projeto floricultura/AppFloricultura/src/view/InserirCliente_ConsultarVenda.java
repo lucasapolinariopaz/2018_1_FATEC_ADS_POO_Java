@@ -14,7 +14,7 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaCliente
      */
-    public InserirCliente_ConsultarVenda() {
+    public InserirCliente_ConsultarVenda(){
         initComponents();
     }
 
@@ -351,7 +351,9 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+            public void run()
+            {
                 new InserirCliente_ConsultarVenda().setVisible(true);
             }
         });

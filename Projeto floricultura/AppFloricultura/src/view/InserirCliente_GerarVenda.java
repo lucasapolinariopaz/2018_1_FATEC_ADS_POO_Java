@@ -5,19 +5,37 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.beans.Cliente;
+import model.dao.ClienteDAO;
+
 /**
  *
- * @author Gustavo Lobo
+ * @author neo
  */
 public class InserirCliente_GerarVenda extends javax.swing.JFrame {
 
+    private GerarVenda tela_GerarVenda;
+    private Cliente cliente;
+    
     /**
-     * Creates new form ConsultaCliente
+     * Creates new form InserirCliente_GerarVendaJFrame
      */
-    public InserirCliente_GerarVenda() {
+    public InserirCliente_GerarVenda(){
         initComponents();
     }
 
+    public void linkar(GerarVenda tela_GerarVenda)
+    {
+        this.tela_GerarVenda = tela_GerarVenda;
+    }
+    
+    public void linkar(Cliente cliente)
+    {
+        this.cliente = cliente;
+    }
+                    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +101,11 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         lbl_Email.setText("E-mail");
 
         btn_inserir.setText("Inserir");
+        btn_inserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_inserirActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setText("Limpar");
         btn_limpar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +115,15 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         });
 
         lbl_PesquisaNome.setText("Pesquisar Nome");
+
+        txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_PesquisaNomeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_PesquisaNomeKeyTyped(evt);
+            }
+        });
 
         lbl_codigo.setText("Código");
 
@@ -121,6 +153,11 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
             }
         });
         tb_clientes.getTableHeader().setReorderingAllowed(false);
+        tb_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_clientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_clientes);
 
         lbltxt_nome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -199,9 +236,6 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
                                 .addComponent(btn_limpar)
                                 .addGap(98, 98, 98))))))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_inserir, btn_limpar});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -257,15 +291,13 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Email)
                             .addComponent(lbltxt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_inserir)
                             .addComponent(btn_limpar)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_inserir, btn_limpar});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -287,9 +319,110 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void limparTodosCampos()
+    {
+        txt_PesquisaNome.setText("");
+        lbltxt_codigo.setText("");
+        lbltxt_nome.setText("");
+        lbltxt_rg.setText("");
+        lbltxt_cpf.setText("");
+        lbltxt_endereco.setText("");
+        lbltxt_n_endereco.setText("");
+        lbltxt_cidade.setText("");
+        lbltxt_estado.setText("");
+        lbltxt_telefone.setText("");
+        lbltxt_celular.setText("");
+        lbltxt_email.setText("");
+    }
+    
+    public void preencher_PD(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_cliente.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getRg(),
+                instancia.getCpf()
+            });
+        });
+    }
+    
+    public void preencherConsulta(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        Cliente consulta_cliente = dao.consultar(sql);  
+        
+        lbltxt_codigo.setText("" + consulta_cliente.getCod_cli());
+        lbltxt_nome.setText(consulta_cliente.getNome());
+        lbltxt_rg.setText(consulta_cliente.getRg());
+        lbltxt_cpf.setText(consulta_cliente.getCpf());
+        lbltxt_endereco.setText(consulta_cliente.getEndereco());
+        lbltxt_n_endereco.setText("" + consulta_cliente.getNum_endereco());
+        lbltxt_cidade.setText(consulta_cliente.getCidade());
+        lbltxt_estado.setText(consulta_cliente.getUf());
+        lbltxt_telefone.setText(consulta_cliente.getTelefone());
+        lbltxt_celular.setText(consulta_cliente.getCelular());
+        lbltxt_email.setText(consulta_cliente.getEmail());
+    }
+    
+    private void btn_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserirActionPerformed
+
+        cliente.setCod_cli(Integer.parseInt(lbltxt_codigo.getText()));
+        cliente.setNome(lbltxt_nome.getText());
+        cliente.setCpf(lbltxt_cpf.getText());
+        
+        if(tela_GerarVenda != null)
+        {
+            tela_GerarVenda.importarCliente(cliente);            
+        }
+    }//GEN-LAST:event_btn_inserirActionPerformed
+
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        // TODO add your handling code here:
+
+        this.limparTodosCampos();
+
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+
+        this.preencher_PD(sql);
     }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
+
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+
+        this.preencher_PD(sql);
+    }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
+
+    private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
+
+        int linha = tb_clientes.getSelectedRow();
+
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome = '" + tb_clientes.getValueAt(linha, 0) + "' AND "
+        + "rg = '" + tb_clientes.getValueAt(linha, 1) + "' AND "
+        + "cpf = '" + tb_clientes.getValueAt(linha, 2) + "'";
+
+        this.preencherConsulta(sql);
+    }//GEN-LAST:event_tb_clientesMouseClicked
+
+    private void txt_PesquisaNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyTyped
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+
+        this.preencher_PD(sql);
+    }//GEN-LAST:event_txt_PesquisaNomeKeyTyped
 
     /**
      * @param args the command line arguments
@@ -318,23 +451,10 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new InserirCliente_GerarVenda().setVisible(true);
             }

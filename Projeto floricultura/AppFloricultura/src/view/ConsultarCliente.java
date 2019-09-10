@@ -20,7 +20,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaCliente
      */
-    public ConsultarCliente() throws ClassNotFoundException {
+    public ConsultarCliente() {
         initComponents();
     }
 
@@ -118,6 +118,9 @@ public class ConsultarCliente extends javax.swing.JFrame {
         lbl_PesquisaNome.setText("Pesquisar Nome");
 
         txt_PesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_PesquisaNomeKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_PesquisaNomeKeyTyped(evt);
             }
@@ -452,6 +455,14 @@ public class ConsultarCliente extends javax.swing.JFrame {
         this.preencher_PD(sql);
     }//GEN-LAST:event_btn_excluirActionPerformed
 
+    private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
+        
+        String sql = "SELECT * FROM Cliente WHERE "
+                + "nome LIKE '%" + txt_PesquisaNome.getText() + "%'";
+        
+        this.preencher_PD(sql);
+    }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -486,14 +497,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try
-                {
-                    new ConsultarCliente().setVisible(true);
-                } 
-                catch (ClassNotFoundException ex)
-                {
-                    System.err.println("Erro tela ConsultarCliente: " + ex);
-                }
+                new ConsultarCliente().setVisible(true);
             }
         });
     }

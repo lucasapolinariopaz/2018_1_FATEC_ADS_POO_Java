@@ -60,155 +60,158 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lbl_pesquisarNomeCliente" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_pesquisarData" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_PesquisarClienteNome" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_PesquisarVendaData" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_pesquisarData" min="-2" pref="124" max="-2" attributes="0"/>
-                              <Component id="txt_pesquisarNome" min="-2" pref="324" max="-2" attributes="0"/>
+                              <Component id="txt_PesquisarVendaData" min="-2" pref="124" max="-2" attributes="0"/>
+                              <Component id="txt_PesquisarClienteNome" min="-2" pref="324" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="jSeparator2" alignment="0" min="-2" pref="457" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lbl_ClienteNome" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_ClienteCodigo" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_ClienteCpf" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbltxt_ClienteCpf" min="-2" pref="141" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteNome" min="-2" pref="318" max="-2" attributes="0"/>
+                              <Component id="lbltxt_ClienteCodigo" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                          <Component id="lbl_cpf_cliente" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="lbl_nome_cliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lbl_VendaPagamento" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_VendaCodigo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_VendaData" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lbltxt_cpf_cliente" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <Component id="lbltxt_nome_cliente" min="-2" pref="318" max="-2" attributes="0"/>
+                                      <Component id="txt_VendaData" min="-2" pref="124" max="-2" attributes="0"/>
+                                      <Component id="txt_VendaPagamento" min="-2" pref="261" max="-2" attributes="0"/>
+                                      <Component id="lbltxt_VendaCodigo" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lbl_data" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_pagamento" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txt_data" min="-2" pref="124" max="-2" attributes="0"/>
-                                          <Component id="txt_pagamento" min="-2" pref="261" max="-2" attributes="0"/>
-                                          <Component id="lbltxt_codigo" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="btn_inserir_cliente" linkSize="6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                                      <Component id="btn_limpar_cliente" linkSize="6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jSeparator1" alignment="1" pref="457" max="32767" attributes="0"/>
-                                  <Component id="jSeparator3" alignment="1" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btn_inserir_cliente" linkSize="6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                  <Component id="btn_limpar_cliente" linkSize="6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jSeparator1" alignment="1" min="-2" pref="462" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                          <Component id="btn_adicionar_produto" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                                          <Component id="btn_excluir_produto" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
                                           <Component id="lbl_lista_produtos" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="jScrollPane1" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="jSeparator2" alignment="1" min="-2" pref="457" max="-2" attributes="0"/>
+                                  <Component id="jSeparator3" min="-2" pref="457" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btn_alterar_venda" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Component id="btn_excluir_venda" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="btn_limpar_venda" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_VendaTotal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbltxt_VendaTotal" min="-2" pref="159" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btn_adicionar_produto" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                                  <Component id="btn_excluir_produto" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btn_alterar_venda" linkSize="2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="btn_excluir_venda" linkSize="2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btn_limpar_venda" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="591" max="-2" attributes="0"/>
-                          <Component id="lbl_total_venda" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbltxt_total_venda" min="-2" pref="159" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="lbltxt_codigo" min="-2" pref="20" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_data" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_data" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_pesquisarData" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_pesquisarData" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_PesquisarVendaData" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_PesquisarVendaData" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_pesquisarNomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_pesquisarNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_PesquisarClienteNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_PesquisarClienteNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="469" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbltxt_VendaCodigo" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_VendaData" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_VendaData" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_VendaCodigo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_pagamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_pagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_VendaPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_VendaPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_inserir_cliente" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_limpar_cliente" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_nome_cliente" linkSize="1" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_nome_cliente" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbltxt_ClienteCodigo" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbltxt_ClienteNome" linkSize="1" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="lbl_ClienteNome" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="lbl_ClienteCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lbl_cpf_cliente" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbltxt_cpf_cliente" linkSize="1" pref="22" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbltxt_ClienteCpf" linkSize="1" pref="22" max="32767" attributes="0"/>
+                              <Component id="lbl_ClienteCpf" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -216,48 +219,47 @@
                           <Component id="lbl_lista_produtos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="127" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_adicionar_produto" linkSize="5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_excluir_produto" linkSize="5" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbltxt_total_venda" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lbl_total_venda" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbltxt_VendaTotal" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_VendaTotal" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btn_limpar_venda" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="btn_alterar_venda" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btn_excluir_venda" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="jScrollPane2" min="-2" pref="458" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lbl_data">
+        <Component class="javax.swing.JLabel" name="lbl_VendaData">
           <Properties>
             <Property name="text" type="java.lang.String" value="Data"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_pagamento">
+        <Component class="javax.swing.JLabel" name="lbl_VendaPagamento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Forma de Pagamento"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_pagamento">
+        <Component class="javax.swing.JTextField" name="txt_VendaPagamento">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_data">
+        <Component class="javax.swing.JTextField" name="txt_VendaData">
         </Component>
         <Component class="javax.swing.JButton" name="btn_inserir_cliente">
           <Properties>
@@ -272,14 +274,14 @@
             <Property name="text" type="java.lang.String" value="Limpar cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_nome_cliente">
+        <Component class="javax.swing.JLabel" name="lbl_ClienteNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nome do cliente"/>
+            <Property name="text" type="java.lang.String" value="Nome do Cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_cpf_cliente">
+        <Component class="javax.swing.JLabel" name="lbl_ClienteCpf">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF do cliente"/>
+            <Property name="text" type="java.lang.String" value="CPF do Cliente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -299,7 +301,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tb_produtos_venda">
+            <Component class="javax.swing.JTable" name="tb_ProdutosVenda">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
@@ -374,7 +376,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_limpar_vendaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_total_venda">
+        <Component class="javax.swing.JLabel" name="lbl_VendaTotal">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -382,7 +384,7 @@
             <Property name="text" type="java.lang.String" value="Valor total da venda:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_total_venda">
+        <Component class="javax.swing.JLabel" name="lbltxt_VendaTotal">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -391,7 +393,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_nome_cliente">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteNome">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -400,7 +402,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_cpf_cliente">
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteCpf">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -416,19 +418,19 @@
             <Property name="text" type="java.lang.String" value="Excluir Venda"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_pesquisarData">
+        <Component class="javax.swing.JLabel" name="lbl_PesquisarVendaData">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar Data da Venda"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_pesquisarData">
+        <Component class="javax.swing.JTextField" name="txt_PesquisarVendaData">
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_pesquisarNomeCliente">
+        <Component class="javax.swing.JLabel" name="lbl_PesquisarClienteNome">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar Nome do Cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_pesquisarNome">
+        <Component class="javax.swing.JTextField" name="txt_PesquisarClienteNome">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -437,7 +439,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tb_consulta_vendas">
+            <Component class="javax.swing.JTable" name="tb_ConsultaVendas">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="0">
@@ -453,18 +455,32 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lbl_VendaCodigo">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbltxt_codigo">
+        <Component class="javax.swing.JLabel" name="lbltxt_VendaCodigo">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
               </Border>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbltxt_ClienteCodigo">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_ClienteCodigo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo do Cliente"/>
           </Properties>
         </Component>
       </SubComponents>

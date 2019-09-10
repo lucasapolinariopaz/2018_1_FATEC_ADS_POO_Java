@@ -77,34 +77,6 @@ public class VendaDAO
         }
     }
     
-    public boolean restaurar_estoque(Venda_produto venda_produto)
-    {
-        String sql = "UPDATE Produto SET quantidade = ? WHERE cod_prod = ?";
-        
-        PreparedStatement stmt = null;
-        
-        try 
-        {
-            stmt = con.prepareStatement(sql);
-            
-            stmt.setInt(1, venda_produto.getProduto().getQuantidade());
-            stmt.setInt(2, venda_produto.getProduto().getCod_prod());
-            
-            stmt.executeUpdate();
-            
-            return true;
-        }
-        catch (SQLException ex)
-        {
-            System.err.println("Erro VendaDAO restaurar_estoque: " + ex);
-            return false;
-        }
-        finally
-        {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
-    
     public boolean gerar(Venda venda)
     {
         String sql = "INSERT INTO Venda(data, valor, forma_pagamento, cod_cli) VALUES(?, ?, ?, ?)";
@@ -206,11 +178,7 @@ public class VendaDAO
         
         result = gerar(venda);
         
-        if(result == false)
-        {
-            return result;
-        }
-        else
+        if(result == true)
         {
             pk_venda = consultar_pk_venda(venda);
             venda.setCod_venda(pk_venda);
@@ -222,10 +190,17 @@ public class VendaDAO
                 
                 if(result == false)
                     break;
+                else
+                {
+                    result = debitar_estoque(lista_produtos_venda.get(i));
+                    
+                    if(result == false)
+                        break;
+                }   
             }
-            
-            return result;
         }
+        
+        return result;
     }   
     
     public List<Venda> consultar_PD(String sql)
@@ -456,17 +431,43 @@ public class VendaDAO
             }
             
             if(compara == true)
+            {
                 result = alterar(lista_PV_atualizada.get(j));
+                
+                if(result == false)
+                    break;
+                else
+                {
+                    result = repor_estoque(lista_PV_antiga.get(i));
+                    
+                    if(result == false)
+                        break;
+                    else
+                    {
+                        result = debitar_estoque(lista_PV_atualizada.get(j));
+                        
+                        if(result == false)
+                            break;
+                    }                    
+                }
+            }
             else
+            {
                 result = excluir(lista_PV_antiga.get(i));
-            
-            if(result == false)
-                break;
+                
+                if(result == false)
+                    break;
+                else
+                {
+                    result = repor_estoque(lista_PV_antiga.get(i));
+                    
+                    if(result == false)
+                        break;
+                }
+            }  
         }
         
-        if(result == false)
-            return result;
-        else
+        if(result == true)
         {
             //Varredura Lista de produtos atualizada
             for(i = 0; i < lista_PV_atualizada.size(); i++)
@@ -484,14 +485,23 @@ public class VendaDAO
                 }
             
                 if(compara == false)
+                {
                     result = gerar(lista_PV_atualizada.get(i));
-                
-                if(result == false)
-                    break;
-            }
-            
-            return result;       
+                    
+                    if(result == false)
+                        break;
+                    else
+                    {
+                        result = debitar_estoque(lista_PV_atualizada.get(i));
+                        
+                        if(result == false)
+                            break;
+                    }
+                }
+            }                  
         }
+        
+        return result; 
     }
     
     public boolean alterar(Venda venda, List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
@@ -500,19 +510,37 @@ public class VendaDAO
         
         result = alterar(venda);
         
-        if(result == false)
-            return result;
-        else
-        {
+        if(result == true)
             result = alterar(lista_PV_antiga, lista_PV_atualizada);
-            return result;
+                
+        return result;
+    }
+    
+    public boolean excluir(List<Venda_produto> lista_produtos_venda)
+    {
+        boolean result = false;
+        
+        for(int i = 0; i < lista_produtos_venda.size(); i++)
+        {
+            result = excluir(lista_produtos_venda.get(i));
+              
+            if(result == false)
+                break;
+            else
+            {
+                result = repor_estoque(lista_produtos_venda.get(i));
+                  
+                if(result == false)
+                    break;
+            }   
         }
+        
+        return result;
     }
     
     public boolean excluir(Venda venda)
     {
-        String sql = "DELETE FROM Venda_produto WHERE cod_venda = ?;"
-                + "DELETE FROM Venda WHERE cod_venda = ?;";
+        String sql = "DELETE FROM Venda WHERE cod_venda = ?";
         
         PreparedStatement stmt = null;
         
@@ -521,7 +549,6 @@ public class VendaDAO
             stmt = con.prepareStatement(sql);
             
             stmt.setInt(1, venda.getCod_venda());
-            stmt.setInt(2, venda.getCod_venda());
             
             stmt.executeUpdate();
             
@@ -529,12 +556,24 @@ public class VendaDAO
         }
         catch (SQLException ex)
         {
-            System.err.println("Erro VendaDAO excluir (Tabela Venda e Tabela Venda_produto): " + ex);
+            System.err.println("Erro VendaDAO excluir (Tabela Venda): " + ex);
             return false;
         }
         finally
         {
             ConnectionFactory.closeConnection(con, stmt);
         }
-    }   
+    }
+    
+    public boolean excluir(Venda venda, List<Venda_produto> lista_produtos_venda)
+    {
+        boolean result;
+        
+        result = excluir(lista_produtos_venda);
+        
+        if(result == true)
+            excluir(venda);
+        
+        return result;
+    }
 }

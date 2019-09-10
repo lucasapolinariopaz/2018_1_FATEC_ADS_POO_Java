@@ -18,10 +18,24 @@ public class CadastrarCliente extends javax.swing.JFrame {
     /**
      * Creates new form CadastroCliente
      */
-    public CadastrarCliente() throws ClassNotFoundException {
+    public CadastrarCliente() {
         initComponents();
     }
 
+    public void limparTodosCampos()
+    {
+        txt_nome.setText("");
+        txt_rg.setText("");
+        txt_cpf.setText("");
+        txt_endereco.setText("");
+        txt_n_endereco.setText("");
+        txt_cidade.setText("");
+        txt_estado.setText("");
+        txt_telefone.setText("");
+        txt_cel.setText("");
+        txt_email.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,16 +220,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         
-        txt_nome.setText("");
-        txt_rg.setText("");
-        txt_cpf.setText("");
-        txt_endereco.setText("");
-        txt_n_endereco.setText("");
-        txt_cidade.setText("");
-        txt_estado.setText("");
-        txt_telefone.setText("");
-        txt_cel.setText("");
-        txt_email.setText(""); 
+        this.limparTodosCampos();
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
@@ -279,14 +284,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try 
-                {
-                    new CadastrarCliente().setVisible(true);
-                    
-                } catch (ClassNotFoundException ex) 
-                {
-                    System.err.println("Erro tela CadastrarCliente: " + ex);
-                }
+                new CadastrarCliente().setVisible(true);
             }
         });
     }

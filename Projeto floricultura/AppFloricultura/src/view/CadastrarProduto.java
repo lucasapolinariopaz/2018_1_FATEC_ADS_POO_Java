@@ -18,7 +18,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     /**
      * Creates new form CadastroProduto
      */
-    public CadastrarProduto() throws ClassNotFoundException {
+    public CadastrarProduto() {
         initComponents();
     }
 
@@ -211,14 +211,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try 
-                {
-                    new CadastrarProduto().setVisible(true);
-                }
-                catch (ClassNotFoundException ex)
-                {
-                    System.err.println("Erro tela CadastrarProduto: " + ex);
-                }
+                new CadastrarProduto().setVisible(true);
             }
         });
     }

@@ -18,7 +18,7 @@ public class Menu extends javax.swing.JFrame {
         Cadastrar_produto = new javax.swing.JMenuItem();
         Consultar_produto = new javax.swing.JMenuItem();
         Menu_venda = new javax.swing.JMenu();
-        Cadastrar_venda = new javax.swing.JMenuItem();
+        Gerar_venda = new javax.swing.JMenuItem();
         Consultar_venda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,13 +65,13 @@ public class Menu extends javax.swing.JFrame {
 
         Menu_venda.setText("Venda");
 
-        Cadastrar_venda.setText("Gerar Venda");
-        Cadastrar_venda.addActionListener(new java.awt.event.ActionListener() {
+        Gerar_venda.setText("Gerar Venda");
+        Gerar_venda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Cadastrar_vendaActionPerformed(evt);
+                Gerar_vendaActionPerformed(evt);
             }
         });
-        Menu_venda.add(Cadastrar_venda);
+        Menu_venda.add(Gerar_venda);
 
         Consultar_venda.setText("Consultar");
         Consultar_venda.addActionListener(new java.awt.event.ActionListener() {
@@ -101,71 +101,38 @@ public class Menu extends javax.swing.JFrame {
 
     private void Cadastro_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastro_clienteActionPerformed
         
-        CadastrarCliente tela01;
-        
-        try
-        {
-            tela01 = new CadastrarCliente();
-            tela01.setVisible(true);
-        }
-        catch (ClassNotFoundException ex)
-        {
-            System.err.println("Erro menu tela 01: " + ex);
-        }
+        CadastrarCliente tela_CadastrarCliente = new CadastrarCliente();
+        tela_CadastrarCliente.setVisible(true);
     }//GEN-LAST:event_Cadastro_clienteActionPerformed
 
     private void Consultar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_clienteActionPerformed
         
-        ConsultarCliente tela02;
-        
-        try
-        {
-            tela02 = new ConsultarCliente();
-            tela02.setVisible(true);
-        } 
-        catch (ClassNotFoundException ex) 
-        {
-            System.err.println("Erro menu tela 02: " + ex);
-        }
+        ConsultarCliente tela_ConsultarCliente = new ConsultarCliente();
+        tela_ConsultarCliente.setVisible(true);
     }//GEN-LAST:event_Consultar_clienteActionPerformed
 
     private void Cadastrar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastrar_produtoActionPerformed
         
-        CadastrarProduto tela03;
-        
-        try
-        {
-            tela03 = new CadastrarProduto();
-            tela03.setVisible(true);
-        }
-        catch (ClassNotFoundException ex)
-        {
-            System.err.println("Erro menu tela 03: " + ex);
-        }
+        CadastrarProduto tela_CadastrarProduto  = new CadastrarProduto();
+        tela_CadastrarProduto.setVisible(true);
     }//GEN-LAST:event_Cadastrar_produtoActionPerformed
 
     private void Consultar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_produtoActionPerformed
         
-        ConsultarProduto tela04;
-        try 
-        {
-            tela04 = new ConsultarProduto();
-            tela04.setVisible(true);
-        }
-        catch (ClassNotFoundException ex) 
-        {
-            System.err.println("Erro menu tela 04: " + ex);
-        }
+        ConsultarProduto tela_ConsultarProduto  = new ConsultarProduto();
+        tela_ConsultarProduto.setVisible(true);
     }//GEN-LAST:event_Consultar_produtoActionPerformed
 
-    private void Cadastrar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cadastrar_vendaActionPerformed
-        GerarVenda tela05 = new GerarVenda();
-        tela05.setVisible(true);
-    }//GEN-LAST:event_Cadastrar_vendaActionPerformed
+    private void Gerar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Gerar_vendaActionPerformed
+        
+        GerarVenda tela_GerarVenda = new GerarVenda();
+        tela_GerarVenda.setVisible(true);
+    }//GEN-LAST:event_Gerar_vendaActionPerformed
 
     private void Consultar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Consultar_vendaActionPerformed
-        ConsultarVenda tela06 = new ConsultarVenda();
-        tela06.setVisible(true);
+        
+        ConsultarVenda tela_ConsultarVenda = new ConsultarVenda();
+        tela_ConsultarVenda.setVisible(true);
     }//GEN-LAST:event_Consultar_vendaActionPerformed
 
     /**
@@ -200,12 +167,12 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Cadastrar_produto;
-    private javax.swing.JMenuItem Cadastrar_venda;
     private javax.swing.JMenuItem Cadastro_cliente;
     private javax.swing.JMenu Consulta_cliente;
     private javax.swing.JMenuItem Consultar_cliente;
     private javax.swing.JMenuItem Consultar_produto;
     private javax.swing.JMenuItem Consultar_venda;
+    private javax.swing.JMenuItem Gerar_venda;
     private javax.swing.JMenu Menu_produto;
     private javax.swing.JMenu Menu_venda;
     private javax.swing.JMenuBar jMenuBar1;

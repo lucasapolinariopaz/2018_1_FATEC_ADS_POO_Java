@@ -285,6 +285,7 @@ public class AdicionarProduto_ConsultarVenda extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AdicionarProduto_ConsultarVenda().setVisible(true);
             }
