@@ -48,7 +48,7 @@ public class ProdutoDAO
         }
     }
     
-    public List<Produto> consutar_tabela(String sql)
+    public List<Produto> consutar_PD(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -73,7 +73,7 @@ public class ProdutoDAO
         }
         catch (SQLException ex)
         {
-            System.err.println("Erro ProdutoDAO consultar_tabela: " + ex);
+            System.err.println("Erro ProdutoDAO consutar_PD: " + ex);
         }
         finally
         {

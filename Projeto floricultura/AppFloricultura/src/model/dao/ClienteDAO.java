@@ -55,7 +55,7 @@ public class ClienteDAO
         }
     }
     
-    public List<Cliente> consultar_tabela(String sql)
+    public List<Cliente> consultar_PD(String sql)
     {
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -80,7 +80,7 @@ public class ClienteDAO
         }
         catch (SQLException ex)
         {
-            System.err.println("Erro ClienteDAO consultar_tabela: " + ex);
+            System.err.println("Erro ClienteDAO consultar_PD: " + ex);
         }
         finally
         {

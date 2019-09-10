@@ -308,7 +308,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
     {
         ClienteDAO dao = new ClienteDAO();
         
-        List<Cliente> consulta_cliente = dao.consultar_tabela(sql);
+        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
         
         DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
         tabela.setNumRows(0);

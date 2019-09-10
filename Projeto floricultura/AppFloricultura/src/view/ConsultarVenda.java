@@ -363,7 +363,7 @@ public class ConsultarVenda extends javax.swing.JFrame {
     {
         VendaDAO dao = new VendaDAO();
         
-        List<Venda> consulta_venda = dao.consultar_tabela(sql);
+        List<Venda> consulta_venda = dao.consultar_PD(sql);
         
         DefaultTableModel tabela = (DefaultTableModel) tb_consulta_vendas.getModel();
         tabela.setNumRows(0);

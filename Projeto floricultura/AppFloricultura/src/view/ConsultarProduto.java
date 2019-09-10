@@ -245,7 +245,7 @@ public class ConsultarProduto extends javax.swing.JFrame {
     {
         ProdutoDAO dao = new ProdutoDAO();
         
-        List<Produto> consulta_produto = dao.consutar_tabela(sql);
+        List<Produto> consulta_produto = dao.consutar_PD(sql);
         
         DefaultTableModel tabela = (DefaultTableModel) tb_produtos.getModel();
         tabela.setNumRows(0);
