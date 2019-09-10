@@ -8,7 +8,9 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.beans.Cliente;
 import model.beans.Venda;
 import model.beans.Venda_produto;
 import model.dao.VendaDAO;
@@ -20,6 +22,7 @@ import model.dao.VendaDAO;
 public class ConsultarVenda extends javax.swing.JFrame {
 
     InserirCliente_ConsultarVenda tela_InserirCliente_ConsultarVenda = new InserirCliente_ConsultarVenda();
+    AdicionarProduto_ConsultarVenda tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
     
     List<Venda_produto> lista_PV_antiga = new ArrayList<>();
     List<Venda_produto> lista_PV_atualizada = new ArrayList<>();
@@ -56,26 +59,30 @@ public class ConsultarVenda extends javax.swing.JFrame {
         if(txt_PesquisarVendaData.getText().isEmpty() && txt_PesquisarClienteNome.getText().isEmpty())
         {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
-                    + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli";
+                    + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
+                    + "ORDER BY v.cod_venda DESC";
         }
         else if(txt_PesquisarVendaData.getText().isEmpty())
         {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
-                    + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%'";
+                    + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%' "
+                    + "ORDER BY v.cod_venda DESC";
         }
         else if(txt_PesquisarClienteNome.getText().isEmpty())
         {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
-                    + "WHERE v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%'";
+                    + "WHERE v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%' "
+                    + "ORDER BY v.cod_venda DESC";
         }
         else
         {
             sql = "SELECT v.data AS data_venda, c.nome AS nome_cliente, v.valor AS valor_venda "
                     + "FROM Venda v INNER JOIN Cliente c ON v.cod_cli = c.cod_cli "
                     + "WHERE c.nome LIKE '%" + txt_PesquisarClienteNome.getText() + "%' AND "
-                    + "v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%'";
+                    + "v.data LIKE '%" + txt_PesquisarVendaData.getText() + "%' "
+                    + "ORDER BY v.cod_venda DESC";
         }
                     
         this.preencher_PD(sql);
@@ -158,7 +165,36 @@ public class ConsultarVenda extends javax.swing.JFrame {
         preencherTabelaProdutos(lista_PV_antiga);
         lbltxt_VendaTotal.setText("");
     }
+    
+    public void importarCliente(Cliente cliente)
+    {
+        lbltxt_ClienteCodigo.setText(String.valueOf(cliente.getCod_cli()));
+        lbltxt_ClienteNome.setText(cliente.getNome());
+        lbltxt_ClienteCpf.setText(cliente.getCpf());
+    }
+    
+    public boolean isInListaProduto(Venda_produto venda_produto)
+    {
+        boolean result = false;
         
+        for(int i = 0; i < lista_PV_atualizada.size(); i++)
+        {
+            if(lista_PV_atualizada.get(i).getProduto().getCod_prod() == venda_produto.getProduto().getCod_prod())
+            {
+                result = true;
+                break;
+            } 
+        }
+        
+        return result;
+    }
+    
+    public void importarProduto(Venda_produto venda_produto)
+    {
+        this.lista_PV_atualizada.add(venda_produto);
+        this.preencherTabelaProdutos(lista_PV_atualizada);
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -278,6 +314,11 @@ public class ConsultarVenda extends javax.swing.JFrame {
         });
 
         btn_alterar_venda.setText("Salvar Alterações");
+        btn_alterar_venda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alterar_vendaActionPerformed(evt);
+            }
+        });
 
         btn_limpar_venda.setText("Limpar Campos");
         btn_limpar_venda.addActionListener(new java.awt.event.ActionListener() {
@@ -296,6 +337,11 @@ public class ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ClienteCpf.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btn_excluir_venda.setText("Excluir Venda");
+        btn_excluir_venda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluir_vendaActionPerformed(evt);
+            }
+        });
 
         lbl_PesquisarVendaData.setText("Pesquisar Data da Venda");
 
@@ -547,8 +593,11 @@ public class ConsultarVenda extends javax.swing.JFrame {
 
     private void btn_adicionar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionar_produtoActionPerformed
         
-        AdicionarProduto_ConsultarVenda tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
-        tela_AdicionarProduto_ConsultarVenda.setVisible(true);        
+        if(tela_AdicionarProduto_ConsultarVenda == null)
+            tela_AdicionarProduto_ConsultarVenda = new AdicionarProduto_ConsultarVenda();
+        
+        tela_AdicionarProduto_ConsultarVenda.setVisible(true);
+        tela_AdicionarProduto_ConsultarVenda.linkar(this);     
     }//GEN-LAST:event_btn_adicionar_produtoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -584,16 +633,76 @@ public class ConsultarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_tb_ConsultaVendasMouseClicked
 
     private void btn_limpar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_clienteActionPerformed
-        limparCamposCliente();
+        this.limparCamposCliente();
     }//GEN-LAST:event_btn_limpar_clienteActionPerformed
 
     private void btn_excluir_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluir_produtoActionPerformed
-        limparUmProduto();
+        this.limparUmProduto();
     }//GEN-LAST:event_btn_excluir_produtoActionPerformed
 
     private void btn_limpar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpar_vendaActionPerformed
-        limparTodosCampos();
+        
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
     }//GEN-LAST:event_btn_limpar_vendaActionPerformed
+
+    private void btn_alterar_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterar_vendaActionPerformed
+        
+        Venda venda = new Venda();
+        
+        venda.setData(txt_VendaData.getText());
+        venda.setForma_pagamento(txt_VendaPagamento.getText());
+        venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+        venda.setCliente(cliente);
+        
+        VendaDAO dao = new VendaDAO();
+        
+        boolean result = dao.alterar(venda, lista_PV_antiga, lista_PV_atualizada);
+        
+        if(result == true)
+        {
+            limparTodosCampos();
+            this.pesquisaDinamica();
+            JOptionPane.showMessageDialog(this, "Venda alterada", "Venda alterada", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Venda não alterada", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_alterar_vendaActionPerformed
+
+    private void btn_excluir_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluir_vendaActionPerformed
+        
+        Venda venda = new Venda();
+        
+        venda.setData(txt_VendaData.getText());
+        venda.setForma_pagamento(txt_VendaPagamento.getText());
+        venda.setValor(Double.parseDouble(lbltxt_VendaTotal.getText()));
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+        venda.setCliente(cliente);
+        
+        VendaDAO dao = new VendaDAO();
+        
+        boolean result = dao.excluir(venda, lista_PV_antiga);
+        
+        if(result == true)
+        {
+            limparTodosCampos();
+            this.pesquisaDinamica();
+            JOptionPane.showMessageDialog(this, "Venda excluída", "Venda excluída", JOptionPane.PLAIN_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Venda não excluída", "Erro", JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_excluir_vendaActionPerformed
 
     /**
      * @param args the command line arguments

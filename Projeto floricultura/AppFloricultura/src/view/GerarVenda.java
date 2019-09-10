@@ -434,6 +434,7 @@ public class GerarVenda extends javax.swing.JFrame {
         
         if(result == true)
         {
+            limparTodosCampos();
             JOptionPane.showMessageDialog(this, "Venda gerada", "Venda gerada", JOptionPane.PLAIN_MESSAGE);
         }
         else

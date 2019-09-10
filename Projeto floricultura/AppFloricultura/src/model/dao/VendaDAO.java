@@ -429,7 +429,7 @@ public class VendaDAO
     
     public boolean alterar(List<Venda_produto> lista_PV_antiga, List<Venda_produto> lista_PV_atualizada)
     {
-        boolean result = false, compara = true;
+        boolean result = false, compara = false;
         int i, j;
         
         //Varredura Lista de produtos antiga
@@ -437,11 +437,10 @@ public class VendaDAO
         {            
             for(j = 0; j < lista_PV_atualizada.size(); j++)
             {
-                compara = 
-                        (lista_PV_antiga.get(i).getVenda().getCod_venda() == 
-                        lista_PV_atualizada.get(j).getVenda().getCod_venda()) &&
+                compara = ((lista_PV_antiga.get(i).getVenda().getCod_venda() == 
+                        lista_PV_atualizada.get(j).getVenda().getCod_venda()) && 
                         (lista_PV_antiga.get(i).getProduto().getCod_prod() == 
-                        lista_PV_atualizada.get(j).getProduto().getCod_prod());
+                        lista_PV_atualizada.get(j).getProduto().getCod_prod()));
                         
                 if(compara == true)
                     break;
@@ -491,11 +490,10 @@ public class VendaDAO
             {            
                 for(j = 0; j < lista_PV_antiga.size(); j++)
                 {
-                    compara = 
-                        (lista_PV_atualizada.get(i).getVenda().getCod_venda() == 
-                        lista_PV_antiga.get(j).getVenda().getCod_venda()) &&
-                        (lista_PV_atualizada.get(i).getProduto().getCod_prod() == 
-                        lista_PV_antiga.get(j).getProduto().getCod_prod());
+                    compara = ((lista_PV_atualizada.get(i).getVenda().getCod_venda() == 
+                            lista_PV_antiga.get(j).getVenda().getCod_venda()) && 
+                            (lista_PV_atualizada.get(i).getProduto().getCod_prod() == 
+                            lista_PV_antiga.get(j).getProduto().getCod_prod()));
                 
                     if(compara == true)
                         break;
@@ -582,9 +580,9 @@ public class VendaDAO
         }
     }
     
-    public boolean excluir(Venda venda, List<Venda_produto> lista_produtos_venda)
+    public boolean excluir(Venda venda, List<Venda_produto> lista_PV_antiga)
     {
-        boolean result = excluir(lista_produtos_venda);
+        boolean result = excluir(lista_PV_antiga);
         
         if(result == true)
             excluir(venda);

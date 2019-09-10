@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.beans.Cliente;
+import model.dao.ClienteDAO;
+
 /**
  *
  * @author Gustavo Lobo
@@ -23,6 +28,69 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
     public void linkar(ConsultarVenda tela_ConsultarVenda)
     {
         this.tela_ConsultarVenda = tela_ConsultarVenda;
+    }
+    
+    public void preencher_PD(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente> consulta_cliente = dao.consultar_PD(sql);
+        
+        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
+        tabela.setNumRows(0);
+        
+        consulta_cliente.forEach((instancia) -> 
+        {
+            tabela.addRow(new Object[]
+            {
+                instancia.getNome(),
+                instancia.getRg(),
+                instancia.getCpf()
+            });
+        });
+    }
+    
+    public void pesquisaDinamica()
+    {
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome LIKE '%" + txt_PesquisaClienteNome.getText() + "%'";
+
+        this.preencher_PD(sql);
+    }
+    
+    public void preencherConsulta(String sql)
+    {
+        ClienteDAO dao = new ClienteDAO();
+        
+        Cliente consulta_cliente = dao.consultar(sql);  
+        
+        lbltxt_ClienteCodigo.setText("" + consulta_cliente.getCod_cli());
+        lbltxt_ClienteNome.setText(consulta_cliente.getNome());
+        lbltxt_ClienteRg.setText(consulta_cliente.getRg());
+        lbltxt_ClienteCpf.setText(consulta_cliente.getCpf());
+        lbltxt_ClienteEndereco.setText(consulta_cliente.getEndereco());
+        lbltxt_ClienteN_endereco.setText("" + consulta_cliente.getNum_endereco());
+        lbltxt_ClienteCidade.setText(consulta_cliente.getCidade());
+        lbltxt_ClienteEstado.setText(consulta_cliente.getUf());
+        lbltxt_ClienteTelefone.setText(consulta_cliente.getTelefone());
+        lbltxt_ClienteCelular.setText(consulta_cliente.getCelular());
+        lbltxt_ClienteEmail.setText(consulta_cliente.getEmail());
+    }
+    
+    public void limparTodosCampos()
+    {
+        txt_PesquisaClienteNome.setText("");
+        lbltxt_ClienteCodigo.setText("");
+        lbltxt_ClienteNome.setText("");
+        lbltxt_ClienteRg.setText("");
+        lbltxt_ClienteCpf.setText("");
+        lbltxt_ClienteEndereco.setText("");
+        lbltxt_ClienteN_endereco.setText("");
+        lbltxt_ClienteCidade.setText("");
+        lbltxt_ClienteEstado.setText("");
+        lbltxt_ClienteTelefone.setText("");
+        lbltxt_ClienteCelular.setText("");
+        lbltxt_ClienteEmail.setText("");
     }
     
     /**
@@ -66,6 +134,11 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         lbltxt_ClienteEmail = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INSERIR CLIENTE (CONSULTAR VENDA)", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -90,10 +163,26 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
         lbl_Email.setText("E-mail");
 
         btn_inserir.setText("Inserir");
+        btn_inserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_inserirActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setText("Limpar");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
+            }
+        });
 
         lbl_PesquisaNome.setText("Pesquisar Nome");
+
+        txt_PesquisaClienteNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_PesquisaClienteNomeKeyReleased(evt);
+            }
+        });
 
         lbl_codigo.setText("Código");
 
@@ -123,6 +212,11 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
             }
         });
         tb_clientes.getTableHeader().setReorderingAllowed(false);
+        tb_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_clientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_clientes);
 
         lbltxt_ClienteNome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -288,6 +382,47 @@ public class InserirCliente_ConsultarVenda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void txt_PesquisaClienteNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaClienteNomeKeyReleased
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_txt_PesquisaClienteNomeKeyReleased
+
+    private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
+        
+        int linha = tb_clientes.getSelectedRow();
+
+        String sql = "SELECT * FROM Cliente WHERE "
+        + "nome = '" + tb_clientes.getValueAt(linha, 0) + "' AND "
+        + "rg = '" + tb_clientes.getValueAt(linha, 1) + "' AND "
+        + "cpf = '" + tb_clientes.getValueAt(linha, 2) + "'";
+
+        this.preencherConsulta(sql);
+    }//GEN-LAST:event_tb_clientesMouseClicked
+
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        
+        this.limparTodosCampos();
+        this.pesquisaDinamica();
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void btn_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inserirActionPerformed
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setCod_cli(Integer.parseInt(lbltxt_ClienteCodigo.getText()));
+        cliente.setNome(lbltxt_ClienteNome.getText());
+        cliente.setCpf(lbltxt_ClienteCpf.getText());
+        
+        if(tela_ConsultarVenda != null)
+        {
+            tela_ConsultarVenda.importarCliente(cliente);
+            this.limparTodosCampos();
+        }
+    }//GEN-LAST:event_btn_inserirActionPerformed
 
     /**
      * @param args the command line arguments

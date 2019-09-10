@@ -400,7 +400,6 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void txt_PesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisaNomeKeyReleased
-
         this.pesquisaDinamica();
     }//GEN-LAST:event_txt_PesquisaNomeKeyReleased
 
@@ -417,7 +416,6 @@ public class InserirCliente_GerarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_tb_clientesMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
         this.pesquisaDinamica();
     }//GEN-LAST:event_formWindowOpened
 
