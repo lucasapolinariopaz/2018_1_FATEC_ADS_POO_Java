@@ -11,5 +11,5 @@ Banco de Dados: Java DB (Derby) <br>
 
 Equipe do projeto:
 
-Gustavo Lobo <br>
-Lucas Apolinário Paz
+GUSTAVO LOBO <br>
+LUCAS APOLINÁRIO PAZ
